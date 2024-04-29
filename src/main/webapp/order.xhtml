@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <style type="text/css">
+            .value {
+                font-weight: bold;
+            }
+        </style>
+
+
+        <h:form>
+            <p:messages>
+                <p:autoUpdate/>
+            </p:messages>
+
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                <p:outputLabel for="@next" value="Vendor:"/>
+                <p:selectOneMenu id="vendor" value="#{orderView.vendor}" style="width:125px">
+                    <f:selectItem itemLabel="US 1" itemValue="us1"/>
+                    <f:selectItem itemLabel="US 2" itemValue="us2"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="@next" value="Product:"/>
+                <p:selectOneMenu id="product" value="#{orderView.product}" style="width:125px">
+                    <f:selectItem itemLabel="Cannabis" itemValue="cannabis"/>
+                    <f:selectItem itemLabel="Psilocybin" itemValue="psilocybin"/>
+                </p:selectOneMenu>
+
+
+                <p:outputLabel for="@next" value="Amount:"/>
+                <p:inputText id="amount" value="#{orderView.amount}" />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" icon="pi pi-check"/>
+
+            <p:dialog header="Order" modal="true" showEffect="bounce" widgetVar="dlg" resizable="false">
+                <p:panelGrid columns="2" id="display" columnClasses="label,value">
+                    <h:outputText value="Vendor:"/>
+                    <h:outputText value="#{orderView.vendor}"/>
+                    <h:outputText value="Product:"/>
+                    <h:outputText value="#{orderView.product}"/>
+                    <h:outputText value="Amount:"/>
+                    <h:outputText value="#{orderView.amount}"/>
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
