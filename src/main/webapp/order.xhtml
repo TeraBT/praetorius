@@ -22,10 +22,17 @@
             </p:messages>
 
             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+                <p:outputLabel for="@next" value="Region:"/>
+                <p:selectOneMenu id="region" value="#{orderView.selectedRegion}">
+<!--                    <f:selectItem itemLabel="Select Region" itemValue=""/>-->
+                    <f:selectItems value="#{orderView.regionGroupList}"/>
+                </p:selectOneMenu>
+
                 <p:outputLabel for="@next" value="Vendor:"/>
                 <p:selectOneMenu id="vendor" value="#{orderView.vendor}" style="width:125px">
-                    <f:selectItem itemLabel="US 1" itemValue="us1"/>
-                    <f:selectItem itemLabel="US 2" itemValue="us2"/>
+                    <f:selectItem itemLabel="US Vendor 1" itemValue="us_vendor1"/>
+                    <f:selectItem itemLabel="US Vendor 2" itemValue="us_vendor2"/>
                 </p:selectOneMenu>
 
                 <p:outputLabel for="@next" value="Product:"/>
@@ -40,8 +47,10 @@
 
             </h:panelGrid>
 
-<!--            <p:commandButton value="Submit" update="display" oncomplete="#{orderController.saveOrder(orderView.vendor,orderView.product,orderView.amount)}" icon="pi pi-check"/>-->
-            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" action="#{orderController.saveOrder(orderView.vendor,orderView.product,orderView.amount)}" icon="pi pi-check"/>
+            <!--            <p:commandButton value="Submit" update="display" oncomplete="#{orderController.saveOrder(orderView.vendor,orderView.product,orderView.amount)}" icon="pi pi-check"/>-->
+            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()"
+                             action="#{orderController.saveOrder(orderView.vendor,orderView.product,orderView.amount)}"
+                             icon="pi pi-check"/>
 
             <p:dialog header="Order" modal="true" showEffect="bounce" widgetVar="dlg" resizable="false">
                 <p:panelGrid columns="2" id="display" columnClasses="label,value">
