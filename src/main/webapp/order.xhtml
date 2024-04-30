@@ -36,11 +36,12 @@
 
 
                 <p:outputLabel for="@next" value="Amount:"/>
-                <p:inputText id="amount" value="#{orderView.amount}" />
+                <p:inputText id="amount" value="#{orderView.amount}"/>
 
             </h:panelGrid>
 
-            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" icon="pi pi-check"/>
+<!--            <p:commandButton value="Submit" update="display" oncomplete="#{orderController.saveOrder(orderView.vendor,orderView.product,orderView.amount)}" icon="pi pi-check"/>-->
+            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" action="#{orderController.saveOrder(orderView.vendor,orderView.product,orderView.amount)}" icon="pi pi-check"/>
 
             <p:dialog header="Order" modal="true" showEffect="bounce" widgetVar="dlg" resizable="false">
                 <p:panelGrid columns="2" id="display" columnClasses="label,value">
