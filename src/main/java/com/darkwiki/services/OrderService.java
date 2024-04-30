@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Component
 public class OrderService {
@@ -15,6 +16,10 @@ public class OrderService {
 
     public Collection<Order> getAllOrders() {
         return orderRepository.findAll();
+    }
+
+    public Optional<Order> getOrderByOrderReference(String orderReference) {
+        return orderRepository.findByOrderReference(orderReference);
     }
 
     public Order saveOrder(Order order) {

@@ -1,14 +1,13 @@
 package com.darkwiki.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "order_table")
@@ -18,14 +17,54 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long id;
 
-    private String vendor;
+    @Column
+    private String orderReference;
 
+    //    @Column(nullable = false)
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime createTimestamp;
+
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "vendor_id")
+//    private Vendor vendor;
+
+    @Column
+    private String vendorName;
+
+    @Column
     private String product;
 
+    @Column
     private double amount;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(id);
+        return hash;
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        return id.compareTo(o.id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Order other)) return false;
+        return id.equals(other.id);
+    }
+
+    @Override
+    public boolean isNew() {
+        return id == null;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -35,27 +74,36 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
         return id.toString();
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public String getOrderReference() {
+        return orderReference;
     }
 
-    @Override
-    public int compareTo(@NotNull Order o) {
-        return 0;
+    public void setOrderReference(String orderReference) {
+        this.orderReference = orderReference;
     }
 
-    @Override
-    public boolean isNew() {
-        return false;
+    public LocalDateTime getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public String getVendor() {
-        return vendor;
+    public void setCreateTimestamp(LocalDateTime createTimestamp) {
+        this.createTimestamp = createTimestamp;
     }
 
-    public void setVendor(String vendor) {
-        this.vendor = vendor;
+//    public Vendor getVendor() {
+//        return vendor;
+//    }
+
+//    public void setVendor(Vendor vendor) {
+//        this.vendor = vendor;
+//    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
     public String getProduct() {
@@ -73,4 +121,5 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
 }

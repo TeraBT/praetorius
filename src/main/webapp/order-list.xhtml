@@ -23,8 +23,12 @@
                         <h:outputText value="#{order.id}"/>
                     </p:column>
 
+                    <p:column headerText="Order Reference">
+                        <h:outputText value="#{order.orderReference}"/>
+                    </p:column>
+
                     <p:column headerText="Vendor">
-                        <h:outputText value="#{order.vendor}"/>
+                        <h:outputText value="#{order.vendorName}"/>
                     </p:column>
 
                     <p:column headerText="Product">

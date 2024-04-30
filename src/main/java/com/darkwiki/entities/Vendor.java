@@ -1,9 +1,6 @@
 package com.darkwiki.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import org.jetbrains.annotations.NotNull;
+import jakarta.persistence.*;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
@@ -17,15 +14,17 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
 
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
+
+    @Column
+    private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
 
     @Override
-    public String getId() {
-        return id.toString();
-    }
-
-    @Override
-    public int compareTo(@NotNull Vendor o) {
+    public int compareTo(Vendor o) {
         return 0;
     }
 
@@ -47,5 +46,30 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
+    }
+
+    @Override
+    public String getId() {
+        return id.toString();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
