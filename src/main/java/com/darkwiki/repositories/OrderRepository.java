@@ -1,6 +1,6 @@
 package com.darkwiki.repositories;
 
-import com.darkwiki.entities.Order;
+import com.darkwiki.model.Order;
 
 import java.util.Optional;
 

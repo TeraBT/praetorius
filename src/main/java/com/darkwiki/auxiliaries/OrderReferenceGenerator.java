@@ -3,6 +3,7 @@ package com.darkwiki.auxiliaries;
 import java.util.Random;
 
 public class OrderReferenceGenerator {
+
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final int LENGTH = 7;
     private final Random random = new Random();

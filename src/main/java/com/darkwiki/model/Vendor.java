@@ -1,4 +1,4 @@
-package com.darkwiki.entities;
+package com.darkwiki.model;
 
 import jakarta.persistence.*;
 import org.springframework.data.domain.Persistable;
@@ -24,8 +24,8 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
     private Region region;
 
     @Override
-    public int compareTo(Vendor o) {
-        return 0;
+    public String toString() {
+        return super.toString();
     }
 
     @Override
@@ -34,18 +34,24 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    @Override
     public int hashCode() {
-        return super.hashCode();
+        return id.hashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Vendor vendor) {
+            return id.equals(vendor.id);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int compareTo(Vendor o) {
+        return id.compareTo(o.id);
     }
 
     @Override

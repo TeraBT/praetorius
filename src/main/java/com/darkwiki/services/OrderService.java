@@ -1,6 +1,6 @@
 package com.darkwiki.services;
 
-import com.darkwiki.entities.Order;
+import com.darkwiki.model.Order;
 import com.darkwiki.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

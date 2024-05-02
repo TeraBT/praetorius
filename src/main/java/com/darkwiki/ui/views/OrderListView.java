@@ -1,6 +1,6 @@
 package com.darkwiki.ui.views;
 
-import com.darkwiki.entities.Order;
+import com.darkwiki.model.Order;
 import com.darkwiki.controllers.OrderController;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;

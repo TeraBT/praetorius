@@ -1,6 +1,6 @@
 package com.darkwiki.repositories;
 
-import com.darkwiki.entities.Vendor;
+import com.darkwiki.model.Vendor;
 
 import java.util.Optional;
 

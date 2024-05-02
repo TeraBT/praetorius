@@ -1,7 +1,6 @@
-package com.darkwiki.entities;
+package com.darkwiki.model;
 
 import jakarta.persistence.*;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
@@ -42,6 +41,8 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     @Column
     private double amount;
 
+    //TODO: orderStatusSet cet.
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -50,15 +51,15 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     }
 
     @Override
-    public int compareTo(Order o) {
-        return id.compareTo(o.id);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order other)) return false;
+        return id.equals(other.id);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Order other)) return false;
-        return id.equals(other.id);
+    public int compareTo(Order o) {
+        return id.compareTo(o.id);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.darkwiki.ui.views;
 
 import com.darkwiki.controllers.VendorController;
-import com.darkwiki.entities.Vendor;
+import com.darkwiki.model.Vendor;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.model.SelectItem;

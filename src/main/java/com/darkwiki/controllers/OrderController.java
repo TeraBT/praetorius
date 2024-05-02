@@ -1,12 +1,10 @@
 package com.darkwiki.controllers;
 
 import com.darkwiki.auxiliaries.OrderReferenceGenerator;
-import com.darkwiki.entities.Order;
-import com.darkwiki.entities.Vendor;
+import com.darkwiki.model.Order;
 import com.darkwiki.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Collection;
 
@@ -40,10 +38,5 @@ public class OrderController {
         }
 
         orderService.saveOrder(order);
-    }
-
-    @GetMapping("/")
-    public String redirectToHome() {
-        return "redirect:/order.xhtml";
     }
 }
