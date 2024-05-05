@@ -9,13 +9,11 @@
         <ui:composition>
             <h:form>
                 <p:menubar>
-                    <p:submenu label="Submenu 1">
-                        <p:menuitem value="Item 1"/>
-                        <p:menuitem value="Item 2"/>
-                    </p:submenu>
+                    <p:menuitem value="Place Order" url="/order.xhtml"/>
 <!--                    <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}">-->
-                    <p:submenu label="Admin Submenu">
-                        <p:menuitem value="Manage Users" url="/admin/users.xhtml"/>
+                    <p:submenu label="Admin Tools">
+                        <p:menuitem value="List Orders" url="/admin-tools/order-list.xhtml"/>
+                        <p:menuitem value="Edit Orders" url="/admin-tools/order-edit.xhtml"/>
                     </p:submenu>
 
                     

@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+
+    <ui:define name="content">
+        <style type="text/css">
+            .value {
+                font-weight: bold;
+            }
+        </style>
+        <h:form id="form">
+        <p:growl id="msgs" showDetail="true"/>
+
+        <div class="order">
+            <h5>Edit Orders</h5>
+            <p:dataTable var="order" value="#{orderEditView.listAllOrders()}" editable="true"
+                         style="margin-bottom:20px">
+
+                <p:ajax event="rowEdit" listener="#{orderEditView.onRowEdit}" update=":form:msgs"/>
+                <p:ajax event="rowEditCancel" listener="#{orderEditView.onRowCancel}" update=":form:msgs"/>
+
+<!--                <p:column headerText="ID">-->
+<!--                    <p:cellEditor>-->
+<!--                        <f:facet name="output">-->
+<!--                            <h:outputText value="#{order.id}"/>-->
+<!--                        </f:facet>-->
+<!--                        <f:facet name="input">-->
+<!--                            <p:inputText id="modelInput" value="#{order.id}" style="width:100%"/>-->
+<!--                        </f:facet>-->
+<!--                    </p:cellEditor>-->
+<!--                </p:column>-->
+
+                <p:column headerText="ID">
+                    <h:outputText value="#{order.id}"/>
+                </p:column>
+
+                <p:column headerText="Order Reference">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{order.orderReference}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{order.orderReference}" style="width:100%" label="Name"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Vendor">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{order.vendorName}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{order.vendorName}" style="width:100%">
+<!--                                <f:selectItems value="#{orderEditView.}" var="status"-->
+<!--                                               itemLabel="#{vendorName.text}" itemValue="#{status}"/>-->
+                                <f:selectItem itemLabel="US Vendor 1" itemValue="us_vendor1"/>
+                                <f:selectItem itemLabel="US Vendor 2" itemValue="us_vendor2"/>
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Product">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{order.product}">
+<!--                                <f:convertNumber type="currency" currencySymbol="$"/>-->
+                            </h:outputText>
+                        </f:facet>
+                        <f:facet name="input">
+<!--                            <p:inputNumber value="#{order.product}" style="width:100%" label="Product"/>-->
+<!--                            <p:inputNumber value="#{order.product}" !!!!!TODO symbol="$"/>-->
+                            <f:selectItem itemLabel="Cannabis" itemValue="cannabis"/>
+                            <f:selectItem itemLabel="Psilocybin" itemValue="psilocybin"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Amount">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{order.amount}">
+<!--                                <f:convertNumber type="currency" currencySymbol="$"/>-->
+                            </h:outputText>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputNumber value="#{order.amount}" style="width:100%" label="Amount"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:6rem">
+                    <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

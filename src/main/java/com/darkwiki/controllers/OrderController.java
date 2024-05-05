@@ -39,4 +39,8 @@ public class OrderController {
 
         orderService.saveOrder(order);
     }
+
+    public void saveOrder(Order order) {
+        orderService.saveOrder(order);
+    }
 }
