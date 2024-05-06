@@ -17,6 +17,12 @@ public class VendorService {
         return vendorRepository.findAll();
     }
 
+    public Vendor saveVendor(String name) {
+        Vendor vendor = new Vendor();
+        vendor.setName(name);
+        vendorRepository.save(vendor);
+        return vendor;
+    }
 
     public Vendor saveVendor(Vendor vendor) {
         vendorRepository.save(vendor);

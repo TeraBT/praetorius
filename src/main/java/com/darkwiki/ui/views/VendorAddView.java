@@ -18,15 +18,15 @@ public class VendorAddView {
     private String name;
 
     public void addVendor() {
-        Vendor Vendor = new Vendor();
+        Vendor vendor = new Vendor();
 
         if (name.isEmpty()) {
-            Vendor.setName("UNNAMED");
+            vendor.setName("UNNAMED");
         } else {
-            Vendor.setName(name);
+            vendor.setName(name);
         }
 
-        VendorController.saveVendor(name);
+        VendorController.saveVendor(vendor);
     }
 
     public void outputAddVendorSuccess() {

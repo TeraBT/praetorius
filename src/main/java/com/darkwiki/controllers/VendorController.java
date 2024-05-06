@@ -24,4 +24,8 @@ public class VendorController {
         vendorService.saveVendor(vendor);
     }
 
+    public void saveVendor(Vendor vendor) {
+        vendorService.saveVendor(vendor);
+    }
+
 }
