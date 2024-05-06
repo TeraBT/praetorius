@@ -40,6 +40,10 @@
                     <h:outputText value="#{order.id}"/>
                 </p:column>
 
+                <p:column headerText="Create Timestamp">
+                    <h:outputText value="#{order.createTimestampAsFormatedString}"/>
+                </p:column>
+
                 <p:column headerText="Order Reference">
                     <p:cellEditor>
                         <f:facet name="output">

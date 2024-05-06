@@ -6,6 +6,8 @@ import com.darkwiki.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collection;
 
 @Controller
@@ -25,6 +27,7 @@ public class OrderController {
 //        Vendor vendor = new Vendor();
 //        vendor.setName(vendorName);
 //        Product product = new Product();
+        order.setCreateTimestamp(LocalDateTime.now(ZoneId.of("UTC+0")));
         order.setVendorName(vendorName);
         order.setProduct(productName);
         order.setAmount(amount);

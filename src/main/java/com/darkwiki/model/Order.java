@@ -6,6 +6,7 @@ import org.springframework.data.domain.Persistable;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
@@ -42,6 +43,14 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     private double amount;
 
     //TODO: orderStatusSet cet.
+
+    public String getCreateTimestampAsFormatedString() {
+        if (createTimestamp == null) {
+            return "NONE";
+        } else {
+            return createTimestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        }
+    }
 
     @Override
     public int hashCode() {
