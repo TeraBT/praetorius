@@ -10,16 +10,15 @@
                 template="/WEB-INF/templates/main.xhtml">
 
     <ui:define name="content">
-        <style type="text/css">
-            .value {
-                font-weight: bold;
-            }
-        </style>
+
         <h:form id="form">
         <p:growl id="msgs" showDetail="true"/>
 
         <div class="order">
-            <h5>Edit Orders</h5>
+            <div class="nav-admin-tools">
+                <h2 style="display: inline-block; margin-right: 20px">Edit Orders</h2>
+                <p:button value="List" outcome="order-list" style="display: inline-block; margin-bottom: 20px"/>
+            </div>
             <p:dataTable var="order" value="#{orderEditView.listAllOrders()}" editable="true"
                          style="margin-bottom:20px">
 

@@ -8,35 +8,20 @@
                 xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/templates/main.xhtml">
-
     <ui:define name="content">
         <h:form>
             <div class="order">
                 <div class="nav-admin-tools">
-                    <h2 style="display: inline-block; margin-right: 20px">Order List</h2>
-                    <p:button value="Edit" outcome="order-edit" style="display: inline-block; margin-bottom: 20px"/>
+                    <h2 style="display: inline-block; margin-right: 20px">Region List</h2>
+                    <p:button value="Edit" outcome="region-edit" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-
-                <p:dataTable var="order" value="#{orderListView.listAllOrders()}">
+                <p:dataTable var="order" value="#{regionListView.listAllRegions()}">
                     <p:column headerText="ID">
-                        <h:outputText value="#{order.id}"/>
+                        <h:outputText value="#{region.id}"/>
                     </p:column>
 
-                    <p:column headerText="Order Reference">
-                        <h:outputText value="#{order.orderReference}"/>
-                    </p:column>
-
-                    <p:column headerText="Vendor">
-                        <h:outputText value="#{order.vendorName}"/>
-                    </p:column>
-
-                    <p:column headerText="Product">
-                        <h:outputText value="#{order.product}"/>
-                    </p:column>
-
-
-                    <p:column headerText="Amount">
-                        <h:outputText value="#{order.amount}"/>
+                    <p:column headerText="Name">
+                        <h:outputText value="#{region.name}"/>
                     </p:column>
                 </p:dataTable>
             </div>

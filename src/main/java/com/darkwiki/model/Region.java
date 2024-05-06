@@ -76,6 +76,14 @@ public class Region implements Persistable<String>, Serializable, Comparable<Reg
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Set<Vendor> getVendorSet() {
         return vendorSet;
     }
