@@ -1,5 +1,6 @@
 package com.darkwiki.ui.views;
 
+import com.darkwiki.controllers.OrderController;
 import com.darkwiki.controllers.VendorController;
 import com.darkwiki.model.Vendor;
 import jakarta.annotation.PostConstruct;
@@ -8,12 +9,13 @@ import jakarta.faces.model.SelectItem;
 import jakarta.faces.model.SelectItemGroup;
 import jakarta.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Named
+@Component
 @RequestScoped
 public class OrderView {
 
@@ -30,6 +32,8 @@ public class OrderView {
 
     private String selectedRegion;
     private List<SelectItem> regionGroupList;
+    @Autowired
+    private OrderController orderController;
 
     @PostConstruct
     public void init() {
@@ -54,6 +58,10 @@ public class OrderView {
 
         regionGroupList.add(euGroup);
         regionGroupList.add(usGroup);
+    }
+
+    public void createAndSaveOrder() {
+        orderController.saveOrder(vendor, product, amount);
     }
 
 

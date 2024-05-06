@@ -14,8 +14,6 @@ public class VendorController {
     @Autowired
     VendorService vendorService;
 
-    private final OrderReferenceGenerator orderReferenceGenerator = new OrderReferenceGenerator();
-
     public Collection<Vendor> getAllVendors() {
         return vendorService.getAllVendors();
     }
