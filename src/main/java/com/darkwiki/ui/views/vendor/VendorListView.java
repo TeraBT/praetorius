@@ -1,7 +1,8 @@
-package com.darkwiki.ui.views;
+package com.darkwiki.ui.views.vendor;
 
 import com.darkwiki.controllers.VendorController;
 import com.darkwiki.model.Vendor;
+import com.darkwiki.ui.views.AbstractListView;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +12,11 @@ import java.util.Collection;
 
 @Component
 @RequestScoped
-public class VendorListView {
+public class VendorListView extends AbstractListView<Vendor> {
 
     @Autowired
     VendorController VendorController;
 
-    Collection<Vendor> VendorCollection;
-
-    public Collection<Vendor> listAllVendors() {
-        return VendorCollection;
-    }
-
     @PostConstruct
-    public void init() {
-        VendorCollection = VendorController.getAllVendors();
-    }
+    public void init() {super.setCollection(VendorController.getAllVendors());}
 }

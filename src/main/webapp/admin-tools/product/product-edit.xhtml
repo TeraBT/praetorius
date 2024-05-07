@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <div class="product">
+                <div class="nav-admin-tools">
+                    <h2 style="display: inline-block; margin-right: 20px">Edit Product</h2>
+                    <p:button value="List" outcome="product-list" style="display: inline-block; margin-right: 20px"/>
+                    <p:button value="Add" outcome="product-add" style="display: inline-block; margin-bottom: 20px"/>
+                </div>
+                <p:dataTable var="product" value="#{productListView.listAll()}">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{product.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Name">
+                        <h:outputText value="#{product.name}"/>
+                    </p:column>
+
+                    <p:column headerText="Product Type">
+                        <h:outputText value="#{product.productType}"/>
+                    </p:column>
+
+                    <p:column headerText="Description">
+                        <h:outputText value="#{product.description}"/>
+                    </p:column>
+
+                    <p:column headerText="Price Per Unit">
+                        <h:outputText value="#{product.pricePerUnit}"/>
+                    </p:column>
+
+                    <p:column headerText="Available Amounts">
+                        <h:outputText value="#{product.availableAmountSet}"/>
+                    </p:column>
+
+                    <p:column headerText="Shipping Cost">
+                        <h:outputText value="#{product.shippingCost}"/>
+                    </p:column>
+
+                    <p:column headerText="Number of Orders">
+                        <h:outputText value="#{product.orderSet.size()}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

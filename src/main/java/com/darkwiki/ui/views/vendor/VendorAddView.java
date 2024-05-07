@@ -1,7 +1,8 @@
-package com.darkwiki.ui.views;
+package com.darkwiki.ui.views.vendor;
 
 import com.darkwiki.controllers.VendorController;
 import com.darkwiki.model.Vendor;
+import com.darkwiki.ui.views.AbstractAddView;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequestScoped
-public class VendorAddView {
+public class VendorAddView extends AbstractAddView {
 
     @Autowired
     VendorController VendorController;
@@ -29,9 +30,9 @@ public class VendorAddView {
         VendorController.saveVendor(vendor);
     }
 
-    public void outputAddVendorSuccess() {
-        FacesMessage msg = new FacesMessage("Vendor %s added".formatted(name));
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+    @Override
+    public String getOutputString() {
+        return "Vendor %s added".formatted(name);
     }
 
     public String getName() {

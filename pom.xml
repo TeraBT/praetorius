@@ -6,7 +6,7 @@
     <groupId>com.darkwiki</groupId>
     <artifactId>darkwiki-webapp</artifactId>
     <version>1.0.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>darkwiki</name>
     <description>
@@ -22,6 +22,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--        <start-class>com.darkwiki.Main</start-class>-->
         <joinfaces.version>5.2.3.1</joinfaces.version>
         <duplicate-finder-maven-plugin.version>2.0.1</duplicate-finder-maven-plugin.version>
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
@@ -132,7 +133,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <release>17</release>
+                    <release>21</release>
                     <!--<failOnWarning>true</failOnWarning>-->
                     <failOnError>true</failOnError>
                     <showDeprecation>true</showDeprecation>
@@ -148,6 +149,13 @@
 <!--                        ${coverageAgent}-->
 <!--                    </argLine>-->
 <!--                </configuration>-->
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.darkwiki.Main</mainClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

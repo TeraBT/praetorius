@@ -40,10 +40,6 @@
                     <h:outputText value="#{order.id}"/>
                 </p:column>
 
-                <p:column headerText="Create Timestamp">
-                    <h:outputText value="#{order.createTimestampAsFormatedString}"/>
-                </p:column>
-
                 <p:column headerText="Order Reference">
                     <p:cellEditor>
                         <f:facet name="output">
@@ -55,11 +51,19 @@
                     </p:cellEditor>
                 </p:column>
 
+                <p:column headerText="Status">
+                    <h:outputText value="#{order.status}"/>
+                </p:column>
+
+                <p:column headerText="Create Timestamp">
+                    <h:outputText value="#{order.createTimestampAsFormatedString}"/>
+                </p:column>
+
                 <p:column headerText="Vendor">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{order.vendorName}"/></f:facet>
+                        <f:facet name="output"><h:outputText value="#{order.vendor}"/></f:facet>
                         <f:facet name="input">
-                            <h:selectOneMenu value="#{order.vendorName}" style="width:100%">
+                            <h:selectOneMenu value="#{order.vendor}" style="width:100%">
 <!--                                <f:selectItems value="#{orderEditView.}" var="status"-->
 <!--                                               itemLabel="#{vendorName.text}" itemValue="#{status}"/>-->
                                 <f:selectItem itemLabel="US Vendor 1" itemValue="us_vendor1"/>

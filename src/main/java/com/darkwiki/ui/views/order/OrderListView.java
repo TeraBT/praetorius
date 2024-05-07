@@ -1,30 +1,26 @@
-package com.darkwiki.ui.views;
+package com.darkwiki.ui.views.order;
 
 import com.darkwiki.model.Order;
 import com.darkwiki.controllers.OrderController;
+import com.darkwiki.ui.views.AbstractListView;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.testcontainers.shaded.org.checkerframework.checker.units.qual.A;
 
 import java.util.Collection;
 
 @Component
 @RequestScoped
-public class OrderListView {
+public class OrderListView extends AbstractListView<Order> {
 
     @Autowired
     OrderController orderController;
 
-    Collection<Order> orderCollection;
-
-    public Collection<Order> listAllOrders() {
-        return orderCollection;
-    }
-
     @PostConstruct
     public void init() {
-        orderCollection = orderController.getAllOrders();
+        super.setCollection(orderController.getAllOrders());
     }
 
 }

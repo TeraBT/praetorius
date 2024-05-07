@@ -1,4 +1,4 @@
-package com.darkwiki.ui.views;
+package com.darkwiki.ui.views.order;
 
 import com.darkwiki.controllers.OrderController;
 import com.darkwiki.model.Order;

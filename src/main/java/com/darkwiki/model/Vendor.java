@@ -5,6 +5,8 @@ import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Vendor implements Persistable<String>, Serializable, Comparable<Vendor> {
@@ -22,6 +24,9 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
+
+    @OneToMany(mappedBy = "vendor")
+    private Set<Order> orderSet = new HashSet<Order>();
 
     @Override
     public String toString() {
@@ -77,5 +82,13 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Order> getOrderSet() {
+        return orderSet;
+    }
+
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
     }
 }

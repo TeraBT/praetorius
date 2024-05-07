@@ -17,31 +17,35 @@
                     <p:button value="Edit" outcome="order-edit" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
 
-                <p:dataTable var="order" value="#{orderListView.listAllOrders()}">
+                <p:dataTable var="order" value="#{orderListView.listAll()}">
                     <p:column headerText="ID">
                         <h:outputText value="#{order.id}"/>
-                    </p:column>
-
-                    <p:column headerText="Create Timestamp">
-                        <h:outputText value="#{order.createTimestampAsFormatedString}"/>
                     </p:column>
 
                     <p:column headerText="Order Reference">
                         <h:outputText value="#{order.orderReference}"/>
                     </p:column>
 
+                    <p:column headerText="Status">
+                        <h:outputText value="#{order.status}"/>
+                    </p:column>
+
+                    <p:column headerText="Create Timestamp">
+                        <h:outputText value="#{order.createTimestampAsFormatedString}"/>
+                    </p:column>
+
                     <p:column headerText="Vendor">
-                        <h:outputText value="#{order.vendorName}"/>
+                        <h:outputText value="#{order.vendor}"/>
                     </p:column>
 
                     <p:column headerText="Product">
                         <h:outputText value="#{order.product}"/>
                     </p:column>
 
-
                     <p:column headerText="Amount">
                         <h:outputText value="#{order.amount}"/>
                     </p:column>
+
                 </p:dataTable>
             </div>
         </h:form>

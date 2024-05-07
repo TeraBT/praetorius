@@ -1,17 +1,17 @@
-package com.darkwiki.ui.views;
+package com.darkwiki.ui.views.region;
 
 import com.darkwiki.controllers.RegionController;
 import com.darkwiki.model.Region;
+import com.darkwiki.ui.views.AbstractAddView;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequestScoped
-public class RegionAddView {
+public class RegionAddView extends AbstractAddView {
 
     @Autowired
     RegionController regionController;
@@ -30,9 +30,9 @@ public class RegionAddView {
         regionController.saveRegion(region);
     }
 
-    public void outputAddRegionSuccess() {
-        FacesMessage msg = new FacesMessage("Region %s added".formatted(name));
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+    @Override
+    public String getOutputString() {
+        return "Region %s added".formatted(name);
     }
 
     public String getName() {

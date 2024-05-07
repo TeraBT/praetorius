@@ -9,6 +9,6 @@ public class WebNavigationController {
     @GetMapping("/")
     public String redirectToHome() {
 //        return "redirect:/order.xhtml";
-        return "redirect:/landing-page/index.html";
+        return "redirect:/admin-tools/order/order-list.xhtml";
     }
 }

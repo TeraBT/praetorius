@@ -10,19 +10,24 @@
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
         <h:form>
-            <div class="vendor">
+            <div class="region">
                 <div class="nav-admin-tools">
-                    <h2 style="display: inline-block; margin-right: 20px">Edit Vendors</h2>
-                    <p:button value="List" outcome="vendor-list" style="display: inline-block; margin-right: 20px"/>
-                    <p:button value="Add" outcome="vendor-add" style="display: inline-block; margin-bottom: 20px"/>
+                    <h2 style="display: inline-block; margin-right: 20px">Edit Regions</h2>
+                    <p:button value="List" outcome="region-list" style="display: inline-block; margin-right: 20px"/>
+                    <p:button value="Add" outcome="region-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-                <p:dataTable var="vendor" value="#{vendorListView.listAllVendors()}">
+
+                <p:dataTable var="region" value="#{regionListView.listAll()}">
                     <p:column headerText="ID">
-                        <h:outputText value="#{vendor.id}"/>
+                        <h:outputText value="#{region.id}"/>
                     </p:column>
 
                     <p:column headerText="Name">
-                        <h:outputText value="#{vendor.name}"/>
+                        <h:outputText value="#{region.name}"/>
+                    </p:column>
+
+                    <p:column headerText="Vendors">
+                        <h:outputText value="#{region.vendorSet}"/>
                     </p:column>
                 </p:dataTable>
             </div>

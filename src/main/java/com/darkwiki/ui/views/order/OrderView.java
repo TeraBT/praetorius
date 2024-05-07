@@ -1,19 +1,14 @@
-package com.darkwiki.ui.views;
+package com.darkwiki.ui.views.order;
 
 import com.darkwiki.controllers.OrderController;
 import com.darkwiki.controllers.VendorController;
 import com.darkwiki.model.Vendor;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.model.SelectItem;
-import jakarta.faces.model.SelectItemGroup;
-import jakarta.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Component
 @RequestScoped
@@ -31,7 +26,8 @@ public class OrderView {
     private double amount;
 
     private String selectedRegion;
-    private List<SelectItem> regionGroupList;
+
+
     @Autowired
     private OrderController orderController;
 
@@ -39,39 +35,12 @@ public class OrderView {
     public void init() {
 //        vendors = vendorController.getAllVendors();
 
-
-        regionGroupList = new ArrayList<>();
-
-        SelectItemGroup euGroup = new SelectItemGroup("EU");
-        euGroup.setSelectItems(
-                new SelectItem("Germany", "Germany"),
-                new SelectItem("UK", "UK")
-//                new SelectItem("Slovakia", "Slovakia")
-        );
-
-        SelectItemGroup usGroup = new SelectItemGroup("US");
-        usGroup.setSelectItems(
-//                new SelectItem("US West Coast", "US West Coast"),
-                new SelectItem("US North", "US North"),
-                new SelectItem("US South", "US South")
-        );
-
-        regionGroupList.add(euGroup);
-        regionGroupList.add(usGroup);
     }
 
     public void createAndSaveOrder() {
         orderController.saveOrder(vendor, product, amount);
     }
 
-
-//    public VendorController getVendorController() {
-//        return vendorController;
-//    }
-
-//    public void setVendorController(VendorController vendorController) {
-//        this.vendorController = vendorController;
-//    }
 
     public void setVendors(Collection<Vendor> vendors) {
         this.vendors = vendors;
@@ -85,13 +54,6 @@ public class OrderView {
         this.selectedRegion = selectedRegion;
     }
 
-    public List<SelectItem> getRegionGroupList() {
-        return regionGroupList;
-    }
-
-    public void setRegionGroupList(List<SelectItem> regionGroupList) {
-        this.regionGroupList = regionGroupList;
-    }
 
     public Collection<Vendor> getVendors() {
         return vendors;

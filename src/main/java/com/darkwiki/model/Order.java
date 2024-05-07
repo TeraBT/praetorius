@@ -23,7 +23,9 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     @Column
     private String orderReference;
 
-    //    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createTimestamp;
@@ -33,16 +35,20 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
 //    @JoinColumn(name = "vendor_id")
 //    private Vendor vendor;
 
-    @Column
-    private String vendorName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendor_id")
+    private Vendor vendor;
 
-    @Column
-    private String product;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Column
     private double amount;
 
-    //TODO: orderStatusSet cet.
+    @Column
+    private String textMessage;
+
 
     public String getCreateTimestampAsFormatedString() {
         if (createTimestamp == null) {
@@ -100,27 +106,19 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
         this.createTimestamp = createTimestamp;
     }
 
-//    public Vendor getVendor() {
-//        return vendor;
-//    }
-
-//    public void setVendor(Vendor vendor) {
-//        this.vendor = vendor;
-//    }
-
-    public String getVendorName() {
-        return vendorName;
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
-    public String getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
@@ -132,4 +130,19 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
         this.amount = amount;
     }
 
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public String getTextMessage() {
+        return textMessage;
+    }
+
+    public void setTextMessage(String textMessage) {
+        this.textMessage = textMessage;
+    }
 }

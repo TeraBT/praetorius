@@ -1,7 +1,8 @@
-package com.darkwiki.ui.views;
+package com.darkwiki.ui.views.region;
 
 import com.darkwiki.controllers.RegionController;
 import com.darkwiki.model.Region;
+import com.darkwiki.ui.views.AbstractListView;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +12,14 @@ import java.util.Collection;
 
 @Component
 @RequestScoped
-public class RegionListView {
+public class RegionListView extends AbstractListView<Region> {
 
     @Autowired
     RegionController regionController;
 
-    Collection<Region> regionCollection;
-
-    public Collection<Region> listAllRegions() {
-        return regionCollection;
-    }
-
     @PostConstruct
     public void init() {
-        regionCollection = regionController.getAllRegions();
+        super.setCollection(regionController.getAllRegions());
     }
 
 }

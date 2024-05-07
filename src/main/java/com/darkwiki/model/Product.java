@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Product implements Persistable<Long>, Serializable, Comparable<Product> {
@@ -15,11 +13,13 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @GeneratedValue
     Long id;
 
-    @Column
-    private ProductType productType;
 
     @Column
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_type_id")
+    private ProductType productType;
 
     @Column
     private String description;
@@ -30,17 +30,20 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @ElementCollection
     @CollectionTable(name = "product_amounts", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "available_amount")
-    private List<Integer> availableAmountList = new ArrayList<>();
+    private Set<Integer> availableAmountSet = new HashSet<>();
 
     @Column
     private double shippingCost;
 
+    @OneToMany(mappedBy = "product")
+    private Set<Order> orderSet = new HashSet<Order>();
+
     public void addToAvailableAmountList(Integer amount) {
-        availableAmountList.add(amount);
+        availableAmountSet.add(amount);
     }
 
     public void removeFromAvailableAmountList(Integer amount) {
-        availableAmountList.remove(amount);
+        availableAmountSet.remove(amount);
     }
 
 
@@ -109,12 +112,12 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         this.pricePerUnit = pricePerUnit;
     }
 
-    public List<Integer> getAvailableAmountList() {
-        return availableAmountList;
+    public Set<Integer> getAvailableAmountSet() {
+        return availableAmountSet;
     }
 
-    public void setAvailableAmountList(List<Integer> availableAmountList) {
-        this.availableAmountList = availableAmountList;
+    public void setAvailableAmountSet(Set<Integer> availableAmountSet) {
+        this.availableAmountSet = availableAmountSet;
     }
 
     public double getShippingCost() {
@@ -123,5 +126,13 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
 
     public void setShippingCost(double shippingCost) {
         this.shippingCost = shippingCost;
+    }
+
+    public Set<Order> getOrderSet() {
+        return orderSet;
+    }
+
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
     }
 }

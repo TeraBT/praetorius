@@ -14,22 +14,22 @@
             <p:growl id="msgs" showDetail="true"/>
 
             <div class="nav-admin-tools">
-                <h2 style="display: inline-block; margin-right: 20px">Add Region</h2>
-                <p:button value="List" outcome="region-list" style="display: inline-block; margin-right: 20px"/>
-                <p:button value="Edit" outcome="region-edit" style="display: inline-block; margin-bottom: 20px"/>
+                <h2 style="display: inline-block; margin-right: 20px">Add Product</h2>
+                <p:button value="List" outcome="product-list" style="display: inline-block; margin-right: 20px"/>
+                <p:button value="Edit" outcome="product-edit" style="display: inline-block; margin-bottom: 20px"/>
 
             </div>
 
             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 
                 <p:outputLabel for="@next" value="Name:"/>
-                <p:inputText id="name" value="#{regionAddView.name}"/>
+                <p:inputText id="name" value="#{productAddView.name}"/>
 
             </h:panelGrid>
 
             <p:commandButton value="Add"
-                             actionListener="#{regionAddView.addRegion()}"
-                             action="#{regionAddView.outputAddRegionSuccess()}"
+                             actionListener="#{productAddView.addProduct()}"
+                             action="#{productAddView.outputAddSuccess()}"
                              update="msgs"
                              icon="pi pi-plus-circle"/>
         </h:form>

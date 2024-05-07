@@ -28,8 +28,8 @@ public class OrderController {
 //        vendor.setName(vendorName);
 //        Product product = new Product();
         order.setCreateTimestamp(LocalDateTime.now(ZoneId.of("UTC+0")));
-        order.setVendorName(vendorName);
-        order.setProduct(productName);
+//        order.setVendor(vendorName);
+//        order.setProduct(productName);
         order.setAmount(amount);
 
         while (true) {
