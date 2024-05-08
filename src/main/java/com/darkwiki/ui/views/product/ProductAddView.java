@@ -43,14 +43,17 @@ public class ProductAddView extends AbstractAddView {
 
         product.setPricePerUnit(pricePerUnit);
 
+        if (availableAmountAsString.isEmpty()) {
+            product.setAvailableAmountSet(new TreeSet<>());
+        } else {
+            SortedSet<Integer> availableAmountSet = new TreeSet<>();
+            Arrays.stream(availableAmountAsString.split(","))
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .forEach(availableAmountSet::add);
 
-        SortedSet<Integer> availableAmountSet = new TreeSet<>();
-        Arrays.stream(availableAmountAsString.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .forEach(availableAmountSet::add);
-
-        product.setAvailableAmountSet(availableAmountSet);
+            product.setAvailableAmountSet(availableAmountSet);
+        }
 
         productController.saveProduct(product);
     }
