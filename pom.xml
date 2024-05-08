@@ -6,7 +6,7 @@
     <groupId>com.darkwiki</groupId>
     <artifactId>darkwiki-webapp</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>darkwiki</name>
     <description>
