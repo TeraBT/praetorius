@@ -10,19 +10,19 @@
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
         <h:form>
-            <div class="productType">
+            <div class="product-type">
                 <div class="nav-admin-tools">
                     <h2 style="display: inline-block; margin-right: 20px">Edit Product</h2>
                     <p:button value="List" outcome="product-type-list" style="display: inline-block; margin-right: 20px"/>
                     <p:button value="Add" outcome="product-type-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-                <p:dataTable var="productType" value="#{productTypeListView.listAll()}">
+                <p:dataTable var="product_type" value="#{productTypeListView.listAll()}">
                     <p:column headerText="ID">
-                        <h:outputText value="#{productType.id}"/>
+                        <h:outputText value="#{product_type.id}"/>
                     </p:column>
 
                     <p:column headerText="Name">
-                        <h:outputText value="#{productType.name}"/>
+                        <h:outputText value="#{product_type.name}"/>
                     </p:column>
 
 

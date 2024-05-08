@@ -20,9 +20,7 @@ public class ProductAddView extends AbstractAddView {
 
     private String description;
 
-    private String pricePerUnit;
-
-    private final SortedSet<Integer> availableAmountSet = new TreeSet<>();
+    private double pricePerUnit;
 
     private String availableAmountAsString;
 
@@ -43,9 +41,16 @@ public class ProductAddView extends AbstractAddView {
             product.setDescription(description);
         }
 
+        product.setPricePerUnit(pricePerUnit);
+
+
+        SortedSet<Integer> availableAmountSet = new TreeSet<>();
         Arrays.stream(availableAmountAsString.split(","))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .forEach(availableAmountSet::add);
+
+        product.setAvailableAmountSet(availableAmountSet);
 
         productController.saveProduct(product);
     }
@@ -71,8 +76,12 @@ public class ProductAddView extends AbstractAddView {
         this.description = description;
     }
 
-    public String getPricePerUnit() {
+    public double getPricePerUnit() {
         return pricePerUnit;
+    }
+
+    public void setPricePerUnit(double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
     }
 
     public String getAvailableAmountAsString() {

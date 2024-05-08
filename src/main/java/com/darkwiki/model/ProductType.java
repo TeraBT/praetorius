@@ -65,4 +65,8 @@ public class ProductType implements Persistable<Long>, Serializable, Comparable<
     public void setName(String name) {
         this.name = name;
     }
+
+    public Set<Product> getProductSet() {
+        return productSet;
+    }
 }

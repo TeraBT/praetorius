@@ -20,7 +20,7 @@ public class ProductTypeAddView extends AbstractAddView {
     private String name;
 
 
-    public void addProductTypeType() {
+    public void addProductType() {
         ProductType productType = new ProductType();
 
         if (name.isEmpty()) {
