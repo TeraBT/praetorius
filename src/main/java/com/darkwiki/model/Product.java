@@ -30,7 +30,7 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @ElementCollection
     @CollectionTable(name = "product_amounts", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "available_amount")
-    private Set<Integer> availableAmountSet = new HashSet<>();
+    private SortedSet<Integer> availableAmountSet = new TreeSet<>();
 
     @Column
     private double shippingCost;
@@ -116,7 +116,7 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         return availableAmountSet;
     }
 
-    public void setAvailableAmountSet(Set<Integer> availableAmountSet) {
+    public void setAvailableAmountSet(SortedSet<Integer> availableAmountSet) {
         this.availableAmountSet = availableAmountSet;
     }
 

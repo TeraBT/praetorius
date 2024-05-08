@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.darkwiki</groupId>
-    <artifactId>darkwiki-webapp</artifactId>
+    <artifactId>dw-webapp</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
 
@@ -22,7 +22,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<!--        <start-class>com.darkwiki.Main</start-class>-->
+        <!--        <start-class>com.darkwiki.Main</start-class>-->
         <joinfaces.version>5.2.3.1</joinfaces.version>
         <duplicate-finder-maven-plugin.version>2.0.1</duplicate-finder-maven-plugin.version>
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
@@ -52,6 +52,12 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
         <!--        <dependency>-->
         <!--            <groupId>com.h2database</groupId>-->
@@ -59,20 +65,19 @@
         <!--            <scope>runtime</scope>-->
         <!--        </dependency>-->
 
-<!--        <dependency>-->
-<!--            <groupId>org.testcontainers</groupId>-->
-<!--            <artifactId>postgresql</artifactId>-->
-<!--            <version>1.17.3</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>postgresql</artifactId>-->
+        <!--            <version>1.17.3</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
-<!--        <dependency>-->
-<!--            <groupId>org.testcontainers</groupId>-->
-<!--            <artifactId>testcontainers</artifactId>-->
-<!--            <version>1.17.3</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>testcontainers</artifactId>-->
+        <!--            <version>1.17.3</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
 
         <dependency>
@@ -110,11 +115,11 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.testcontainers</groupId>-->
-<!--            <artifactId>postgresql</artifactId>-->
-<!--            <version>1.19.5</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>postgresql</artifactId>-->
+        <!--            <version>1.19.5</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -128,6 +133,14 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -137,18 +150,19 @@
                     <!--<failOnWarning>true</failOnWarning>-->
                     <failOnError>true</failOnError>
                     <showDeprecation>true</showDeprecation>
+                    <executable>true</executable>
                 </configuration>
             </plugin>
             <!-- Enable jacoco analysis -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-<!--                <configuration>-->
-<!--                    <forkMode>once</forkMode>-->
-<!--                    <argLine>-->
-<!--                        ${coverageAgent}-->
-<!--                    </argLine>-->
-<!--                </configuration>-->
+                <!--                <configuration>-->
+                <!--                    <forkMode>once</forkMode>-->
+                <!--                    <argLine>-->
+                <!--                        ${coverageAgent}-->
+                <!--                    </argLine>-->
+                <!--                </configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -7,6 +7,8 @@ import jakarta.enterprise.context.RequestScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.*;
+
 @Component
 @RequestScoped
 public class ProductAddView extends AbstractAddView {
@@ -16,6 +18,14 @@ public class ProductAddView extends AbstractAddView {
 
     private String name;
 
+    private String description;
+
+    private String pricePerUnit;
+
+    private final SortedSet<Integer> availableAmountSet = new TreeSet<>();
+
+    private double shippingCost;
+
     public void addProduct() {
         Product product = new Product();
 
@@ -23,6 +33,12 @@ public class ProductAddView extends AbstractAddView {
             product.setName("UNNAMED");
         } else {
             product.setName(name);
+        }
+
+        if (description.isEmpty()) {
+            product.setDescription("NONE");
+        } else {
+            product.setDescription(description);
         }
 
         productController.saveProduct(product);
@@ -39,5 +55,33 @@ public class ProductAddView extends AbstractAddView {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(String pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
+    }
+
+    public SortedSet<Integer> getAvailableAmountSet() {
+        return availableAmountSet;
+    }
+
+    public double getShippingCost() {
+        return shippingCost;
+    }
+
+    public void setShippingCost(double shippingCost) {
+        this.shippingCost = shippingCost;
     }
 }
