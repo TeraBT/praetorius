@@ -19,11 +19,13 @@ public class WebSecurityConfig {
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http
                     .authorizeHttpRequests(auth -> auth
+                            .requestMatchers("/").permitAll()
+                            .requestMatchers("/landing-page/**").permitAll()
                             .anyRequest().authenticated())
                     .csrf(csrf -> csrf.disable())
                     .formLogin(form -> form
 //                            .loginPage("/login")
-                            .defaultSuccessUrl("/", true)
+//                            .defaultSuccessUrl("/", true)
                             .permitAll())
                     .logout(logout -> logout
 //                            .logoutSuccessUrl("/login?logout")
