@@ -1,7 +1,7 @@
 package com.darkwiki.ui.views.product;
 
-import com.darkwiki.controllers.OrderController;
-import com.darkwiki.model.Order;
+import com.darkwiki.controllers.ProductController;
+import com.darkwiki.model.Product;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
@@ -17,26 +17,26 @@ import java.util.Collection;
 public class ProductEditView {
 
     @Autowired
-    OrderController orderController;
+    ProductController productController;
 
-    Collection<Order> orderCollection;
+    Collection<Product> productCollection;
 
     @PostConstruct
     public void init() {
-        orderCollection = orderController.getAllOrders();
+        productCollection = productController.getAllProducts();
     }
 
-    public Collection<Order> listAllOrders() {
-        return orderCollection;
+    public Collection<Product> listAllProducts() {
+        return productCollection;
     }
 
-    public void onRowEdit(RowEditEvent<Order> event) {
-        orderController.saveOrder(event.getObject());
-        FacesMessage msg = new FacesMessage("Order Edited", String.valueOf(event.getObject().getId()));
+    public void onRowEdit(RowEditEvent<Product> event) {
+        productController.saveProduct(event.getObject());
+        FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void onRowCancel(RowEditEvent<Order> event) {
+    public void onRowCancel(RowEditEvent<Product> event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

@@ -31,8 +31,8 @@
 
                 <p:outputLabel for="@next" value="Product:"/>
                 <p:selectOneMenu id="product" value="#{orderView.product}" style="width:125px">
-                    <f:selectItem itemLabel="Cannabis" itemValue="cannabis"/>
-                    <f:selectItem itemLabel="Psilocybin" itemValue="psilocybin"/>
+                    <f:selectItem itemLabel="Item 1" itemValue="item1"/>
+                    <f:selectItem itemLabel="Item 2" itemValue="item2"/>
                 </p:selectOneMenu>
 
 
@@ -42,9 +42,10 @@
             </h:panelGrid>
 
             <!--            <p:commandButton value="Submit" update="display" oncomplete="#{orderController.saveOrder(orderView.vendor,orderView.product,orderView.amount)}" icon="pi pi-check"/>-->
-            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()"
-                             action="#{orderView.createAndSaveOrder()}"
+            <p:commandButton value="Submit (DEACTIVATED)"
                              icon="pi pi-check"/>
+<!--                         update="display" oncomplete="PF('dlg').show()"-->
+<!--                                         action="#{orderView.createAndSaveOrder()}"-->
 
             <p:dialog header="Order" modal="true" showEffect="bounce" widgetVar="dlg" resizable="false">
                 <p:panelGrid columns="2" id="display" columnClasses="label,value">

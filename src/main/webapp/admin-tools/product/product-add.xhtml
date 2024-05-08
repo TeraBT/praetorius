@@ -25,6 +25,22 @@
                 <p:outputLabel for="@next" value="Name:"/>
                 <p:inputText id="name" value="#{productAddView.name}"/>
 
+                <p:outputLabel for="@next" value="Product Type (ID for now, later we use name):"/>
+                <p:inputText id="product_type" value="NOT_IMPL"/>
+
+                <p:outputLabel for="@next" value="Description:"/>
+                <p:inputText id="description" value="#{productAddView.description}"/>
+
+                <p:outputLabel for="@next" value="Price per unit:"/>
+                <p:inputText id="price_per_unit" value="#{productAddView.pricePerUnit}"/>
+
+                <p:outputLabel for="@next" value="Available Amounts (only int: e.g. 100, 250, 500):"/>
+                <p:inputText id="available_amounts" value="#{productAddView.availableAmountSet}"/>
+
+                <p:outputLabel for="@next" value="Shipping Cost:"/>
+                <p:inputText id="shipping_cost" value="#{productAddView.shippingCost}"/>
+
+
             </h:panelGrid>
 
             <p:commandButton value="Add"
