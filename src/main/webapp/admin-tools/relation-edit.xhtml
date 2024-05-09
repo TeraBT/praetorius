@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+
+    <ui:define name="content">
+        <h:form id="relationEditForm">
+            <p:panel header="Relation Editing Tool">
+                <p:selectOneMenu  id="operationType" value="#{editRelationView.operationType}" style="margin-right: 20px">
+<!--                    <f:selectItem itemLabel="Select Operation" itemValue=""/>-->
+                    <f:selectItems value="#{editRelationView.operationTypeSet}"/>
+
+<!--                    <p:ajax listener="#{dynamicOperationBean" update="entityType" />-->
+                </p:selectOneMenu>
+
+                <p:selectOneMenu rendered="true" id="operandCombination" value="#{editRelationView.operandCombination}">
+                    <!--                    <f:selectItem itemLabel="Select Operation" itemValue=""/>-->
+                    <f:selectItems value="#{editRelationView.operandCombinationSet}"/>
+
+                    <!--                    <p:ajax listener="#{dynamicOperationBean" update="entityType" />-->
+                </p:selectOneMenu>
+<!--                <p:outputLabel for="@next" value="Operation Type:" />-->
+<!--                <p:selectOneMenu id="operationType" value="#{dynamicOperationBean.selectedOperation}"-->
+<!--                                 style="width: 100%">-->
+<!--                    <f:selectItem itemLabel="Select Operation" itemValue="" />-->
+<!--                    <f:selectItems value="#{OperationType.values()}" var="op"-->
+<!--                                   itemLabel="#{op.label}" itemValue="#{op}" />-->
+<!--                    <p:ajax listener="#{dynamicOperationBean.onEntityTypeChange}" update="entityType" />-->
+<!--                </p:selectOneMenu>-->
+
+<!--                <p:commandButton value="Assign" action="#{vendorBean.assignVendorToRegion}"-->
+<!--                                 update=":vendorForm :vendorTable"/>-->
+            </p:panel>
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

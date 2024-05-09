@@ -21,6 +21,10 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @JoinColumn(name = "product_type_id")
     private ProductType productType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendor_id")
+    private Vendor vendor;
+
     @Column
     private String description;
 
@@ -134,5 +138,13 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
 
     public void setOrderSet(Set<Order> orderSet) {
         this.orderSet = orderSet;
+    }
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 }

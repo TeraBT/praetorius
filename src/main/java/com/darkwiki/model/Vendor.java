@@ -26,7 +26,20 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
     private Region region;
 
     @OneToMany(mappedBy = "vendor")
-    private Set<Order> orderSet = new HashSet<Order>();
+    private Set<Product> productSet = new HashSet<>();
+
+    @OneToMany(mappedBy = "vendor")
+    private Set<Order> orderSet = new HashSet<>();
+
+    public void addProduct(Product product) {
+        productSet.add(product);
+        product.setVendor(this);
+    }
+
+    public void removeProduct(Product product) {
+        productSet.remove(product);
+        product.setVendor(null);
+    }
 
     @Override
     public String toString() {

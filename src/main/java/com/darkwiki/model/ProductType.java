@@ -25,6 +25,16 @@ public class ProductType implements Persistable<Long>, Serializable, Comparable<
     @OneToMany(mappedBy = "productType")
     private Set<Product> productSet = new HashSet<>();
 
+    public void addProduct(Product product) {
+        productSet.add(product);
+        product.setProductType(this);
+    }
+
+    public void removeProduct(Product product) {
+        productSet.remove(product);
+        product.setProductType(null);
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;

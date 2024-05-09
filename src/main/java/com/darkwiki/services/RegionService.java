@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class RegionService {
@@ -17,6 +19,15 @@ public class RegionService {
         return regionRepository.findAll();
     }
 
+    public Collection<String> getAllRegionNames() {
+        return getAllRegions().stream().map(Region::getName).collect(Collectors.toSet());
+    }
+
+    public Region saveRegion(Region region) {
+        regionRepository.save(region);
+        return region;
+    }
+
     public Region saveRegion(String name) {
         Region region = new Region();
         region.setName(name);
@@ -24,8 +35,12 @@ public class RegionService {
         return region;
     }
 
-    public Region saveRegion(Region order) {
-        regionRepository.save(order);
-        return order;
+
+    public Optional<Region> getRegion(long id) {
+        return regionRepository.findById(id);
+    }
+
+    public Optional<Region> getRegion(String name) {
+        return regionRepository.findByName(name);
     }
 }

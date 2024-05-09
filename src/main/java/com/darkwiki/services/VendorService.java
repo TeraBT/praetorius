@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class VendorService {
@@ -15,6 +17,10 @@ public class VendorService {
 
     public Collection<Vendor> getAllVendors() {
         return vendorRepository.findAll();
+    }
+
+    public Collection<String> getAllVendorNames() {
+        return getAllVendors().stream().map(Vendor::getName).collect(Collectors.toSet());
     }
 
     public Vendor saveVendor(String name) {
@@ -27,5 +33,13 @@ public class VendorService {
     public Vendor saveVendor(Vendor vendor) {
         vendorRepository.save(vendor);
         return vendor;
+    }
+
+    public Optional<Vendor> getVendor(long id) {
+        return vendorRepository.findById(id);
+    }
+
+    public Optional<Vendor> getVendor(String name) {
+        return vendorRepository.findByName(name);
     }
 }

@@ -6,5 +6,7 @@ import java.util.Optional;
 
 public interface RegionRepository extends AbstractRepository<Region, Long> {
 
-    Optional<Region> findRegionById(long id);
+    Optional<Region> findById(long id);
+
+    Optional<Region> findByName(String name);
 }
