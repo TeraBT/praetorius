@@ -13,6 +13,7 @@ import com.darkwiki.services.ProductTypeService;
 import com.darkwiki.services.RegionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -45,21 +46,27 @@ public class OrderController {
 
         Set<RegionDto> regionDtoSet = new HashSet<>();
         for (Region region : regionService.getAllRegions()) {
-            Set<VendorDto> vendorDtoSet = new HashSet<>();
-            for (Vendor vendor : region.getVendorSet()) {
-                Set<ProductDto> productDtoSet = new HashSet<>();
-                for (Product product : vendor.getProductSet()) {
-                    ProductDto productDto = new ProductDto(product.getId(), product.getName(), product.getProductType());
-                    productDtoSet.add(productDto);
-                }
-                VendorDto vendorDto = new VendorDto(vendor.getId(), vendor.getName(), productDtoSet);
-                vendorDtoSet.add(vendorDto);
-            }
+            Set<VendorDto> vendorDtoSet = getVendorDtoSet(region);
             RegionDto regionDto = new RegionDto(region.getId(), region.getName(), vendorDtoSet);
             regionDtoSet.add(regionDto);
         }
+        System.out.println(regionDtoSet);
 
         return ResponseEntity.ok(new ObjectMapper().writeValueAsString(regionDtoSet));
+    }
+
+    private static @NotNull Set<VendorDto> getVendorDtoSet(Region region) {
+        Set<VendorDto> vendorDtoSet = new HashSet<>();
+        for (Vendor vendor : region.getVendorSet()) {
+            Set<ProductDto> productDtoSet = new HashSet<>();
+            for (Product product : vendor.getProductSet()) {
+                ProductDto productDto = new ProductDto(product.getId(), product.getName(), product.getProductType());
+                productDtoSet.add(productDto);
+            }
+            VendorDto vendorDto = new VendorDto(vendor.getId(), vendor.getName(), productDtoSet);
+            vendorDtoSet.add(vendorDto);
+        }
+        return vendorDtoSet;
     }
 
     private String testData;

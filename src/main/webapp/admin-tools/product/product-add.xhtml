@@ -26,12 +26,12 @@
                 <p:inputText id="name" value="#{productAddView.name}"/>
 
                 <p:outputLabel for="@next" value="Product Type:"/>
-                <p:selectOneMenu value="#{productAddView.productType}">
+                <p:selectOneMenu value="#{productAddView.productType}" converter="omnifaces.SelectItemsConverter">
                     <f:selectItems value="#{productTypeController.allProductTypes}"/>
                 </p:selectOneMenu>
 
                 <p:outputLabel for="@next" value="Vendor:"/>
-                <p:selectOneMenu value="#{productAddView.vendor}">
+                <p:selectOneMenu value="#{productAddView.vendor}" converter="omnifaces.SelectItemsConverter">
                     <f:selectItems value="#{vendorController.allVendors}"/>
                 </p:selectOneMenu>
 

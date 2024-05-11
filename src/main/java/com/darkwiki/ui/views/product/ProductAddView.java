@@ -41,6 +41,9 @@ public class ProductAddView extends AbstractAddView {
             product.setName(name);
         }
 
+        product.setVendor(vendor);
+        product.setProductType(productType);
+
         if (description.isEmpty()) {
             product.setDescription("NONE");
         } else {

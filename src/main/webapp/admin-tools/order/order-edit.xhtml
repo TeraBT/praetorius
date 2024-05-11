@@ -41,14 +41,15 @@
                 </p:column>
 
                 <p:column headerText="Order Reference">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{order.orderReference}"/>
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{order.orderReference}" style="width:100%" label="Name"/>
-                        </f:facet>
-                    </p:cellEditor>
+                    <h:outputText value="#{order.orderReference}"/>
+<!--                    <p:cellEditor>-->
+<!--                        <f:facet name="output">-->
+<!--                            <h:outputText value="#{order.orderReference}"/>-->
+<!--                        </f:facet>-->
+<!--                        <f:facet name="input">-->
+<!--                            <p:inputText value="#{order.orderReference}" style="width:100%" label="Name"/>-->
+<!--                        </f:facet>-->
+<!--                    </p:cellEditor>-->
                 </p:column>
 
                 <p:column headerText="Status">
@@ -63,7 +64,7 @@
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{order.vendor}"/></f:facet>
                         <f:facet name="input">
-                            <p:selectOneMenu value="#{order.vendor}" style="width:100%">
+                            <p:selectOneMenu value="#{order.vendor}" converter="omnifaces.SelectItemsConverter" style="width:100%">
                                 <f:selectItems value="#{vendorController.allVendors}" />
                             </p:selectOneMenu>
                         </f:facet>
@@ -73,11 +74,13 @@
                 <p:column headerText="Product">
                     <p:cellEditor>
                         <f:facet name="output">
-                            <h:outputText value="#{order.product}">
+                            <h:outputText value="#{order.product}" >
                             </h:outputText>
                         </f:facet>
                         <f:facet name="input">
-                           <h:selectOneMenu value="#{productController.allProducts}"/>
+                           <p:selectOneMenu value="#{order.product}" converter="omnifaces.SelectItemsConverter">
+                               <f:selectItems value="#{productController.allProducts}"/>
+                           </p:selectOneMenu>
                         </f:facet>
                     </p:cellEditor>
                 </p:column>

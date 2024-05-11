@@ -25,7 +25,7 @@
                 <p:inputText id="name" value="#{vendorAddView.name}"/>
 
                 <p:outputLabel for="@next" value="Region:"/>
-                <p:selectOneMenu value="#{vendorAddView.region}" style="width:125px">
+                <p:selectOneMenu value="#{vendorAddView.region}" converter="omnifaces.SelectItemsConverter" style="width:125px">
                     <f:selectItems value="#{regionController.allRegions}"/>
                 </p:selectOneMenu>
 

@@ -9,14 +9,15 @@
                 xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
-        <h:form>
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
             <div class="vendor">
                 <div class="nav-admin-tools">
                     <h2 style="display: inline-block; margin-right: 20px">Edit Vendors</h2>
                     <p:button value="List" outcome="vendor-list" style="display: inline-block; margin-right: 20px"/>
                     <p:button value="Add" outcome="vendor-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-                <p:dataTable var="vendor" value="#{vendorListEditView.getCollection()}">
+                <p:dataTable var="vendor" value="#{vendorListEditView.getCollection()}" editable="true">
 
                     <p:ajax event="rowEdit" listener="#{vendorListEditView.onRowEdit}" update=":form:msgs"/>
                     <p:ajax event="rowEditCancel" listener="#{vendorListEditView.onRowCancel}" update=":form:msgs"/>
@@ -40,7 +41,7 @@
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{vendor.region}"/></f:facet>
                             <f:facet name="input">
-                                <p:selectOneMenu value="#{vendor.region}" style="width:100%">
+                                <p:selectOneMenu value="#{vendor.region}" converter="omnifaces.SelectItemsConverter" style="width:100%">
                                     <f:selectItems value="#{regionController.allRegions}"/>
                                 </p:selectOneMenu>
                             </f:facet>

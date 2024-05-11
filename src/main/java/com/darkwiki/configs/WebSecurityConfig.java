@@ -20,7 +20,7 @@ public class WebSecurityConfig {
             http
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers("/").permitAll()
-                            .requestMatchers("/void-api/**").permitAll()
+                            .requestMatchers("/void-api/order").permitAll()
                             .requestMatchers("/order-post.xhtml").permitAll()
                             .requestMatchers("/main/**").permitAll()
                             .anyRequest().authenticated())

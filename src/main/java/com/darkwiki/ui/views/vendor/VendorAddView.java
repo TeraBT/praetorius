@@ -1,14 +1,16 @@
 package com.darkwiki.ui.views.vendor;
 
+import com.darkwiki.controllers.RegionController;
 import com.darkwiki.controllers.VendorController;
 import com.darkwiki.model.Region;
 import com.darkwiki.model.Vendor;
 import com.darkwiki.ui.views.AbstractAddView;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Collection;
 
 @Component
 @RequestScoped
@@ -21,6 +23,9 @@ public class VendorAddView extends AbstractAddView {
 
     private Region region;
 
+    @Autowired
+    private RegionController regionController;
+
     public void addVendor() {
         Vendor vendor = new Vendor();
 
@@ -30,6 +35,7 @@ public class VendorAddView extends AbstractAddView {
             vendor.setName(name);
         }
 
+        vendor.setRegion(region);
         VendorController.saveVendor(vendor);
     }
 

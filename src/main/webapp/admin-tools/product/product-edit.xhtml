@@ -9,14 +9,15 @@
                 xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
-        <h:form>
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
             <div class="product">
                 <div class="nav-admin-tools">
                     <h2 style="display: inline-block; margin-right: 20px">Edit Products</h2>
                     <p:button value="List" outcome="product-list" style="display: inline-block; margin-right: 20px"/>
                     <p:button value="Add" outcome="product-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-                <p:dataTable var="product" value="#{productListEditView.getCollection()}">
+                <p:dataTable var="product" value="#{productListEditView.getCollection()}" editable="true">
 
                     <p:ajax event="rowEdit" listener="#{productListEditView.onRowEdit}" update=":form:msgs"/>
                     <p:ajax event="rowEditCancel" listener="#{productListEditView.onRowCancel}" update=":form:msgs"/>
@@ -34,9 +35,24 @@
                             <f:facet name="output">
                                 <h:outputText value="#{product.productType}"/>
                             </f:facet>
-                            <p:selectOneMenu>
-                                <f:selectItems value="#{productTypeController.allProductTypes}"/>
-                            </p:selectOneMenu>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{product.productType}" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItems value="#{productTypeController.allProductTypes}"/>
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Vendor">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{product.vendor}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{product.vendor}" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItems value="#{vendorController.allVendors}"/>
+                                </p:selectOneMenu>
+                            </f:facet>
                         </p:cellEditor>
                     </p:column>
 
