@@ -1,6 +1,8 @@
 package com.darkwiki.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
@@ -9,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Vendor implements Persistable<String>, Serializable, Comparable<Vendor> {
+public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendor> {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -43,7 +45,7 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
 
     @Override
     public String toString() {
-        return super.toString();
+        return "(%s) %s".formatted(id, name);
     }
 
     @Override
@@ -73,8 +75,8 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
     }
 
     @Override
-    public String getId() {
-        return id.toString();
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -95,6 +97,14 @@ public class Vendor implements Persistable<String>, Serializable, Comparable<Ven
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProductSet() {
+        return productSet;
+    }
+
+    public void setProductSet(Set<Product> productSet) {
+        this.productSet = productSet;
     }
 
     public Set<Order> getOrderSet() {

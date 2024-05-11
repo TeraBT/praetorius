@@ -1,6 +1,7 @@
 package com.darkwiki.ui.views.vendor;
 
 import com.darkwiki.controllers.VendorController;
+import com.darkwiki.model.Region;
 import com.darkwiki.model.Vendor;
 import com.darkwiki.ui.views.AbstractAddView;
 import jakarta.enterprise.context.RequestScoped;
@@ -17,6 +18,8 @@ public class VendorAddView extends AbstractAddView {
     VendorController VendorController;
 
     private String name;
+
+    private Region region;
 
     public void addVendor() {
         Vendor vendor = new Vendor();
@@ -41,5 +44,13 @@ public class VendorAddView extends AbstractAddView {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 }

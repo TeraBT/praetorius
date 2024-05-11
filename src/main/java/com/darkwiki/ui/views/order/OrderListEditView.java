@@ -1,7 +1,8 @@
 package com.darkwiki.ui.views.order;
 
-import com.darkwiki.controllers.OrderController;
 import com.darkwiki.model.Order;
+import com.darkwiki.controllers.OrderController;
+import com.darkwiki.ui.views.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
@@ -10,24 +11,16 @@ import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-
 @Component
 @RequestScoped
-public class OrderEditView {
+public class OrderListEditView extends AbstractListEditView<Order> {
 
     @Autowired
     OrderController orderController;
 
-    Collection<Order> orderCollection;
-
     @PostConstruct
     public void init() {
-        orderCollection = orderController.getAllOrders();
-    }
-
-    public Collection<Order> listAllOrders() {
-        return orderCollection;
+        super.setCollection(orderController.getAllOrders());
     }
 
     public void onRowEdit(RowEditEvent<Order> event) {

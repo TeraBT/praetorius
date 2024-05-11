@@ -1,6 +1,7 @@
 package com.darkwiki.services;
 
 import com.darkwiki.model.Product;
+import com.darkwiki.model.ProductType;
 import com.darkwiki.model.Region;
 import com.darkwiki.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,9 @@ public class ProductService {
 
     public Optional<Product> getProduct(String name) {
         return productRepository.findByName(name);
+    }
+
+    public Collection<Product> getAllProductsByProductType(ProductType productType) {
+        return productRepository.findAllByProductType(productType);
     }
 }

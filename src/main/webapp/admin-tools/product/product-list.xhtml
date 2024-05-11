@@ -16,7 +16,7 @@
                     <p:button value="Edit" outcome="product-edit" style="display: inline-block; margin-right: 20px"/>
                     <p:button value="Add" outcome="product-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-                <p:dataTable var="product" value="#{productListView.listAll()}">
+                <p:dataTable var="product" value="#{productListEditView.getCollection()}">
                     <p:column headerText="ID">
                         <h:outputText value="#{product.id}"/>
                     </p:column>

@@ -2,6 +2,8 @@ package com.darkwiki.ui.views.product;
 
 import com.darkwiki.controllers.ProductController;
 import com.darkwiki.model.Product;
+import com.darkwiki.model.ProductType;
+import com.darkwiki.model.Vendor;
 import com.darkwiki.ui.views.AbstractAddView;
 import jakarta.enterprise.context.RequestScoped;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,10 @@ public class ProductAddView extends AbstractAddView {
     ProductController productController;
 
     private String name;
+
+    private ProductType productType;
+
+    private Vendor vendor;
 
     private String description;
 
@@ -69,6 +75,22 @@ public class ProductAddView extends AbstractAddView {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
     public String getDescription() {

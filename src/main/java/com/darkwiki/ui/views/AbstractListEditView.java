@@ -1,14 +1,20 @@
 package com.darkwiki.ui.views;
 
+import org.primefaces.event.RowEditEvent;
+
 import java.util.Collection;
 
-public abstract class AbstractListView<T> {
+public abstract class AbstractListEditView<T> {
 
     private Collection<T> collection;
 
-    public Collection<T> listAll() {
+    public Collection<T> listAllVendors() {
         return collection;
     }
+
+    abstract public void onRowEdit(RowEditEvent<T> event);
+
+    abstract public void onRowCancel(RowEditEvent<T> event);
 
     abstract public void init();
 

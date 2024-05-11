@@ -1,6 +1,7 @@
 package com.darkwiki.model;
 
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
@@ -9,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Region implements Persistable<String>, Serializable, Comparable<Region> {
+public class Region implements Persistable<Long>, Serializable, Comparable<Region> {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -33,13 +34,6 @@ public class Region implements Persistable<String>, Serializable, Comparable<Reg
         vendorSet.remove(vendor);
         vendor.setRegion(null);
     }
-
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
 
     @Override
     public int hashCode() {
@@ -68,8 +62,13 @@ public class Region implements Persistable<String>, Serializable, Comparable<Reg
     }
 
     @Override
-    public String getId() {
-        return id.toString();
+    public String toString() {
+        return "(%s) %s".formatted(id, name);
+    }
+
+    @Override
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {

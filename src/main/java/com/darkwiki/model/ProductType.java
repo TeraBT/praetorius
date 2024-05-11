@@ -60,6 +60,11 @@ public class ProductType implements Persistable<Long>, Serializable, Comparable<
     }
 
     @Override
+    public String toString() {
+        return "(%s) %s".formatted(id, name);
+    }
+
+    @Override
     public Long getId() {
         return id;
     }

@@ -20,6 +20,8 @@ public class WebSecurityConfig {
             http
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers("/").permitAll()
+                            .requestMatchers("/void-api/**").permitAll()
+                            .requestMatchers("/order-post.xhtml").permitAll()
                             .requestMatchers("/main/**").permitAll()
                             .anyRequest().authenticated())
                     .csrf(csrf -> csrf.disable())
@@ -98,7 +100,7 @@ public class WebSecurityConfig {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user1 = User.builder()
                 .username("darkwiki")
-                .password(encoder.encode("stalinmad"))
+                .password(encoder.encode("pTzR7"))
                 .roles("USER")
                 .build();
         UserDetails user2 = User.builder()

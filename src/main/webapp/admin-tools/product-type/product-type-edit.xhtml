@@ -16,16 +16,30 @@
                     <p:button value="List" outcome="product-type-list" style="display: inline-block; margin-right: 20px"/>
                     <p:button value="Add" outcome="product-type-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-                <p:dataTable var="product_type" value="#{productTypeListView.listAll()}">
+                <p:dataTable var="productType" value="#{productTypeListEditView.getCollection()}">
+
+                    <p:ajax event="rowEdit" listener="#{productTypeListEditView.onRowEdit}" update=":form:msgs"/>
+                    <p:ajax event="rowEditCancel" listener="#{productTypeListEditView.onRowCancel}" update=":form:msgs"/>
+
                     <p:column headerText="ID">
-                        <h:outputText value="#{product_type.id}"/>
+                        <h:outputText value="#{productType.id}"/>
                     </p:column>
 
                     <p:column headerText="Name">
-                        <h:outputText value="#{product_type.name}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{productType.name}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{productType.name}" style="width:100%" label="Name"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
 
 
+                    <p:column style="width:6rem">
+                        <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                    </p:column>
                 </p:dataTable>
             </div>
         </h:form>

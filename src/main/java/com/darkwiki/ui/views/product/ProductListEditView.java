@@ -2,6 +2,8 @@ package com.darkwiki.ui.views.product;
 
 import com.darkwiki.controllers.ProductController;
 import com.darkwiki.model.Product;
+import com.darkwiki.model.ProductType;
+import com.darkwiki.ui.views.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
@@ -14,21 +16,13 @@ import java.util.Collection;
 
 @Component
 @RequestScoped
-public class ProductEditView {
+public class ProductListEditView extends AbstractListEditView<Product> {
 
     @Autowired
     ProductController productController;
 
-    Collection<Product> productCollection;
-
     @PostConstruct
-    public void init() {
-        productCollection = productController.getAllProducts();
-    }
-
-    public Collection<Product> listAllProducts() {
-        return productCollection;
-    }
+    public void init() {super.setCollection(productController.getAllProducts());}
 
     public void onRowEdit(RowEditEvent<Product> event) {
         productController.saveProduct(event.getObject());
@@ -40,5 +34,4 @@ public class ProductEditView {
         FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-
 }

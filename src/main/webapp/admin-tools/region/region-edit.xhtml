@@ -17,17 +17,32 @@
                     <p:button value="Add" outcome="region-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
 
-                <p:dataTable var="region" value="#{regionListView.listAll()}">
+                <p:dataTable var="region" value="#{regionListEditView.getCollection()}">
+
+                    <p:ajax event="rowEdit" listener="#{regionListEditView.onRowEdit}" update=":form:msgs"/>
+                    <p:ajax event="rowEditCancel" listener="#{regionListEditView.onRowCancel}" update=":form:msgs"/>
+
                     <p:column headerText="ID">
                         <h:outputText value="#{region.id}"/>
                     </p:column>
 
                     <p:column headerText="Name">
-                        <h:outputText value="#{region.name}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{region.name}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{region.name}" style="width:100%" label="Name"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Vendors">
                         <h:outputText value="#{region.vendorSet}"/>
+                    </p:column>
+
+                    <p:column style="width:6rem">
+                        <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
                     </p:column>
                 </p:dataTable>
             </div>

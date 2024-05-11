@@ -16,7 +16,11 @@
                     <p:button value="List" outcome="product-list" style="display: inline-block; margin-right: 20px"/>
                     <p:button value="Add" outcome="product-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-                <p:dataTable var="product" value="#{productListView.listAll()}">
+                <p:dataTable var="product" value="#{productListEditView.getCollection()}">
+
+                    <p:ajax event="rowEdit" listener="#{productListEditView.onRowEdit}" update=":form:msgs"/>
+                    <p:ajax event="rowEditCancel" listener="#{productListEditView.onRowCancel}" update=":form:msgs"/>
+
                     <p:column headerText="ID">
                         <h:outputText value="#{product.id}"/>
                     </p:column>
@@ -26,7 +30,14 @@
                     </p:column>
 
                     <p:column headerText="Product Type">
-                        <h:outputText value="#{product.productType}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{product.productType}"/>
+                            </f:facet>
+                            <p:selectOneMenu>
+                                <f:selectItems value="#{productTypeController.allProductTypes}"/>
+                            </p:selectOneMenu>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Description">
@@ -49,6 +60,9 @@
                         <h:outputText value="#{product.orderSet.size()}"/>
                     </p:column>
 
+                    <p:column style="width:6rem">
+                        <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                    </p:column>
                 </p:dataTable>
             </div>
         </h:form>

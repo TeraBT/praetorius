@@ -19,11 +19,11 @@
                 <h2 style="display: inline-block; margin-right: 20px">Edit Orders</h2>
                 <p:button value="List" outcome="order-list" style="display: inline-block; margin-bottom: 20px"/>
             </div>
-            <p:dataTable var="order" value="#{orderEditView.listAllOrders()}" editable="true"
+            <p:dataTable var="order" value="#{orderListEditView.getCollection()}" editable="true"
                          style="margin-bottom:20px">
 
-                <p:ajax event="rowEdit" listener="#{orderEditView.onRowEdit}" update=":form:msgs"/>
-                <p:ajax event="rowEditCancel" listener="#{orderEditView.onRowCancel}" update=":form:msgs"/>
+                <p:ajax event="rowEdit" listener="#{orderListEditView.onRowEdit}" update=":form:msgs"/>
+                <p:ajax event="rowEditCancel" listener="#{orderListEditView.onRowCancel}" update=":form:msgs"/>
 
 <!--                <p:column headerText="ID">-->
 <!--                    <p:cellEditor>-->
@@ -63,12 +63,9 @@
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{order.vendor}"/></f:facet>
                         <f:facet name="input">
-                            <h:selectOneMenu value="#{order.vendor}" style="width:100%">
-<!--                                <f:selectItems value="#{orderEditView.}" var="status"-->
-<!--                                               itemLabel="#{vendorName.text}" itemValue="#{status}"/>-->
-                                <f:selectItem itemLabel="US Vendor 1" itemValue="us_vendor1"/>
-                                <f:selectItem itemLabel="US Vendor 2" itemValue="us_vendor2"/>
-                            </h:selectOneMenu>
+                            <p:selectOneMenu value="#{order.vendor}" style="width:100%">
+                                <f:selectItems value="#{vendorController.allVendors}" />
+                            </p:selectOneMenu>
                         </f:facet>
                     </p:cellEditor>
                 </p:column>
@@ -77,14 +74,10 @@
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{order.product}">
-<!--                                <f:convertNumber type="currency" currencySymbol="$"/>-->
                             </h:outputText>
                         </f:facet>
                         <f:facet name="input">
-<!--                            <p:inputNumber value="#{order.product}" style="width:100%" label="Product"/>-->
-<!--                            <p:inputNumber value="#{order.product}" !!!!!TODO symbol="$"/>-->
-                            <f:selectItem itemLabel="Cannabis" itemValue="cannabis"/>
-                            <f:selectItem itemLabel="Psilocybin" itemValue="psilocybin"/>
+                           <h:selectOneMenu value="#{productController.allProducts}"/>
                         </f:facet>
                     </p:cellEditor>
                 </p:column>

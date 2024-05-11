@@ -8,7 +8,7 @@ public class WebNavigationController {
 
     @GetMapping("/")
     public String redirectToHome() {
-//        return "redirect:/order.xhtml";
+//        return "redirect:/dw-docs.xhtml";
         return "redirect:/main/index.html";
     }
 }
