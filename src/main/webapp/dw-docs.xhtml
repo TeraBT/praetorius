@@ -10,12 +10,16 @@
                 template="/WEB-INF/templates/main.xhtml">
 
     <ui:define name="content">
-        <p:headerRow>Darkwiki Docs</p:headerRow>
 
+        <p:headerRow>Darkwiki Docs</p:headerRow>
 
         <p:panel header="REST Interface">
         <pre>
         <code>
+            <b style="color:red">IMPORTANT:</b>
+            Deactivate automatic saving of cookies for both GET and POST!
+            Otherwise, the request will be redirected to login page.
+
             GET/POST 167.71.160.175:8080/void-api/order
 
             RegionDto: id, name, vendorDtoSet
@@ -39,6 +43,45 @@
         </pre>
 
 
+        </p:panel>
+
+        <p:panel header="Useful Aliases">
+        <pre>
+        <code>
+            Aliases can be entered in the terminal just like other commands.
+            They are 'shortcuts' for commands, see below:
+
+            alias dsta='sudo systemctl start docker.service; echo "d c! started"'
+            alias dsto='sudo systemctl stop docker.socket; sudo systemctl stop docker.service; echo "d c! stopped"'
+            alias dstat='sudo systemctl status docker'
+            alias dsta-dw='dsta; docker start darkwiki_db; echo "dw db started"'
+
+            alias dw-ssh='ssh dark@167.71.160.175'
+            alias dw-ip='echo 167.71.160.175'
+            alias dw-deploy='scp ~/IdeaProjects/darkwiki/target/dw-webapp-1.0.0.war dark@167.71.160.175:~/webapp'
+
+            alias dw-run-no-log='nohup java -jar /home/dark/webapp/dw-webapp-1.0.0.war >/dev/null 2>&amp;1 &amp;'
+            alias dw-run-log='nohup java -jar /home/dark/webapp/dw-webapp-1.0.0.war &amp;'
+
+            These are found in ~/.bashrc (at the bottom of the file, use 'vim ~/.bashrc' to edit).
+            Use 'source ~/.bashrc' to reload .bashrc after changes.
+        </code>
+        </pre>
+
+        </p:panel>
+
+        <p:panel header="Miscellanea">
+        <pre>
+        <code>
+            JVM Settings:
+            -Xms: initial heap size
+            -Xmx: Maximum heap size
+
+            Docker Setup:
+            docker run --name darkwiki_db -e POSTGRES_USER=darkwiki_admin -e POSTGRES_PASSWORD=strongpassword -e POSTGRES_DB=darkwiki_db -p 5432:5432 -d -v darkwiki_volume:/var/lib/postgresql/data postgres
+
+        </code>
+        </pre>
         </p:panel>
 
 

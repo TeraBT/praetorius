@@ -8,4 +8,5 @@ public interface OrderRepository extends AbstractRepository<Order, Long> {
     Optional<Order> findById(long id);
 
     Optional<Order> findByOrderReference(String orderReference);
+
 }

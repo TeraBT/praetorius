@@ -11,7 +11,8 @@ import org.springframework.data.repository.Repository;
 @NoRepositoryBean
 public interface AbstractRepository<T, ID extends Serializable> extends Repository<T, ID> {
 
-    void delete(T entity);
+//    Boolean delete(T entity);
+    Optional<T> deleteById(Long id);
 
     List<T> findAll();
 

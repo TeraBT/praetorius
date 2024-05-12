@@ -29,18 +29,18 @@ public class WebSecurityConfig {
                     .csrf(csrf -> csrf.disable())
                     .formLogin(form -> form
 //                            .loginPage("/login")
-                            .defaultSuccessUrl("/", true)
+//                            .defaultSuccessUrl("/", true)
                             .permitAll())
                     .logout(logout -> logout
                             .logoutSuccessUrl("/login?logout")
-                            .permitAll())
-                    .sessionManagement(session -> session
-                        .invalidSessionUrl("/login?invalid")
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                        .sessionFixation().migrateSession()
-                        .maximumSessions(1)
-                                .expiredUrl("/login?expired")
-                );
+                            .permitAll());
+//                    .sessionManagement(session -> session
+//                        .invalidSessionUrl("/login?invalid")
+//                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//                        .sessionFixation().migrateSession()
+//                        .maximumSessions(1)
+//                                .expiredUrl("/login?expired")
+//                );
 
             return http.build();
         }

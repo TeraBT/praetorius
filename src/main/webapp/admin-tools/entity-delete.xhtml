@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+
+    <ui:define name="content">
+        <h:form id="entityDeletionForm">
+            <p:growl id="msgs" showDetail="true"/>
+
+            <h:panelGrid title="Entity Deletion Tool" columns="2" style="margin-bottom:10px" cellpadding="5">
+
+                <p:outputLabel for="@next" value="Entity Type"/>
+                <p:selectOneMenu id="entityType" value="#{deleteController.entityType}"
+                                 converter="omnifaces.SelectItemsConverter" style="margin-right: 20px">
+                    <f:selectItems value="#{deleteController.entityTypeList}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="@next" value="Entity ID:"/>
+                <p:inputText id="name" value="#{deleteController.entityId}"/>
+            </h:panelGrid>
+
+            <p:commandButton value="Delete"
+                             action="#{deleteController.deleteEntity
+                             (deleteController.entityType, deleteController.entityId)}"
+                             update="msgs"
+                             icon="pi pi-times"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

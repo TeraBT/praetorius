@@ -1,5 +1,6 @@
 package com.darkwiki.services;
 
+import com.darkwiki.model.Order;
 import com.darkwiki.model.Vendor;
 import com.darkwiki.repositories.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,16 @@ public class VendorService {
 
     public Optional<Vendor> getVendor(String name) {
         return vendorRepository.findByName(name);
+    }
+
+    public boolean deleteVendor(Long id) {
+
+        boolean wasPresent = vendorRepository.findById(id).isPresent();
+
+        if (wasPresent) {
+            vendorRepository.deleteById(id);
+        }
+
+        return wasPresent;
     }
 }

@@ -1,5 +1,6 @@
 package com.darkwiki.services;
 
+import com.darkwiki.model.Order;
 import com.darkwiki.model.Region;
 import com.darkwiki.repositories.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,16 @@ public class RegionService {
 
     public Optional<Region> getRegion(String name) {
         return regionRepository.findByName(name);
+    }
+
+    public boolean deleteRegion(Long id) {
+
+        boolean wasPresent = regionRepository.findById(id).isPresent();
+
+        if (wasPresent) {
+            regionRepository.deleteById(id);
+        }
+
+        return wasPresent;
     }
 }

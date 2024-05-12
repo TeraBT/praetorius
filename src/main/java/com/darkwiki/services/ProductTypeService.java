@@ -1,5 +1,6 @@
 package com.darkwiki.services;
 
+import com.darkwiki.model.Order;
 import com.darkwiki.model.ProductType;
 import com.darkwiki.model.Region;
 import com.darkwiki.repositories.ProductTypeRepository;
@@ -42,5 +43,16 @@ public class ProductTypeService {
 
     public Optional<ProductType> getProductType(String name) {
         return productTypeRepository.findByName(name);
+    }
+
+    public boolean deleteProductType(Long id) {
+
+        boolean wasPresent = productTypeRepository.findById(id).isPresent();
+
+        if (wasPresent) {
+            productTypeRepository.deleteById(id);
+        }
+
+        return wasPresent;
     }
 }
