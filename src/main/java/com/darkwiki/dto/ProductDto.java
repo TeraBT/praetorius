@@ -8,5 +8,6 @@ public record ProductDto(
 
         Long id,
         String name,
-        ProductType productType
+
+        String productTypeName
 ) {}

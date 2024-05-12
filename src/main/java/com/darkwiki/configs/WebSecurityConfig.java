@@ -1,14 +1,16 @@
 package com.darkwiki.configs;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
@@ -19,26 +21,54 @@ public class WebSecurityConfig {
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http
                     .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/").permitAll()
-                            .requestMatchers("/void-api/order").permitAll()
+                            .requestMatchers("/void-api/**").permitAll()
                             .requestMatchers("/order-post.xhtml").permitAll()
                             .requestMatchers("/main/**").permitAll()
+                            .requestMatchers("/").permitAll()
                             .anyRequest().authenticated())
                     .csrf(csrf -> csrf.disable())
                     .formLogin(form -> form
 //                            .loginPage("/login")
-//                            .defaultSuccessUrl("/", true)
+                            .defaultSuccessUrl("/", true)
                             .permitAll())
                     .logout(logout -> logout
-//                            .logoutSuccessUrl("/login?logout")
-                            .permitAll());
+                            .logoutSuccessUrl("/login?logout")
+                            .permitAll())
+                    .sessionManagement(session -> session
+                        .invalidSessionUrl("/login?invalid")
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                        .sessionFixation().migrateSession()
+                        .maximumSessions(1)
+                                .expiredUrl("/login?expired")
+                );
 
             return http.build();
         }
 
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/").permitAll()
+//                        .requestMatchers("/void-api/order").permitAll()
+//                        .requestMatchers("/order-post.xhtml").permitAll()
+//                        .requestMatchers("/main/**").permitAll()
+//                        .anyRequest().authenticated())
+//                .csrf(csrf -> csrf.disable())
+//                .formLogin(form -> form
+////                            .loginPage("/login")
+////                            .defaultSuccessUrl("/", true)
+//                        .permitAll())
+//                .logout(logout -> logout
+////                            .logoutSuccessUrl("/login?logout")
+//                        .permitAll());
+//
+//        return http.build();
+//    }
+
+
 
 //    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exceptio//    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        return http
 //                .authorizeRequests(
@@ -60,8 +90,11 @@ public class WebSecurityConfig {
 //                        .maximumSessions(1)
 ////                                .expiredUrl("/login?expired")
 ////                )
-//                .build();
-//    }n {
+//                .http.build();
+//    }
+
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {{
 //        http
 ////                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
 //                .authorizeRequests(authorizeRequests ->

@@ -3,6 +3,7 @@ package com.darkwiki.controllers;
 import com.darkwiki.auxiliaries.OrderReferenceGenerator;
 import com.darkwiki.dto.ProductDto;
 import com.darkwiki.dto.RegionDto;
+import com.darkwiki.dto.RegionDtoSetDto;
 import com.darkwiki.dto.VendorDto;
 import com.darkwiki.model.Order;
 import com.darkwiki.model.Product;
@@ -12,17 +13,16 @@ import com.darkwiki.services.OrderService;
 import com.darkwiki.services.ProductTypeService;
 import com.darkwiki.services.RegionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collection;
@@ -45,24 +45,35 @@ public class OrderController {
     public ResponseEntity<String> getOrderInitData() throws JsonProcessingException {
 
         Set<RegionDto> regionDtoSet = new HashSet<>();
+
         for (Region region : regionService.getAllRegions()) {
             Set<VendorDto> vendorDtoSet = getVendorDtoSet(region);
             RegionDto regionDto = new RegionDto(region.getId(), region.getName(), vendorDtoSet);
             regionDtoSet.add(regionDto);
         }
-        System.out.println(regionDtoSet);
 
-        return ResponseEntity.ok(new ObjectMapper().writeValueAsString(regionDtoSet));
+        RegionDtoSetDto regionDtoSetDto = new RegionDtoSetDto(regionDtoSet);
+
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .serializeNulls()
+                .create();
+
+        String s = gson.toJson(regionDtoSetDto);
+        return ResponseEntity.ok(s);
     }
 
     private static @NotNull Set<VendorDto> getVendorDtoSet(Region region) {
         Set<VendorDto> vendorDtoSet = new HashSet<>();
+
         for (Vendor vendor : region.getVendorSet()) {
             Set<ProductDto> productDtoSet = new HashSet<>();
             for (Product product : vendor.getProductSet()) {
-                ProductDto productDto = new ProductDto(product.getId(), product.getName(), product.getProductType());
+                ProductDto productDto = new ProductDto(product.getId(),
+                        product.getName(), product.getProductType().getName());
                 productDtoSet.add(productDto);
             }
+
             VendorDto vendorDto = new VendorDto(vendor.getId(), vendor.getName(), productDtoSet);
             vendorDtoSet.add(vendorDto);
         }
