@@ -33,12 +33,12 @@ public class OrderService {
 
     public boolean deleteOrder(Long id) {
 
-        boolean wasPresent = orderRepository.findById(id).isPresent();
-
-        if (wasPresent) {
+        if (orderRepository.findById(id).isPresent()) {
             orderRepository.deleteById(id);
+
+            return true;
         }
 
-        return wasPresent;
+        return false;
     }
 }

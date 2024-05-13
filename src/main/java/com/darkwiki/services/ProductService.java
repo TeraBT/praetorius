@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -54,8 +55,8 @@ public class ProductService {
 
         if (product.isPresent()) {
 
-            product.get().getOrderSet().forEach(product.get()::removeFromOrderSet);
-            product.get().getAvailableAmountSet().forEach(product.get()::removeFromAvailableAmountSet);
+            Set.copyOf(product.get().getOrderSet()).forEach(product.get()::removeFromOrderSet);
+            Set.copyOf(product.get().getAvailableAmountSet()).forEach(product.get()::removeFromAvailableAmountSet);
             productRepository.deleteById(id);
 
             return true;

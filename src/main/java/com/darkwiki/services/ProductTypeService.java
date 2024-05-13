@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -49,7 +50,7 @@ public class ProductTypeService {
 
         if (productType.isPresent()) {
 
-            productType.get().getProductSet().forEach(productType.get()::removeFromProductSet);
+            Set.copyOf(productType.get().getProductSet()).forEach(productType.get()::removeFromProductSet);
             productTypeRepository.deleteById(id);
 
             return true;

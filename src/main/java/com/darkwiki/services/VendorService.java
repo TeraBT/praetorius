@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -49,8 +50,8 @@ public class VendorService {
 
         if (vendor.isPresent()) {
 
-            vendor.get().getProductSet().forEach(vendor.get()::removeFromProductSet);
-            vendor.get().getOrderSet().forEach(vendor.get()::removeFromOrderSet);
+            Set.copyOf(vendor.get().getProductSet()).forEach(vendor.get()::removeFromProductSet);
+            Set.copyOf(vendor.get().getOrderSet()).forEach(vendor.get()::removeFromOrderSet);
             vendorRepository.deleteById(id);
 
             return true;
