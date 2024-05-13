@@ -5,10 +5,7 @@ import com.darkwiki.dto.ProductDto;
 import com.darkwiki.dto.RegionDto;
 import com.darkwiki.dto.RegionDtoSetDto;
 import com.darkwiki.dto.VendorDto;
-import com.darkwiki.model.Order;
-import com.darkwiki.model.Product;
-import com.darkwiki.model.Region;
-import com.darkwiki.model.Vendor;
+import com.darkwiki.model.*;
 import com.darkwiki.services.OrderService;
 import com.darkwiki.services.ProductTypeService;
 import com.darkwiki.services.RegionService;
@@ -27,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -68,9 +66,11 @@ public class OrderController {
 
         for (Vendor vendor : region.getVendorSet()) {
             Set<ProductDto> productDtoSet = new HashSet<>();
+
             for (Product product : vendor.getProductSet()) {
+                Optional<ProductType> productType = Optional.ofNullable(product.getProductType());
                 ProductDto productDto = new ProductDto(product.getId(),
-                        product.getName(), product.getProductType().getName());
+                        product.getName(), productType.map(ProductType::getName).orElse("NULL"));
                 productDtoSet.add(productDto);
             }
 

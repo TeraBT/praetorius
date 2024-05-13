@@ -42,12 +42,22 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @OneToMany(mappedBy = "product")
     private Set<Order> orderSet = new HashSet<Order>();
 
-    public void addToAvailableAmountList(Integer amount) {
+    public void addToAvailableAmountSet(Integer amount) {
         availableAmountSet.add(amount);
     }
 
-    public void removeFromAvailableAmountList(Integer amount) {
+    public void removeFromAvailableAmountSet(Integer amount) {
         availableAmountSet.remove(amount);
+    }
+
+    public void addToOrderSet(Order order) {
+        orderSet.add(order);
+        order.setProduct(this);
+    }
+
+    public void removeFromOrderSet(Order order) {
+        orderSet.remove(order);
+        order.setProduct(null);
     }
 
 

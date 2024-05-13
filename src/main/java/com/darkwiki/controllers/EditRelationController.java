@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -61,21 +60,21 @@ public class EditRelationController {
                         Optional<Region> region = regionService.getRegion(operandName2);
                         Optional<Vendor> vendor = vendorService.getVendor(operandName1);
                         if (region.isPresent() && vendor.isPresent()) {
-                            region.get().addVendor(vendor.get());
+                            region.get().addToVendorSet(vendor.get());
                         }
                     }
                     case PRODUCT_TO_VENDOR -> {
                         Optional<Vendor> vendor = vendorService.getVendor(operandName2);
                         Optional<Product> product = productService.getProduct(operandName1);
                         if (vendor.isPresent() && product.isPresent()) {
-                            vendor.get().addProduct(product.get());
+                            vendor.get().addToProductSet(product.get());
                         }
                     }
                     case PRODUCT_TYPE_TO_PRODUCT -> {
                         Optional<Product> product = productService.getProduct(operandName2);
                         Optional<ProductType> productType = productTypeService.getProductType(operandName1);
                         if (productType.isPresent() && product.isPresent()) {
-                            productType.get().addProduct(product.get());
+                            productType.get().addToProductSet(product.get());
                         }
                     }
                 }
@@ -86,21 +85,21 @@ public class EditRelationController {
                         Optional<Region> region = regionService.getRegion(operandName2);
                         Optional<Vendor> vendor = vendorService.getVendor(operandName1);
                         if (region.isPresent() && vendor.isPresent()) {
-                            region.get().removeVendor(vendor.get());
+                            region.get().removeFromVendorSet(vendor.get());
                         }
                     }
                     case PRODUCT_TO_VENDOR -> {
                         Optional<Vendor> vendor = vendorService.getVendor(operandName2);
                         Optional<Product> product = productService.getProduct(operandName1);
                         if (vendor.isPresent() && product.isPresent()) {
-                            vendor.get().removeProduct(product.get());
+                            vendor.get().removeFromProductSet(product.get());
                         }
                     }
                     case PRODUCT_TYPE_TO_PRODUCT -> {
                         Optional<Product> product = productService.getProduct(operandName2);
                         Optional<ProductType> productType = productTypeService.getProductType(operandName1);
                         if (productType.isPresent() && product.isPresent()) {
-                            productType.get().removeProduct(product.get());
+                            productType.get().removeFromProductSet(product.get());
                         }
                     }
                 }

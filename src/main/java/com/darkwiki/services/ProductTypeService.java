@@ -1,8 +1,6 @@
 package com.darkwiki.services;
 
-import com.darkwiki.model.Order;
 import com.darkwiki.model.ProductType;
-import com.darkwiki.model.Region;
 import com.darkwiki.repositories.ProductTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,12 +45,16 @@ public class ProductTypeService {
 
     public boolean deleteProductType(Long id) {
 
-        boolean wasPresent = productTypeRepository.findById(id).isPresent();
+        Optional<ProductType> productType = productTypeRepository.findById(id);
 
-        if (wasPresent) {
+        if (productType.isPresent()) {
+
+            productType.get().getProductSet().forEach(productType.get()::removeFromProductSet);
             productTypeRepository.deleteById(id);
+
+            return true;
         }
 
-        return wasPresent;
+        return false;
     }
 }

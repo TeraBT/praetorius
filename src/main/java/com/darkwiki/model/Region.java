@@ -1,7 +1,6 @@
 package com.darkwiki.model;
 
 import jakarta.persistence.*;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
@@ -25,12 +24,12 @@ public class Region implements Persistable<Long>, Serializable, Comparable<Regio
     @OneToMany(mappedBy = "region")
     private Set<Vendor> vendorSet = new HashSet<>();
 
-    public void addVendor(Vendor vendor) {
+    public void addToVendorSet(Vendor vendor) {
         vendorSet.add(vendor);
         vendor.setRegion(this);
     }
 
-    public void removeVendor(Vendor vendor) {
+    public void removeFromVendorSet(Vendor vendor) {
         vendorSet.remove(vendor);
         vendor.setRegion(null);
     }

@@ -64,6 +64,8 @@ public class ProductAddView extends AbstractAddView {
             product.setAvailableAmountSet(availableAmountSet);
         }
 
+        product.setShippingCost(shippingCost);
+
         productController.saveProduct(product);
     }
 

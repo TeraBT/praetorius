@@ -1,8 +1,6 @@
 package com.darkwiki.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
@@ -33,14 +31,24 @@ public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendo
     @OneToMany(mappedBy = "vendor")
     private Set<Order> orderSet = new HashSet<>();
 
-    public void addProduct(Product product) {
+    public void addToProductSet(Product product) {
         productSet.add(product);
         product.setVendor(this);
     }
 
-    public void removeProduct(Product product) {
+    public void removeFromProductSet(Product product) {
         productSet.remove(product);
         product.setVendor(null);
+    }
+
+    public void addToOrderSet(Order order) {
+        orderSet.add(order);
+        order.setVendor(this);
+    }
+
+    public void removeFromOrderSet(Order order) {
+        orderSet.remove(order);
+        order.setVendor(null);
     }
 
     @Override

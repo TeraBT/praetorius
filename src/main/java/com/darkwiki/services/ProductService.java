@@ -1,6 +1,5 @@
 package com.darkwiki.services;
 
-import com.darkwiki.model.Order;
 import com.darkwiki.model.Product;
 import com.darkwiki.model.ProductType;
 import com.darkwiki.repositories.ProductRepository;
@@ -51,12 +50,17 @@ public class ProductService {
 
     public boolean deleteProduct(Long id) {
 
-        boolean wasPresent = productRepository.findById(id).isPresent();
+        Optional<Product> product = productRepository.findById(id);
 
-        if (wasPresent) {
+        if (product.isPresent()) {
+
+            product.get().getOrderSet().forEach(product.get()::removeFromOrderSet);
+            product.get().getAvailableAmountSet().forEach(product.get()::removeFromAvailableAmountSet);
             productRepository.deleteById(id);
+
+            return true;
         }
 
-        return wasPresent;
+        return false;
     }
 }
