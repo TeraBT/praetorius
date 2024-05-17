@@ -32,23 +32,43 @@ public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendo
     private Set<Order> orderSet = new HashSet<>();
 
     public void addToProductSet(Product product) {
-        productSet.add(product);
-        product.setVendor(this);
+        if (product != null) {
+            productSet.add(product);
+            product.setVendor(this);
+        }
     }
 
     public void removeFromProductSet(Product product) {
-        productSet.remove(product);
-        product.setVendor(null);
+        if (product != null) {
+            productSet.remove(product);
+            product.setVendor(null);
+        }
     }
 
     public void addToOrderSet(Order order) {
-        orderSet.add(order);
-        order.setVendor(this);
+        if (order != null) {
+            orderSet.add(order);
+            order.setVendor(this);
+        }
     }
 
     public void removeFromOrderSet(Order order) {
-        orderSet.remove(order);
-        order.setVendor(null);
+        if (order != null) {
+            orderSet.remove(order);
+            order.setVendor(null);
+        }
+    }
+
+    public void setRegion(Region region) {
+        if (region != null) {
+            region.getVendorSet().add(this);
+        }
+
+        if (this.region != null) {
+            this.region.getVendorSet().remove(this);
+        }
+
+        this.region = region;
     }
 
     @Override
@@ -93,10 +113,6 @@ public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendo
 
     public Region getRegion() {
         return region;
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
     }
 
     public String getName() {

@@ -50,6 +50,31 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     private String textMessage;
 
 
+    public void setVendor(Vendor vendor) {
+        if (vendor != null) {
+            vendor.getOrderSet().add(this);
+        }
+
+        if (this.vendor != null) {
+            this.vendor.getOrderSet().remove(this);
+        }
+
+        this.vendor = vendor;
+    }
+
+    public void setProduct(Product product) {
+        if (product != null) {
+            product.getOrderSet().add(this);
+        }
+
+        if (this.product != null) {
+            this.product.getOrderSet().remove(this);
+        }
+
+        this.product = product;
+    }
+
+
     public String getCreateTimestampAsFormatedString() {
         if (createTimestamp == null) {
             return "NONE";
@@ -110,16 +135,8 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
         return vendor;
     }
 
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-    }
-
     public Product getProduct() {
         return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public double getAmount() {

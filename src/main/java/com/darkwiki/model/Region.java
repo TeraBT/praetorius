@@ -25,13 +25,17 @@ public class Region implements Persistable<Long>, Serializable, Comparable<Regio
     private Set<Vendor> vendorSet = new HashSet<>();
 
     public void addToVendorSet(Vendor vendor) {
-        vendorSet.add(vendor);
-        vendor.setRegion(this);
+       if  (vendor != null) {
+           vendorSet.add(vendor);
+           vendor.setRegion(this);
+       }
     }
 
     public void removeFromVendorSet(Vendor vendor) {
-        vendorSet.remove(vendor);
-        vendor.setRegion(null);
+       if (vendor != null) {
+           vendorSet.remove(vendor);
+           vendor.setRegion(null);
+       }
     }
 
     @Override
@@ -85,9 +89,4 @@ public class Region implements Persistable<Long>, Serializable, Comparable<Regio
     public Set<Vendor> getVendorSet() {
         return vendorSet;
     }
-
-    public void setVendorSet(Set<Vendor> vendorSet) {
-        this.vendorSet = vendorSet;
-    }
-
 }

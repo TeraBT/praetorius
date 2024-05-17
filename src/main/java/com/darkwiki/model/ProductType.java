@@ -26,13 +26,17 @@ public class ProductType implements Persistable<Long>, Serializable, Comparable<
     private Set<Product> productSet = new HashSet<>();
 
     public void addToProductSet(Product product) {
-        productSet.add(product);
-        product.setProductType(this);
+        if (product != null) {
+            productSet.add(product);
+            product.setProductType(this);
+        }
     }
 
     public void removeFromProductSet(Product product) {
-        productSet.remove(product);
-        product.setProductType(null);
+        if (product != null) {
+            productSet.add(product);
+            product.setProductType(this);
+        }
     }
 
     @Override

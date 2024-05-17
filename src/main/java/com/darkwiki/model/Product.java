@@ -43,23 +43,54 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     private Set<Order> orderSet = new HashSet<Order>();
 
     public void addToAvailableAmountSet(Integer amount) {
-        availableAmountSet.add(amount);
+        if (amount != null) {
+            availableAmountSet.add(amount);
+        }
     }
 
     public void removeFromAvailableAmountSet(Integer amount) {
-        availableAmountSet.remove(amount);
+        if (amount != null) {
+            availableAmountSet.remove(amount);
+        }
     }
 
     public void addToOrderSet(Order order) {
-        orderSet.add(order);
-        order.setProduct(this);
+       if (order != null) {
+           orderSet.add(order);
+           order.setProduct(this);
+       }
     }
 
     public void removeFromOrderSet(Order order) {
-        orderSet.remove(order);
-        order.setProduct(null);
+       if (order != null) {
+           orderSet.remove(order);
+           order.setProduct(null);
+       }
     }
 
+    public void setVendor(Vendor vendor) {
+        if (vendor != null) {
+            vendor.getProductSet().add(this);
+        }
+
+        if (this.vendor != null) {
+            this.vendor.getProductSet().remove(this);
+        }
+
+        this.vendor = vendor;
+    }
+
+    public void setProductType(ProductType productType) {
+        if (productType != null) {
+            productType.getProductSet().add(this);
+        }
+
+        if (this.productType != null) {
+            this.productType.getProductSet().remove(this);
+        }
+
+        this.productType = productType;
+    }
 
     @Override
     public int hashCode() {
@@ -103,10 +134,6 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         return productType;
     }
 
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
-    }
-
     public String getName() {
         return name;
     }
@@ -135,10 +162,6 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         return availableAmountSet;
     }
 
-    public void setAvailableAmountSet(SortedSet<Integer> availableAmountSet) {
-        this.availableAmountSet = availableAmountSet;
-    }
-
     public double getShippingCost() {
         return shippingCost;
     }
@@ -151,15 +174,7 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         return orderSet;
     }
 
-    public void setOrderSet(Set<Order> orderSet) {
-        this.orderSet = orderSet;
-    }
-
     public Vendor getVendor() {
         return vendor;
-    }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
     }
 }
