@@ -59,4 +59,8 @@ public class RegionService {
 
         return false;
     }
+
+    public Optional<Region> findRegionById(Long id) {
+        return regionRepository.findById(id);
+    }
 }

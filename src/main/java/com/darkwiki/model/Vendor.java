@@ -1,6 +1,7 @@
 package com.darkwiki.model;
 
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
@@ -60,6 +61,12 @@ public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendo
     }
 
     public void setRegion(Region region) {
+        if (region != null && this.region != null) {
+            if (this.region.equals(region)) {
+                return;
+            }
+        }
+
         if (region != null) {
             region.getVendorSet().add(this);
         }
@@ -78,12 +85,12 @@ public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendo
 
     @Override
     public boolean isNew() {
-        return false;
+        return id == null;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
@@ -91,14 +98,17 @@ public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendo
         if (this == o) {
             return true;
         } else if (o instanceof Vendor vendor) {
-            return id.equals(vendor.id);
+            return id != null && vendor.id != null && id.equals(vendor.id);
         } else {
             return false;
         }
     }
 
     @Override
-    public int compareTo(Vendor o) {
+    public int compareTo(@NotNull Vendor o) {
+        if (this.id == null || o.id == null) {
+            return 0;
+        }
         return id.compareTo(o.id);
     }
 

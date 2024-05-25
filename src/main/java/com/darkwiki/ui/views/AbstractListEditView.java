@@ -8,10 +8,6 @@ public abstract class AbstractListEditView<T> {
 
     private Collection<T> collection;
 
-    public Collection<T> listAllVendors() {
-        return collection;
-    }
-
     abstract public void onRowEdit(RowEditEvent<T> event);
 
     abstract public void onRowCancel(RowEditEvent<T> event);

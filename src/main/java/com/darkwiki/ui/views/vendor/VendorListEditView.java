@@ -17,6 +17,7 @@ public class VendorListEditView extends AbstractListEditView<Vendor> {
 
     @Autowired
     VendorController VendorController;
+
     @Autowired
     private VendorController vendorController;
 
@@ -24,6 +25,7 @@ public class VendorListEditView extends AbstractListEditView<Vendor> {
     public void init() {super.setCollection(VendorController.getAllVendors());}
 
     public void onRowEdit(RowEditEvent<Vendor> event) {
+        System.out.println(event.getObject().getRegion());
         vendorController.saveVendor(event.getObject());
         FacesMessage msg = new FacesMessage("Vendor Edited", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);

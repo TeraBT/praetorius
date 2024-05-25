@@ -51,6 +51,12 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
 
 
     public void setVendor(Vendor vendor) {
+        if (vendor != null && this.vendor != null) {
+            if (this.vendor.equals(vendor)) {
+                return;
+            }
+        }
+
         if (vendor != null) {
             vendor.getOrderSet().add(this);
         }
@@ -63,6 +69,12 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     }
 
     public void setProduct(Product product) {
+        if (product != null && this.product != null) {
+            if (this.product.equals(product)) {
+                return;
+            }
+        }
+
         if (product != null) {
             product.getOrderSet().add(this);
         }
@@ -73,7 +85,6 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
 
         this.product = product;
     }
-
 
     public String getCreateTimestampAsFormatedString() {
         if (createTimestamp == null) {

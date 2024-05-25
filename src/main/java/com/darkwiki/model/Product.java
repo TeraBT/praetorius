@@ -54,6 +54,11 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         }
     }
 
+    // TODO: This seems to be dangerous, but possibly needed for the ProductAddView to function
+    public void setAvailableAmountSet(SortedSet<Integer> availableAmountSet) {
+        this.availableAmountSet = availableAmountSet;
+    }
+
     public void addToOrderSet(Order order) {
        if (order != null) {
            orderSet.add(order);
@@ -69,6 +74,12 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     }
 
     public void setVendor(Vendor vendor) {
+        if (vendor != null && this.vendor != null) {
+            if (this.vendor.equals(vendor)) {
+                return;
+            }
+        }
+
         if (vendor != null) {
             vendor.getProductSet().add(this);
         }
