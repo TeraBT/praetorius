@@ -65,6 +65,22 @@ public class DeleteController {
         return succeeded;
     }
 
+    public boolean deleteRegion(Long id) {
+        return regionService.deleteRegion(id);
+    }
+
+    public boolean deleteVendor(Long id) {
+        return vendorService.deleteVendor(id);
+    }
+
+    public boolean deleteProduct(Long id) {
+        return productService.deleteProduct(id);
+    }
+
+    public boolean deleteProductType(Long id) {
+        return productTypeService.deleteProductType(id);
+    }
+
     public void outputExecutionOutcome(boolean succeeded, EntityType entityType, Long id) {
 
         if (succeeded) {

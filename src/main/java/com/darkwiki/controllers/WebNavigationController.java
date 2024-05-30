@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class WebNavigationController {
 
     @GetMapping("/")
-    public String redirectToHome() {
-//        return "redirect:/dw-docs.xhtml";
+    public String index() {
         return "redirect:/main/index.html";
     }
 }

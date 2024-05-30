@@ -31,15 +31,15 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     private LocalDateTime createTimestamp;
 
 
-//    @ManyToOne(fetch = FetchType.LAZY)
+//    @ManyToOne
 //    @JoinColumn(name = "vendor_id")
 //    private Vendor vendor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "vendor_id")
     private Vendor vendor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -49,6 +49,9 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     @Column
     private String textMessage;
 
+    // TODO: Orders should keep info about vendor even if vendor is deleted (also for product)
+    // TODO: Just save product, vendor can be fetched through it
+    // TODO: Orders shouldn't have editable vendor and product info
 
     public void setVendor(Vendor vendor) {
         if (vendor != null && this.vendor != null) {

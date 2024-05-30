@@ -22,7 +22,7 @@ public class ProductType implements Persistable<Long>, Serializable, Comparable<
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "productType")
+    @OneToMany(mappedBy = "productType", fetch = FetchType.LAZY)
     private Set<Product> productSet = new HashSet<>();
 
     public void addToProductSet(Product product) {

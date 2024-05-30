@@ -2,6 +2,7 @@ package com.darkwiki.services;
 
 import com.darkwiki.model.Region;
 import com.darkwiki.repositories.RegionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,8 @@ public class RegionService {
 
     @Autowired
     RegionRepository regionRepository;
+    @Autowired
+    private VendorService vendorService;
 
     public Collection<Region> getAllRegions() {
         return regionRepository.findAll();
@@ -45,13 +48,17 @@ public class RegionService {
         return regionRepository.findByName(name);
     }
 
+    @Transactional
     public boolean deleteRegion(Long id) {
 
         Optional<Region> region = regionRepository.findById(id);
 
         if (region.isPresent()) {
 
-            Set.copyOf(region.get().getVendorSet()).forEach(region.get()::removeFromVendorSet);
+            region.get().getVendorSet().forEach(v -> {
+                v.setRegion(null);
+                vendorService.saveVendor(v);
+            });
             regionRepository.deleteById(id);
 
             return true;

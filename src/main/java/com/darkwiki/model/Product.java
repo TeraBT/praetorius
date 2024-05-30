@@ -17,11 +17,11 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @Column
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_type_id")
     private ProductType productType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "vendor_id")
     private Vendor vendor;
 
@@ -39,7 +39,7 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @Column
     private double shippingCost;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<Order> orderSet = new HashSet<Order>();
 
     public void addToAvailableAmountSet(Integer amount) {
@@ -54,9 +54,14 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         }
     }
 
-    // TODO: This seems to be dangerous, but possibly needed for the ProductAddView to function
+    public void removeFromAvailableAmountSet(Set<Integer> amountSet) {
+        if (amountSet != null) {
+            availableAmountSet.removeAll(amountSet);
+        }
+    }
+
     public void setAvailableAmountSet(SortedSet<Integer> availableAmountSet) {
-        this.availableAmountSet = availableAmountSet;
+        this.availableAmountSet.addAll(availableAmountSet);
     }
 
     public void addToOrderSet(Order order) {

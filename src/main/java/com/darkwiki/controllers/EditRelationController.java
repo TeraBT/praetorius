@@ -107,6 +107,7 @@ public class EditRelationController {
         }
     }
 
+    // TODO: Naming convention 'getAll...'
     public Collection<Region> getRegions() {
         return regionService.getAllRegions();
     }

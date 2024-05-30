@@ -1,6 +1,8 @@
 package com.darkwiki.ui.views.vendor;
 
+import com.darkwiki.controllers.RegionController;
 import com.darkwiki.controllers.VendorController;
+import com.darkwiki.model.Region;
 import com.darkwiki.model.Vendor;
 import com.darkwiki.ui.views.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
@@ -10,6 +12,8 @@ import jakarta.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Collection;
 
 @Component
 @RequestScoped
@@ -21,11 +25,17 @@ public class VendorListEditView extends AbstractListEditView<Vendor> {
     @Autowired
     private VendorController vendorController;
 
+    @Autowired
+    private RegionController regionController;
+
     @PostConstruct
     public void init() {super.setCollection(VendorController.getAllVendors());}
 
+    public Collection<Region> getAllRegions() {
+        return regionController.getAllRegions();
+    }
+
     public void onRowEdit(RowEditEvent<Vendor> event) {
-        System.out.println(event.getObject().getRegion());
         vendorController.saveVendor(event.getObject());
         FacesMessage msg = new FacesMessage("Vendor Edited", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);

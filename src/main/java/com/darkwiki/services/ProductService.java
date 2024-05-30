@@ -3,6 +3,7 @@ package com.darkwiki.services;
 import com.darkwiki.model.Product;
 import com.darkwiki.model.ProductType;
 import com.darkwiki.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,8 @@ public class ProductService {
 
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    private OrderService orderService;
 
     public Collection<Product> getAllProducts() {
         return productRepository.findAll();
@@ -49,14 +52,18 @@ public class ProductService {
         return productRepository.findAllByProductType(productType);
     }
 
+    @Transactional
     public boolean deleteProduct(Long id) {
 
         Optional<Product> product = productRepository.findById(id);
 
         if (product.isPresent()) {
 
-            Set.copyOf(product.get().getOrderSet()).forEach(product.get()::removeFromOrderSet);
-            Set.copyOf(product.get().getAvailableAmountSet()).forEach(product.get()::removeFromAvailableAmountSet);
+            product.get().getOrderSet().forEach(o -> {
+                o.setProduct(null);
+                orderService.saveOrder(o);
+            });
+            product.get().removeFromAvailableAmountSet(product.get().getAvailableAmountSet());
             productRepository.deleteById(id);
 
             return true;

@@ -1,11 +1,13 @@
 package com.darkwiki.model;
 
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,26 +23,26 @@ public class Region implements Persistable<Long>, Serializable, Comparable<Regio
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "region")
+    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
     private Set<Vendor> vendorSet = new HashSet<>();
 
     public void addToVendorSet(Vendor vendor) {
-       if  (vendor != null) {
-           vendorSet.add(vendor);
-           vendor.setRegion(this);
-       }
+        if (vendor != null) {
+            vendorSet.add(vendor);
+            vendor.setRegion(this);
+        }
     }
 
     public void removeFromVendorSet(Vendor vendor) {
-       if (vendor != null) {
-           vendorSet.remove(vendor);
-           vendor.setRegion(null);
-       }
+        if (vendor != null) {
+            vendorSet.remove(vendor);
+            vendor.setRegion(null);
+        }
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return Objects.hash(id);
     }
 
     @Override
@@ -55,8 +57,12 @@ public class Region implements Persistable<Long>, Serializable, Comparable<Regio
     }
 
     @Override
-    public int compareTo(Region o) {
-        return id.compareTo(o.id);
+    public int compareTo(@NotNull Region o) {
+        if (o.getId() == null) {
+            return 1;
+        } else {
+            return id.compareTo(o.getId());
+        }
     }
 
     @Override

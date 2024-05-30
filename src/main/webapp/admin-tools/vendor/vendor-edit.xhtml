@@ -17,7 +17,13 @@
                     <p:button value="List" outcome="vendor-list" style="display: inline-block; margin-right: 20px"/>
                     <p:button value="Add" outcome="vendor-add" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
-                <p:dataTable var="vendor" value="#{vendorListEditView.collection}" editable="true">
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+                </p:confirmDialog>
+
+                <p:dataTable var="vendor" value="#{vendorListEditView.getCollection()}" editable="true">
 
                     <p:ajax event="rowEdit" listener="#{vendorListEditView.onRowEdit}" update=":form:msgs"/>
                     <p:ajax event="rowEditCancel" listener="#{vendorListEditView.onRowCancel}" update=":form:msgs"/>
@@ -42,7 +48,7 @@
                             <f:facet name="output"><h:outputText value="#{vendor.region}"/></f:facet>
                             <f:facet name="input">
                                 <p:selectOneMenu value="#{vendor.region}" converter="omnifaces.SelectItemsConverter" style="width:100%">
-                                    <f:selectItems value="#{regionController.allRegions}"/>
+                                    <f:selectItems value="#{vendorListEditView.getAllRegions()}"/>
                                 </p:selectOneMenu>
                             </f:facet>
                         </p:cellEditor>
@@ -58,6 +64,17 @@
 
                     <p:column style="width:6rem">
                         <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                    </p:column>
+
+                    <p:column headerText="Delete">
+                        <p:commandButton icon="pi pi-trash"
+                                         update="form"
+                                         actionListener="#{deleteController.deleteVendor(vendor.id)}"
+                                         action="#{vendorListEditView.init()}"
+                                         title="Delete">
+
+                            <p:confirm header="Confirmation" message="Are you sure you want to proceed?"/>
+                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
             </div>

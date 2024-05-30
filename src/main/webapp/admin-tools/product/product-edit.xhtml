@@ -22,6 +22,11 @@
                     <p:ajax event="rowEdit" listener="#{productListEditView.onRowEdit}" update=":form:msgs"/>
                     <p:ajax event="rowEditCancel" listener="#{productListEditView.onRowCancel}" update=":form:msgs"/>
 
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+                    </p:confirmDialog>
+
                     <p:column headerText="ID">
                         <h:outputText value="#{product.id}"/>
                     </p:column>
@@ -78,6 +83,17 @@
 
                     <p:column style="width:6rem">
                         <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                    </p:column>
+
+                    <p:column headerText="Delete">
+                        <p:commandButton icon="pi pi-trash"
+                                         update="form"
+                                         actionListener="#{deleteController.deleteProduct(product.id)}"
+                                         action="#{productListEditView.init()}"
+                                         title="Delete">
+
+                            <p:confirm header="Confirmation" message="Are you sure you want to proceed?"/>
+                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
             </div>

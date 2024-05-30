@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.darkwiki</groupId>
+    <artifactId>dw-webapp</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+
+    <name>darkwiki</name>
+    <description>
+        ...
+    </description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--        <start-class>com.darkwiki.Main</start-class>-->
+        <joinfaces.version>5.2.3.1</joinfaces.version>
+        <duplicate-finder-maven-plugin.version>2.0.1</duplicate-finder-maven-plugin.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+        <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+        <env>release</env>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+        <!--            <artifactId>jackson-databind</artifactId>-->
+        <!--            <version>2.15.4</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.9</version>
+        </dependency>
+
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.h2database</groupId>-->
+        <!--            <artifactId>h2</artifactId>-->
+        <!--            <scope>runtime</scope>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>postgresql</artifactId>-->
+        <!--            <version>1.17.3</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>testcontainers</artifactId>-->
+        <!--            <version>1.17.3</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+
+
+        <dependency>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>security-spring-boot-starter</artifactId>
+            <version>${joinfaces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>primefaces-spring-boot-starter</artifactId>
+            <version>${joinfaces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>omnifaces-spring-boot-starter</artifactId>
+            <version>5.2.5</version>
+        </dependency>
+
+
+        <!-- special test dependencies -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-test</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.security</groupId>-->
+        <!--            <artifactId>spring-security-test</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>nl.jqno.equalsverifier</groupId>-->
+        <!--            <artifactId>equalsverifier</artifactId>-->
+        <!--            <version>3.15.8</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>testcontainers-bom</artifactId>-->
+        <!--            <version>1.19.7</version>-->
+        <!--            <type>pom</type>-->
+        <!--            <scope>import</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>postgresql</artifactId>-->
+        <!--            <version>1.19.5</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>17.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>testcontainers</artifactId>-->
+        <!--            <version>1.19.5</version>-->
+        <!--        </dependency>-->
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <release>21</release>
+                    <!--<failOnWarning>true</failOnWarning>-->
+                    <failOnError>true</failOnError>
+                    <showDeprecation>true</showDeprecation>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+            <!-- Enable jacoco analysis -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <!--                <configuration>-->
+                <!--                    <forkMode>once</forkMode>-->
+                <!--                    <argLine>-->
+                <!--                        ${coverageAgent}-->
+                <!--                    </argLine>-->
+                <!--                </configuration>-->
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.darkwiki.Main</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <configuration>
+                    <propertyName>coverageAgent</propertyName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

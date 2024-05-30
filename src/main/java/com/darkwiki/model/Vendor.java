@@ -22,14 +22,14 @@ public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendo
     @Column
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @OneToMany(mappedBy = "vendor")
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
     private Set<Product> productSet = new HashSet<>();
 
-    @OneToMany(mappedBy = "vendor")
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
     private Set<Order> orderSet = new HashSet<>();
 
     public void addToProductSet(Product product) {

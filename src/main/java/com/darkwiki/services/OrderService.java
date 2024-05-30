@@ -3,6 +3,7 @@ package com.darkwiki.services;
 import com.darkwiki.model.Order;
 import com.darkwiki.repositories.OrderRepository;
 import com.darkwiki.repositories.RegionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +32,8 @@ public class OrderService {
         return order;
     }
 
+    // TODO: First do other todos of this class, then implement this
+    @Transactional
     public boolean deleteOrder(Long id) {
 
         if (orderRepository.findById(id).isPresent()) {
