@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.darkwiki</groupId>
-    <artifactId>dw-webapp</artifactId>
+    <groupId>com.bti</groupId>
+    <artifactId>praetorius</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
 
-    <name>darkwiki</name>
+    <name>Praetorius</name>
     <description>
         ...
     </description>
@@ -22,7 +22,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--        <start-class>com.darkwiki.Main</start-class>-->
+        <!--        <start-class>com.bti</start-class>-->
         <joinfaces.version>5.2.3.1</joinfaces.version>
         <duplicate-finder-maven-plugin.version>2.0.1</duplicate-finder-maven-plugin.version>
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
@@ -193,7 +193,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.darkwiki.Main</mainClass>
+                    <mainClass>com.bti.Main</mainClass>
                 </configuration>
             </plugin>
             <plugin>

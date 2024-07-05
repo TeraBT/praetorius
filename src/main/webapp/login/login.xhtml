@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/main-template.xhtml">
+
+    <ui:define name="title">Login Page</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:panel header="Login" styleClass="login-panel">
+                <h:panelGrid columns="2" cellpadding="5">
+
+                    <h:outputLabel for="username" value="Username: " />
+                    <p:inputText id="username" value="#{loginController.username}" required="true" />
+
+                    <h:outputLabel for="password" value="Password: " />
+                    <p:password id="password" value="#{loginController.password}" required="true" />
+
+                    <h:outputLabel />
+                    <p:commandButton value="Login" action="#{loginController.login}" icon="pi pi-check" update="@form" />
+
+                </h:panelGrid>
+
+                <h:messages globalOnly="true" style="color:red;" />
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
