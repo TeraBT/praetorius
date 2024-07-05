@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/admin-tools-template.xhtml">
+
+    <ui:define name="content">
+
+        <p:headerRow>Praetorius Docs</p:headerRow>
+
+        <p:panel header="REST Interface">
+        <pre>
+        <code>
+            <b style="color:red">IMPORTANT:</b>
+            Deactivate automatic saving of cookies for both GET and POST!
+            Otherwise, the request will be redirected to login page.
+
+            GET/POST 167.71.160.175:8080/void-api/order
+
+            RegionDto: id, name, vendorDtoSet
+            VendorDto: id, name, productDtoSet
+            ProductDto: id, name, productType
+
+
+            View result of POST at 167.71.160.175:8080/order-post.xhtml
+
+        </code>
+        </pre>
+
+
+        </p:panel>
+
+        <p:panel header="Web App Logs">
+        <pre>
+        <code>
+            Logs are written to '~/nohup.out'.
+        </code>
+        </pre>
+
+
+        </p:panel>
+
+        <p:panel header="Useful Aliases">
+        <pre>
+        <code>
+            Aliases can be entered in the terminal just like other commands.
+            They are 'shortcuts' for commands, see below:
+
+            alias dsta='sudo systemctl start docker.service; echo "d c! started"'
+            alias dsto='sudo systemctl stop docker.socket; sudo systemctl stop docker.service; echo "d c! stopped"'
+            alias dstat='sudo systemctl status docker'
+            alias dsta-praet='dsta; docker start praetorius_db; echo "dw db started"'
+
+            alias dw-ssh='ssh praetor@&lt;IP&gt;'
+            alias dw-ip='echo &lt;IP&gt;'
+            alias dw-deploy='scp ~/IdeaProjects/praetorius/target/praetorius-webapp-1.0.0.war praetor@&lt;IP&gt;:~/praetorius'
+
+            alias dw-run-no-log='nohup java -jar /home/praetor/praetorius/praetorius-webapp-1.0.0.war >/dev/null 2>&amp;1 &amp;'
+            alias dw-run-log='nohup java -jar /home/praetor/praetorius/praetorius-webapp-1.0.0.war &amp;'
+
+            These are found in ~/.bashrc (at the bottom of the file, use 'vim ~/.bashrc' to edit).
+            Use 'source ~/.bashrc' to reload .bashrc after changes.
+        </code>
+        </pre>
+
+        </p:panel>
+
+        <p:panel header="Miscellanea">
+        <pre>
+        <code>
+            JVM Settings:
+            -Xms: initial heap size
+            -Xmx: Maximum heap size
+
+            Docker Setup:
+            docker run --name praetorius_db -e POSTGRES_USER=praetorius_admin -e POSTGRES_PASSWORD=ArmaVirum753queCano -e POSTGRES_DB=praetorius_db \
+            -p 5432:5432 -d -v praetorius_volume:/var/lib/postgresql/data postgres
+
+        </code>
+        </pre>
+        </p:panel>
+
+
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      xml:lang="en">
+    <body>
+        <ui:composition>
+            <h:form>
+                <p:menubar>
+                    <p:menuitem value="Praetorius Docs" url="/praetorius-docs.xhtml"/>
+<!--                    <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}">-->
+                    <p:submenu label="Admin Tools">
+                        <p:menuitem value="Orders" url="/admin-tools/order/order-list.xhtml"/>
+                        <p:menuitem value="Regions" url="/admin-tools/region/region-list.xhtml"/>
+                        <p:menuitem value="Vendors" url="/admin-tools/vendor/vendor-list.xhtml"/>
+                        <p:menuitem value="Products" url="/admin-tools/product/product-list.xhtml"/>
+                        <p:menuitem value="Product Types" url="/admin-tools/product-type/product-type-list.xhtml"/>
+                        <p:menuitem value="Entity Deletion" url="/admin-tools/entity-delete.xhtml"/>
+                    </p:submenu>
+
+                    
+<!--                    <p:menuitem value="Login" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/>-->
+<!--                    <p:menuitem value="Logout" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/>                    -->
+                    
+                </p:menubar>
+            </h:form>
+        </ui:composition>
+    </body>
+</html>
+
