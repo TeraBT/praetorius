@@ -54,14 +54,14 @@
             alias dsta='sudo systemctl start docker.service; echo "d c! started"'
             alias dsto='sudo systemctl stop docker.socket; sudo systemctl stop docker.service; echo "d c! stopped"'
             alias dstat='sudo systemctl status docker'
-            alias dsta-praet='dsta; docker start praetorius_db; echo "dw db started"'
+            alias dsta-praet='dsta; docker start praetorius_db; echo "praetorius database started"'
 
-            alias dw-ssh='ssh praetor@&lt;IP&gt;'
-            alias dw-ip='echo &lt;IP&gt;'
-            alias dw-deploy='scp ~/IdeaProjects/praetorius/target/praetorius-webapp-1.0.0.war praetor@&lt;IP&gt;:~/praetorius'
+            alias praet-ssh='ssh praetor@&lt;IP&gt;'
+            alias praet-ip='echo &lt;IP&gt;'
+            alias praet-deploy='scp ~/IdeaProjects/praetorius/target/praetorius-webapp-1.0.0.war praetor@&lt;IP&gt;:~/praetorius'
 
-            alias dw-run-no-log='nohup java -jar /home/praetor/praetorius/praetorius-webapp-1.0.0.war >/dev/null 2>&amp;1 &amp;'
-            alias dw-run-log='nohup java -jar /home/praetor/praetorius/praetorius-webapp-1.0.0.war &amp;'
+            alias praet-run-no-log='nohup java -jar /home/praetor/praetorius/praetorius-webapp-1.0.0.war >/dev/null 2>&amp;1 &amp;'
+            alias praet-run-log='nohup java -jar /home/praetor/praetorius/praetorius-webapp-1.0.0.war &amp;'
 
             These are found in ~/.bashrc (at the bottom of the file, use 'vim ~/.bashrc' to edit).
             Use 'source ~/.bashrc' to reload .bashrc after changes.

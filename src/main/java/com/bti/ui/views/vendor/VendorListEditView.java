@@ -1,6 +1,8 @@
 package com.bti.ui.views.vendor;
 
+import com.bti.controllers.RegionController;
 import com.bti.controllers.VendorController;
+import com.bti.model.Region;
 import com.bti.model.Vendor;
 import com.bti.ui.views.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
