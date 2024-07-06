@@ -11,6 +11,8 @@ import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 @Component
 @RequestScoped
 public class VendorListEditView extends AbstractListEditView<Vendor> {
@@ -21,11 +23,17 @@ public class VendorListEditView extends AbstractListEditView<Vendor> {
     @Autowired
     private VendorController vendorController;
 
+    @Autowired
+    private RegionController regionController;
+
     @PostConstruct
     public void init() {super.setCollection(VendorController.getAllVendors());}
 
+    public Collection<Region> getAllRegions() {
+        return regionController.getAllRegions();
+    }
+
     public void onRowEdit(RowEditEvent<Vendor> event) {
-        System.out.println(event.getObject().getRegion());
         vendorController.saveVendor(event.getObject());
         FacesMessage msg = new FacesMessage("Vendor Edited", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);

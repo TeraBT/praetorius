@@ -17,6 +17,9 @@ public class ProductTypeService {
     @Autowired
     ProductTypeRepository productTypeRepository;
 
+    @Autowired
+    private ProductService productService;
+
     public Collection<ProductType> getAllProductTypes() {
         return productTypeRepository.findAll();
     }
@@ -52,7 +55,10 @@ public class ProductTypeService {
 
         if (productType.isPresent()) {
 
-            Set.copyOf(productType.get().getProductSet()).forEach(productType.get()::removeFromProductSet);
+            productType.get().getProductSet().forEach(p -> {
+                p.setProductType(null);
+                productService.saveProduct(p);
+            });
             productTypeRepository.deleteById(id);
 
             return true;

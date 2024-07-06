@@ -17,6 +17,11 @@ public class VendorService {
     @Autowired
     VendorRepository vendorRepository;
 
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private OrderService orderService;
+
     public Collection<Vendor> getAllVendors() {
         return vendorRepository.findAll();
     }
@@ -52,8 +57,14 @@ public class VendorService {
 
         if (vendor.isPresent()) {
 
-            Set.copyOf(vendor.get().getProductSet()).forEach(vendor.get()::removeFromProductSet);
-            Set.copyOf(vendor.get().getOrderSet()).forEach(vendor.get()::removeFromOrderSet);
+            vendor.get().getProductSet().forEach(p -> {
+                p.setVendor(null);
+                productService.saveProduct(p);
+            });
+            vendor.get().getOrderSet().forEach(o -> {
+                o.setVendor(null);
+                orderService.saveOrder(o);
+            });
             vendorRepository.deleteById(id);
 
             return true;
