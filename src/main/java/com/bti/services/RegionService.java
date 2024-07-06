@@ -17,6 +17,9 @@ public class RegionService {
     @Autowired
     RegionRepository regionRepository;
 
+    @Autowired
+    private VendorService vendorService;
+
     public Collection<Region> getAllRegions() {
         return regionRepository.findAll();
     }
@@ -53,7 +56,10 @@ public class RegionService {
 
         if (region.isPresent()) {
 
-            Set.copyOf(region.get().getVendorSet()).forEach(region.get()::removeFromVendorSet);
+            region.get().getVendorSet().forEach(v -> {
+                v.setRegion(null);
+                vendorService.saveVendor(v);
+            });
             regionRepository.deleteById(id);
 
             return true;
