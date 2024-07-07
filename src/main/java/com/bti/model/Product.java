@@ -42,6 +42,9 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<Order> orderSet = new HashSet<Order>();
 
+    @Column
+    private String imagePath;
+
     public void addToAvailableAmountSet(Integer amount) {
         if (amount != null) {
             availableAmountSet.add(amount);
@@ -192,5 +195,17 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
 
     public Vendor getVendor() {
         return vendor;
+    }
+
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
