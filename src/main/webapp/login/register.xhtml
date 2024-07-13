@@ -5,20 +5,23 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Login</title>
+    <title>Register</title>
 </h:head>
 <h:body>
     <h:form>
-        <p:panel header="Login">
+        <p:panel header="Register">
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel for="username" value="Username:" />
-                <p:inputText id="username" value="#{loginBean.username}" required="true" />
+                <p:inputText id="username" value="#{registerBean.user.username}" required="true" />
 
                 <h:outputLabel for="password" value="Password:" />
-                <p:password id="password" value="#{loginBean.password}" required="true" />
+                <p:password id="password" value="#{registerBean.user.password}" required="true" />
+
+                <h:outputLabel for="confirmPassword" value="Confirm Password:" />
+                <p:password id="confirmPassword" value="#{registerBean.confirmPassword}" required="true" />
 
                 <h:outputLabel />
-                <p:commandButton value="Login" action="#{loginBean.login}" icon="pi pi-check" update="@form" />
+                <p:commandButton value="Register" action="#{registerBean.register}" icon="pi pi-check" update="@form" />
             </h:panelGrid>
         </p:panel>
 

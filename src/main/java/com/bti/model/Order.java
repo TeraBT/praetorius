@@ -17,7 +17,7 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private Long id;
 
     @Column
