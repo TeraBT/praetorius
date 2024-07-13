@@ -21,20 +21,20 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "/login/login.xthml";
+        return "/sec/login.xthml";
     }
 
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
-        return "/login/register.xthml";
+        return "/sec/register.xthml";
     }
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, Model model) {
         if (userService.findByUsername(user.getUsername()).isPresent()) {
             model.addAttribute("error", "Username already exists");
-            return "/login/register.xhtml";
+            return "/sec/register.xhtml";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);

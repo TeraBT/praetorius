@@ -1,5 +1,6 @@
 package com.bti.services;
 
+import com.bti.model.Role;
 import com.bti.model.User;
 import com.bti.repositories.RoleRepository;
 import com.bti.repositories.UserRepository;
@@ -28,6 +29,10 @@ public class UserService {
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Optional<Role> findRoleByName(String name) {
+        return roleRepository.findByName(name);
     }
 
 }

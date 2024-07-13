@@ -18,7 +18,7 @@
                 <p:password id="password" value="#{loginBean.password}" required="true" />
 
                 <h:outputLabel />
-                <p:commandButton value="Login" action="#{loginBean.login}" icon="pi pi-check" update="@form" />
+                <p:commandButton value="Register" action="#{loginBean.login()}" icon="pi pi-check" update="@form" />
             </h:panelGrid>
         </p:panel>
 

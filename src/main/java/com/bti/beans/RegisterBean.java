@@ -1,6 +1,8 @@
 package com.bti.beans;
 
+import com.bti.model.Role;
 import com.bti.model.User;
+import com.bti.repositories.RoleRepository;
 import com.bti.services.UserService;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -10,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 @Component
 @ViewScoped
@@ -23,6 +26,8 @@ public class RegisterBean implements Serializable {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
 
     public String register() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -37,6 +42,13 @@ public class RegisterBean implements Serializable {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role userRole = userService.findRoleByName("USER").orElseGet(() -> {
+            Role newRole = new Role();
+            newRole.setName("USER");
+            roleRepository.save(newRole);
+            return newRole;
+        });
+        user.getRoleSet().add(userService.findRoleByName("USER").orElse(userRole));
         userService.saveUser(user);
 
         return "login?faces-redirect=true";
