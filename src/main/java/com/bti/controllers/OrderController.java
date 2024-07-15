@@ -37,7 +37,7 @@ public class OrderController {
     @Autowired
     private ProductTypeService productTypeService;
 
-    @GetMapping("/void-api/order")
+    @GetMapping("/order")
     public ResponseEntity<String> getOrderInitData() throws JsonProcessingException {
 
         Set<RegionDto> regionDtoSet = new HashSet<>();
@@ -88,7 +88,7 @@ public class OrderController {
         this.testData = testData;
     }
 
-    @PostMapping("void-api/order")
+    @PostMapping("/order")
     public ResponseEntity<String> createOrderTest(@RequestBody String testData) {
         this.testData = testData;
         return ResponseEntity.ok("Parsed correctly. Cf. /order-post.xhtml");

@@ -16,8 +16,8 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public String login() {
@@ -36,7 +36,7 @@ public class AuthController {
             model.addAttribute("error", "Username already exists");
             return "/sec/register.xhtml";
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
         return "redirect:/login";
     }

@@ -28,23 +28,16 @@ public class LoginBean implements Serializable {
     @Autowired
     private UserService userService;
 
-    public String test() {
-        return "test";
-    }
-
     public String login() {
         logger.info("Attempting to log in with username: " + username);
-        System.out.println("Attempting to log in with username: " + username);
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             request.login(username, password);
             logger.info("Login successful for username: " + username);
-            System.out.println("Login successful for username: " + username);
             return "main?faces-redirect=true";
         } catch (Exception e) {
             logger.severe("Login failed for username: " + username + ". Error: " + e.getMessage());
-            System.out.println("Login failed for username: " + username + ". Error: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Failed", "Invalid username or password"));
             return null;
