@@ -28,7 +28,7 @@ public class CommunicationTestController {
         return "hello world";
     }
 
-    @GetMapping("/order")
+    @GetMapping("/order-get-data")
     public Set<String> getOrder() {
         Set<String> idRefMapping = orderService.getAllOrders().stream().map(
                 o -> ("ID: " + o.getId() + "; Ref.:" + o.getOrderReference())

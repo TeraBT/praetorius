@@ -24,8 +24,8 @@ public class RegisterBean implements Serializable {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
     @Autowired
     private RoleRepository roleRepository;
 
@@ -41,7 +41,7 @@ public class RegisterBean implements Serializable {
             return null;
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role userRole = userService.findRoleByName("USER").orElseGet(() -> {
             Role newRole = new Role();
             newRole.setName("USER");
