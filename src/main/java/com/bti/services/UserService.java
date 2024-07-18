@@ -2,22 +2,19 @@ package com.bti.services;
 
 import com.bti.model.Role;
 import com.bti.model.User;
-import com.bti.repositories.RoleRepository;
 import com.bti.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Service
+@Component
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
 
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
@@ -31,8 +28,8 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public Optional<Role> findRoleByName(String name) {
-        return roleRepository.findByName(name);
-    }
+//    public Optional<Role> findRoleByName(String name) {
+//        return roleRepository.findByName(name);
+//    }
 
 }

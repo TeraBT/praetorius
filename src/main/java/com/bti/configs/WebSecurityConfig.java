@@ -97,28 +97,28 @@
 
 package com.bti.configs;
 
-import com.bti.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-//    @Autowired
-//    private CustomUserDetailsService customUserDetailsService;
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Autowired
+    DataSource dataSource;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -136,27 +136,47 @@ public class WebSecurityConfig {
                     return corsConfiguration;
                 }))
 //                .formLogin(withDefaults())
+//                .formLogin(form -> form
+////                        .loginPage("/sec/login.xhtml")
+//                        .defaultSuccessUrl("/main.xhtml", true)
+//                        .permitAll())
+//                .logout(logout -> logout
+//                        .logoutSuccessUrl("/sec/login.xhtml?logout")
+//                        .permitAll())
+//                .exceptionHandling(exception -> exception
+//                        .accessDeniedPage("/access-denied")
                 .formLogin(form -> form
-//                        .loginPage("/sec/login.xhtml")
-                        .defaultSuccessUrl("/main.xhtml", true)
-                        .permitAll())
+                        .loginPage("/login.xhtml")
+                        .permitAll()
+                        .defaultSuccessUrl("/main.xhtml")
+                        .loginProcessingUrl("/login")
+                        .successForwardUrl("/main.xhtml")
+                )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/sec/login.xhtml?logout")
-                        .permitAll())
-                .exceptionHandling(exception -> exception
-                        .accessDeniedPage("/access-denied"));
+                        .logoutSuccessUrl("/login.xhtml")
+                        .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                )
+                .sessionManagement(session -> session
+                        .invalidSessionUrl("/error/invalid-session.xhtml")
+                );
+
 
         return http.build();
     }
 
-//    @Bean
-//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-//        return authenticationConfiguration.getAuthenticationManager();
-//    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(dataSource);
+//                .usersByUsernameQuery("select username, password from user_table;");
+//                .authoritiesByUsernameQuery("select user_username, role_set from user_role where user_username=?");
+    }
 
     @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher() {
-        return new HttpSessionEventPublisher();
+    public static PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
 
