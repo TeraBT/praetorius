@@ -11,7 +11,7 @@ public class CustomServletContextInitializer implements ServletContextInitialize
 
     @Override
     public void onStartup(ServletContext sc) throws ServletException {
-        sc.setInitParameter("jakarta.faces.PROJECT_STAGE", "Development");
+        sc.setInitParameter("jakarta.faces.PROJECT_STAGE", "Development"); // TODO: Change to Production
         sc.setInitParameter("jakarta.faces.STATE_SAVING_METHOD", "server");
         sc.setInitParameter("jakarta.faces.FACELETS_SKIP_COMMENTS", "true");
         sc.setInitParameter("jakarta.faces.DEFAULT_SUFFIX", ".xhtml");

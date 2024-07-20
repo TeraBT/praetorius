@@ -12,7 +12,7 @@ import org.springframework.data.repository.Repository;
 public interface AbstractRepository<T, ID extends Serializable> extends Repository<T, ID> {
 
 //    Boolean delete(T entity);
-    Optional<T> deleteById(Long id);
+    Optional<T> deleteById(ID id);
 
     List<T> findAll();
 
