@@ -1,113 +1,17 @@
-//package com.bti.configs;
-//
-//import com.bti.services.CustomUserDetailsService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.authentication.AuthenticationProvider;
-//import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.web.SecurityFilterChain;
-//import org.springframework.security.web.session.HttpSessionEventPublisher;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class WebSecurityConfig {
-//
-//    @Autowired
-//    private CustomUserDetailsService customUserDetailsService;
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(
-//                                "/",
-////                                "/main.xhtml",
-//                                "/sec/**",
-//                                "/admin-tools/**",
-//                                "/jakarta.faces.resource/**",
-//                                "/register",
-//                                "/login").permitAll()
-//                        .anyRequest().authenticated())
-//                .csrf(csrf -> csrf.disable())
-//                .cors(cors -> cors.disable()
-////                        cors.configurationSource(request -> {
-////                    var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
-////                    corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080"));
-////                    corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-////                    corsConfiguration.setAllowedHeaders(List.of("*"));
-////                    corsConfiguration.setAllowCredentials(true);
-////                    return corsConfiguration;
-////                })
-//                )
-//                .formLogin(form -> form
-////                        .loginPage("/sec/login.xhtml")
-//                        .defaultSuccessUrl("/", true)
-//                        .permitAll())
-//                .logout(logout -> logout
-////                        .logoutSuccessUrl("/sec/login.xhtml")
-//                        .logoutSuccessUrl("/")
-//                        .permitAll())
-//                .exceptionHandling(exception -> exception
-//                        .accessDeniedPage("/access-denied"));
-//
-//        return http.build();
-//    }
-//
-//    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(customUserDetailsService);
-//        auth.authenticationProvider(authenticationProvider());
-//    }
-//
-//    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        auth
-//                .userDetailsService(customUserDetailsService)
-//                .passwordEncoder(passwordEncoder());
-//    }
-//
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setUserDetailsService(customUserDetailsService);
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
-//        return authenticationProvider;
-//    }
-//
-////    @Bean
-////    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-////        return authenticationConfiguration.getAuthenticationManager();
-////    }
-//
-//    @Bean
-//    public HttpSessionEventPublisher httpSessionEventPublisher() {
-//        return new HttpSessionEventPublisher();
-//    }
-//}
-
 package com.bti.configs;
 
+import com.bti.model.Role;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -117,66 +21,68 @@ import java.util.List;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+    private static final String USER = Role.USER.name();
+    private static final String VENDOR = Role.VENDOR.name();
+    private static final String ADMIN = Role.ADMIN.name();
+    private static final String LOGIN = "/login.xhtml";
+    private static final String ACCESSDENIED = "/error/access_denied.xhtml";
+
     @Autowired
     DataSource dataSource;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/sec/register.xhtml", "/jakarta.faces.resource/**").permitAll()
-                        .anyRequest().authenticated())
-                .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.configurationSource(request -> {
-                    var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
-                    corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080"));
-                    corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                    corsConfiguration.setAllowedHeaders(List.of("*"));
-                    corsConfiguration.setAllowCredentials(true);
-                    return corsConfiguration;
-                }))
-//                .formLogin(withDefaults())
-//                .formLogin(form -> form
-////                        .loginPage("/sec/login.xhtml")
-//                        .defaultSuccessUrl("/main.xhtml", true)
-//                        .permitAll())
-//                .logout(logout -> logout
-//                        .logoutSuccessUrl("/sec/login.xhtml?logout")
-//                        .permitAll())
-//                .exceptionHandling(exception -> exception
-//                        .accessDeniedPage("/access-denied")
-                .formLogin(form -> form
-                        .loginPage("/login.xhtml")
-                        .permitAll()
-                        .defaultSuccessUrl("/main.xhtml")
-                        .loginProcessingUrl("/login")
-                        .successForwardUrl("/main.xhtml")
-                )
-                .logout(logout -> logout
-                        .logoutSuccessUrl("/login.xhtml")
-                        .deleteCookies("JSESSIONID")
-                        .invalidateHttpSession(true)
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                )
-                .sessionManagement(session -> session
-                        .invalidSessionUrl("/error/invalid-session.xhtml")
-                );
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
+        try {
 
-        return http.build();
+            http
+                    .csrf(csrf -> csrf.disable()) // TODO: Enable csrf and cors.
+                    .cors(cors -> cors.disable())
+                    .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // needed for H2 console
+                    .authorizeHttpRequests(authorize -> authorize
+                            .requestMatchers(new AntPathRequestMatcher("/main.xhtml")).hasAnyAuthority(USER, VENDOR, ADMIN)
+                            .requestMatchers(new AntPathRequestMatcher("/jakarta.faces.resource/**")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/error/**")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/sec/**")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/register")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/admin-tools/**")).hasAnyAuthority(ADMIN)
+                            .anyRequest().authenticated())
+
+                            // :TODO: Login failure failureUrl(/login.xhtml?error)
+                            .formLogin(form -> form
+                                    .loginPage(LOGIN)
+                                    .permitAll()
+                                    .defaultSuccessUrl("/main.xhtml")
+                                    .loginProcessingUrl("/login")
+                                    .successForwardUrl("/main.xhtml")
+                            )
+                            .logout(logout -> logout
+                                    .logoutSuccessUrl(LOGIN)
+                                    .deleteCookies("JSESSIONID")
+                                    .invalidateHttpSession(true)
+                                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                            )
+                            .sessionManagement(session -> session
+                                    .invalidSessionUrl("/error/invalid-session.xhtml")
+                            );
+
+            return http.build();
+        } catch (Exception ex) {
+            throw new BeanCreationException("Wrong spring security configuration", ex);
+        }
     }
-
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
-//                .usersByUsernameQuery("select username, password from user_table;");
-//                .authoritiesByUsernameQuery("select user_username, role_set from user_role where user_username=?");
+        //Configure roles and passwords via datasource
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("select username, password, enabled from praetorius_user where username=?")
+                .authoritiesByUsernameQuery("select praetorius_user_username, role from user_role where praetorius_user_username=?");
     }
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        // :TODO: Encrypt.
+        return NoOpPasswordEncoder.getInstance();
     }
 }
-
