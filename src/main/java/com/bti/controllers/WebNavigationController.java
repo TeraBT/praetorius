@@ -8,7 +8,6 @@ public class WebNavigationController {
 
     @GetMapping("/")
     public String redirectToMain() {
-//        return "redirect:/praetorius-docs.xhtml";
         return "redirect:/main.xhtml";
     }
 }

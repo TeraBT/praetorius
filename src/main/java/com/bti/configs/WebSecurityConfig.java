@@ -40,7 +40,8 @@ public class WebSecurityConfig {
                     .cors(cors -> cors.disable())
                     .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // needed for H2 console
                     .authorizeHttpRequests(authorize -> authorize
-                            .requestMatchers(new AntPathRequestMatcher("/main.xhtml")).hasAnyAuthority(USER, VENDOR, ADMIN)
+                            .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/main.xhtml")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/jakarta.faces.resource/**")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/error/**")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/sec/**")).permitAll()

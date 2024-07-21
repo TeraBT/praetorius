@@ -1,31 +1,39 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" 
+      xmlns:p="http://primefaces.org/ui"
       xml:lang="en">
-    <body>
-        <ui:composition>
-            <h:form>
-                <p:menubar>
-                    <p:menuitem value="Praetorius" url="/main.xhtml"/>
-<!--                    <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}">-->
-                    <p:submenu label="Profile">
-                        <p:menuitem value="My Courses" url="/admin-tools/order/order-list.xhtml"/>
-                        <p:menuitem value="Settings" url="/admin-tools/region/region-list.xhtml"/>
-                    </p:submenu>
-                    <p:menuitem value="Admin Tools" url="/admin-tools/order/order-list.xhtml"/>
-                    <p:menuitem value="Logout" url="/logout"/>
-                    <p:menuitem value="Register" url="/sec/register.xhtml"/>
+<body>
+<ui:composition>
+    <h:form>
+        <style>
 
-                    
-<!--                    <p:menuitem value="Login" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/>-->
-<!--                    <p:menuitem value="Logout" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/>                    -->
-                    
+        </style>
+        <div class="header">
+            <div class="navbar-left">
+                <p:menubar class="menubar" style="background-color: unset">
+                    <p:menuitem value="Praetorius" url="/" styleClass="navbar-item-left"/>
                 </p:menubar>
-            </h:form>
-        </ui:composition>
-    </body>
+            </div>
+            <div class="navbar-right">
+                <p:menubar class="menubar" style="background-color: unset">
+                    <!-- <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}"> -->
+                    <p:submenu label="Profile" class="submenu">
+                        <p:menuitem value="My Bookings" url="/admin-tools/order/order-list.xhtml" styleClass="sub-spec"/>
+                        <p:menuitem value="Settings" url="/admin-tools/region/region-list.xhtml" styleClass="sub-spec"/>
+                    </p:submenu>
+                    <p:menuitem value="Admin Tools" url="/admin-tools/order/order-list.xhtml" styleClass="navbar-item"/>
+                    <p:menuitem value="Logout" url="/logout" styleClass="navbar-item"/>
+                    <p:menuitem value="Register" url="/sec/register.xhtml" styleClass="navbar-item"/>
+                    <!-- <p:menuitem value="Login" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/> -->
+                    <!-- <p:menuitem value="Logout" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/> -->
+                </p:menubar>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>
+</body>
 </html>
-
