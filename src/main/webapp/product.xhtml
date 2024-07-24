@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/main-template.xhtml">
+
+    <ui:define name="content">
+
+        <h1>Product Details</h1>
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel value="Product Name:" />
+            <h:outputText value="#{productView.productId}" />
+
+            <h:outputLabel value="Vendor:" />
+            <h:outputText value="#{productView.product.vendor.name}" />
+
+            <h:outputLabel value="Description:" />
+            <h:outputText value="#{productView.product.description}" />
+
+            <h:outputLabel value="Price:" />
+            <h:outputText value="#{productView.product.pricePerUnit}">
+                <f:convertNumber currencySymbol="€" type="currency"/>
+            </h:outputText>
+        </h:panelGrid>
+
+    </ui:define>
+</ui:composition>

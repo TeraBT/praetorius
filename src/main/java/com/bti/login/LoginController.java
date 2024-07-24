@@ -1,4 +1,4 @@
-package com.bti.beans;
+package com.bti.login;
 
 import com.bti.services.UserService;
 import jakarta.faces.application.FacesMessage;
@@ -18,9 +18,9 @@ import java.util.logging.Logger;
 
 @Component
 @ViewScoped
-public class LoginBean implements Serializable {
+public class LoginController implements Serializable {
 
-    private static final Logger logger = Logger.getLogger(LoginBean.class.getName());
+    private static final Logger logger = Logger.getLogger(LoginController.class.getName());
 
     private String username;
     private String password;

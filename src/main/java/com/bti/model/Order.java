@@ -50,8 +50,26 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     private String textMessage;
 
     // TODO: Orders should keep info about vendor even if vendor is deleted (also for product)
-    // TODO: Just save product, vendor can be fetched through it
     // TODO: Orders shouldn't have editable vendor and product info
+
+    @Column
+    private String orderLog;
+
+    public String getCreateTimestampAsFormatedString() {
+        if (createTimestamp == null) {
+            return "NONE";
+        } else {
+            return createTimestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        }
+    }
+
+    public String createOrderLog() {
+        return orderLog = "Order ID: " + id +
+                "\nOrder Reference: " + orderReference +
+                "\nVendor: " + vendor.getName() +
+                "\nProduct: " + product.getName() +
+                "\nAmount: " + amount;
+    }
 
     public void setVendor(Vendor vendor) {
         if (vendor != null && this.vendor != null) {
@@ -87,14 +105,6 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
         }
 
         this.product = product;
-    }
-
-    public String getCreateTimestampAsFormatedString() {
-        if (createTimestamp == null) {
-            return "NONE";
-        } else {
-            return createTimestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        }
     }
 
     @Override
@@ -175,5 +185,13 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
 
     public void setTextMessage(String textMessage) {
         this.textMessage = textMessage;
+    }
+
+    public String getOrderLog() {
+        return orderLog;
+    }
+
+    public void setOrderLog(String orderLog) {
+        this.orderLog = orderLog;
     }
 }

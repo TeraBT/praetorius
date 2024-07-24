@@ -1,4 +1,4 @@
-//package com.bti.beans;
+//package com.bti.login;
 //
 //import com.bti.model.Role;
 //import com.bti.model.User;
@@ -7,7 +7,7 @@
 //import jakarta.faces.application.FacesMessage;
 //import jakarta.faces.context.FacesContext;
 //import jakarta.faces.view.ViewScoped;
-//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.login.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.stereotype.Component;
 //

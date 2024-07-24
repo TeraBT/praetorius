@@ -12,13 +12,13 @@
         <p:panel header="Login">
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel for="username" value="Username:" />
-                <p:inputText id="username" value="#{loginBean.username}" required="true" />
+                <p:inputText id="username" value="#{loginController.username}" required="true" />
 
                 <h:outputLabel for="password" value="Password:" />
-                <p:password id="password" value="#{loginBean.password}" required="true" />
+                <p:password id="password" value="#{loginController.password}" required="true" />
 
                 <h:outputLabel />
-                <p:commandButton value="Login" action="#{loginBean.login()}" icon="pi pi-check" update="@form" />
+                <p:commandButton value="Login" action="#{loginController.login()}" icon="pi pi-check" update="@form" />
             </h:panelGrid>
         </p:panel>
 
