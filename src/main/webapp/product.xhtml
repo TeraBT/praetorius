@@ -11,7 +11,7 @@
         <h1>Product Details</h1>
         <h:panelGrid columns="2" cellpadding="5">
             <h:outputLabel value="Product Name:" />
-            <h:outputText value="#{productView.productId}" />
+            <h:outputText value="#{productView.product.id}" />
 
             <h:outputLabel value="Vendor:" />
             <h:outputText value="#{productView.product.vendor.name}" />
@@ -23,6 +23,9 @@
             <h:outputText value="#{productView.product.pricePerUnit}">
                 <f:convertNumber currencySymbol="€" type="currency"/>
             </h:outputText>
+            <br/>
+            <p:commandButton value="Buy" action="#{orderController.placeOrder()}"
+            style="margin-top: 10px"/> <!-- TODO: args for placeOrder() -->
         </h:panelGrid>
 
     </ui:define>

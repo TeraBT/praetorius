@@ -12,9 +12,11 @@ import com.bti.services.RegionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import jakarta.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -24,6 +26,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Controller
 @RestController
 @CrossOrigin(origins = "*")
 public class OrderController {
@@ -36,6 +39,32 @@ public class OrderController {
     private RegionService regionService;
     @Autowired
     private ProductTypeService productTypeService;
+
+    @Transactional
+    public void placeOrder(Product product, double amount, String comment) {
+        Order order = new Order();
+        order.setOrderReference(generateUnusedOrderReference());
+        order.setStatus(OrderStatus.PLACED);
+        order.setCreateTimestamp(LocalDateTime.now(ZoneId.of("UTC+0")));
+        order.setVendor(product.getVendor());
+        order.setProduct(product);
+        order.setPrice(product.getPricePerUnit());
+        order.setAmount(amount);
+        order.setTotalPrice(product.getPricePerUnit() * amount);
+        order.setComment(comment);
+        order.createOrderLog();
+
+        orderService.saveOrder(order);
+    }
+
+    private String generateUnusedOrderReference() {
+        while (true) {
+            String orderReference = orderReferenceGenerator.generateOrderReference();
+            if (orderService.getOrderByOrderReference(orderReference).isEmpty()) {
+                return orderReference;
+            }
+        }
+    }
 
     @GetMapping("/order")
     public ResponseEntity<String> getOrderInitData() throws JsonProcessingException {

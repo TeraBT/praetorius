@@ -15,5 +15,6 @@ public class CustomServletContextInitializer implements ServletContextInitialize
         sc.setInitParameter("jakarta.faces.STATE_SAVING_METHOD", "server");
         sc.setInitParameter("jakarta.faces.FACELETS_SKIP_COMMENTS", "true");
         sc.setInitParameter("jakarta.faces.DEFAULT_SUFFIX", ".xhtml");
+        sc.setInitParameter("jakarta.faces.DEFAULT_SUFFIX", ".xhtml");
     }
 }

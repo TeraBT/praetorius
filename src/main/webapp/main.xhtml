@@ -20,14 +20,17 @@
                         gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
                 <p:dataViewGridItem>
-                    <h:commandLink action="#{productController.redirectToProductView(product.id)}" styleClass="product-grid-item-link">
+                    <p:commandLink actionListener="#{productController.initProductView(product)}"
+                                   action="product?faces-redirect=true"
+                                   styleClass="product-grid-item-link"
+                                   style="text-decoration: none">
                         <div class="product-grid-item">
                             <div class="product-grid-item-top">
                                 <div class="product-name">#{product.name}</div>
                             </div>
                             <div class="product-grid-item-content">
                                 <p:graphicImage name="products/#{product.imagePath}" library="images" width="10%"
-                                                style="border-style: solid; border-radius: 5px;"/>
+                                                style="border-style: solid; border-radius: 5px; border-color: black"/>
                                 <div class="product-vendor">#{product.vendor.name}</div>
                                 <div class="product-description">#{product.description}</div>
                             </div>
@@ -39,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                    </h:commandLink>
+                    </p:commandLink>
                 </p:dataViewGridItem>
 
             </p:dataView>
