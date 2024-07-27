@@ -20,6 +20,8 @@ public class ProductView {
 
     private Product product;
 
+    private Integer selectedAmount;
+
 
     public Product getProduct() {
         return product;
@@ -29,4 +31,11 @@ public class ProductView {
         this.product = product;
     }
 
+    public Integer getSelectedAmount() {
+        return selectedAmount;
+    }
+
+    public void setSelectedAmount(Integer selectedAmount) {
+        this.selectedAmount = selectedAmount;
+    }
 }

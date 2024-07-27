@@ -10,22 +10,35 @@
 
         <h1>Product Details</h1>
         <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel value="Product Name:" />
-            <h:outputText value="#{productView.product.id}" />
+            <p:outputLabel value="Name:"/>
+            <h:outputText value="#{productView.product.id}"/>
 
-            <h:outputLabel value="Vendor:" />
-            <h:outputText value="#{productView.product.vendor.name}" />
+            <p:outputLabel value="Product Type:"/>
+            <h:outputText value="#{productView.product.productType}"/>
 
-            <h:outputLabel value="Description:" />
-            <h:outputText value="#{productView.product.description}" />
+            <p:outputLabel value="Vendor:"/>
+            <h:outputText value="#{productView.product.vendor.name}"/>
 
-            <h:outputLabel value="Price:" />
+            <p:outputLabel value="Description:"/>
+            <h:outputText value="#{productView.product.description}"/>
+
+            <p:outputLabel value="Price:"/>
             <h:outputText value="#{productView.product.pricePerUnit}">
                 <f:convertNumber currencySymbol="€" type="currency"/>
             </h:outputText>
+
+            <p:outputLabel value="Amount"/>
+            <p:selectOneMenu id="selectAmount" value="#{productView.selectedAmount}">
+                <f:selectItem itemLabel="Select Amount" itemValue=""/>
+                <f:selectItems value="#{productView.product.availableAmountSet}"/>
+            </p:selectOneMenu>
+
+
             <br/>
-            <p:commandButton value="Buy" action="#{orderController.placeOrder()}"
-            style="margin-top: 10px"/> <!-- TODO: args for placeOrder() -->
+            <p:commandButton value="Buy"
+                             action="#{orderController.placeOrder(productView.product,
+                             productView.selectedAmount, 'test')}"
+                             style="margin-top: 10px"/>
         </h:panelGrid>
 
     </ui:define>

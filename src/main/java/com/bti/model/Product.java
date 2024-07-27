@@ -31,7 +31,7 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @Column
     private double pricePerUnit;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "product_amounts", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "available_amount")
     private SortedSet<Integer> availableAmountSet = new TreeSet<>();
