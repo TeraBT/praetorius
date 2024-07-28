@@ -47,7 +47,7 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     private double price;
 
     @Column
-    private double amount;
+    private Integer amount;
 
     @Column
     private double totalPrice;
@@ -169,10 +169,6 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
         return product;
     }
 
-    public double getAmount() {
-        return amount;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -181,7 +177,11 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
         this.price = price;
     }
 
-    public void setAmount(double amount) {
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

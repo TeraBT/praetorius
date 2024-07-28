@@ -1,33 +1,38 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" 
+      xmlns:p="http://primefaces.org/ui"
       xml:lang="en">
-    <body>
-        <ui:composition>
-            <h:form>
-                <p:menubar>
-                    <p:menuitem value="Praetorius Docs" url="/admin-tools/praetorius-docs.xhtml"/>
-<!--                    <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}">-->
-                    <p:submenu label="Admin Tools">
-                        <p:menuitem value="Orders" url="/admin-tools/order/order-list.xhtml"/>
-                        <p:menuitem value="Regions" url="/admin-tools/region/region-list.xhtml"/>
-                        <p:menuitem value="Vendors" url="/admin-tools/vendor/vendor-list.xhtml"/>
-                        <p:menuitem value="Products" url="/admin-tools/product/product-list.xhtml"/>
-                        <p:menuitem value="Product Types" url="/admin-tools/product-type/product-type-list.xhtml"/>
-                        <p:menuitem value="Entity Deletion" url="/admin-tools/entity-delete.xhtml"/>
-                    </p:submenu>
-                    <p:menuitem value="Main Page" url="/main.xhtml"/>
+<body>
+<ui:composition>
+    <h:form>
+        <div class="header">
+            <p:menubar class="menubar" style="background-color: unset">
+                <p:menuitem value="Praetorius Docs" url="/admin-tools/praetorius-docs.xhtml"
+                            styleClass="navbar-item-left"/>
+                <!--                    <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}">-->
+                <p:submenu label="Admin Tools" styleClass="navbar-item-left">
+                    <p:menuitem value="Orders" url="/admin-tools/order/order-list.xhtml" styleClass="sub-spec"/>
+                    <p:menuitem value="Regions" url="/admin-tools/region/region-list.xhtml" styleClass="sub-spec"/>
+                    <p:menuitem value="Vendors" url="/admin-tools/vendor/vendor-list.xhtml" styleClass="sub-spec"/>
+                    <p:menuitem value="Products" url="/admin-tools/product/product-list.xhtml" styleClass="sub-spec"/>
+                    <p:menuitem value="Product Types" url="/admin-tools/product-type/product-type-list.xhtml"
+                                styleClass="sub-spec"/>
+                    <p:menuitem value="Entity Deletion" url="/admin-tools/entity-delete.xhtml" styleClass="sub-spec"/>
+                </p:submenu>
+                <p:menuitem value="Main Page" url="/main.xhtml" styleClass="navbar-item-left"/>
 
-                    
-<!--                    <p:menuitem value="Login" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/>-->
-<!--                    <p:menuitem value="Logout" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/>                    -->
-                    
-                </p:menubar>
-            </h:form>
-        </ui:composition>
-    </body>
+
+                <!--                    <p:menuitem value="Login" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/>-->
+                <!--                    <p:menuitem value="Logout" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/>                    -->
+
+            </p:menubar>
+        </div>
+    </h:form>
+</ui:composition>
+</body>
 </html>
 

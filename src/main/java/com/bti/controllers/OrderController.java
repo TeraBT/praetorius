@@ -35,14 +35,17 @@ public class OrderController {
     OrderService orderService;
 
     private final OrderReferenceGenerator orderReferenceGenerator = new OrderReferenceGenerator();
+
     @Autowired
     private RegionService regionService;
+
     @Autowired
     private ProductTypeService productTypeService;
 
     @Transactional
-    public void placeOrder(Product product, double amount, String comment) {
+    public void placeOrder(Product product, Integer amount, String comment) {
         Order order = new Order();
+        orderService.saveOrder(order);
         order.setOrderReference(generateUnusedOrderReference());
         order.setStatus(OrderStatus.PLACED);
         order.setCreateTimestamp(LocalDateTime.now(ZoneId.of("UTC+0")));
@@ -127,7 +130,7 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
-    public void saveOrder(String vendorName, String productName, double amount) {
+    public void saveOrder(String vendorName, String productName, Integer amount) {
         Order order = new Order();
 //        Vendor vendor = new Vendor();
 //        vendor.setName(vendorName);

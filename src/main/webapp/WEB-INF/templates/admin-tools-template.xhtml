@@ -13,9 +13,12 @@
 
 <!--    <meta name="_csrf" content="#{requestScope['_csrf'].token}"/>-->
 <!--    <meta name="_csrf_header" content="#{requestScope['_csrf'].headerName}"/>-->
-</h:head>
-<h:body style="margin:10px;">
 
+    <h:outputStylesheet name="main.css"/>
+
+</h:head>
+
+<h:body>
 
     <div id="page">
 
@@ -23,7 +26,7 @@
             <ui:include src="/WEB-INF/includes/admin-tools-header.xhtml"/>
         </div>
 
-        <div id="content">
+        <div id="content" style="margin-left: 10px; margin-right: 10px">
             <ui:insert name="content">Content</ui:insert>
         </div>
 

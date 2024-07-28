@@ -41,7 +41,7 @@ public class WebSecurityConfig {
                     .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // needed for H2 console
                     .authorizeHttpRequests(authorize -> authorize
                             .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
-                            .requestMatchers(new AntPathRequestMatcher("/main.xhtml")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/main*")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/jakarta.faces.resource/**")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/error/**")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/sec/**")).permitAll()
@@ -53,9 +53,8 @@ public class WebSecurityConfig {
                             .formLogin(form -> form
                                     .loginPage(LOGIN)
                                     .permitAll()
-                                    .defaultSuccessUrl("/main.xhtml")
+                                    .defaultSuccessUrl("/main", false)
                                     .loginProcessingUrl("/login")
-                                    .successForwardUrl("/main.xhtml")
                             )
                             .logout(logout -> logout
                                     .logoutSuccessUrl(LOGIN)

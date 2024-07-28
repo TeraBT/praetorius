@@ -39,7 +39,7 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @Column
     private double shippingCost;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private Set<Order> orderSet = new HashSet<Order>();
 
     @Column

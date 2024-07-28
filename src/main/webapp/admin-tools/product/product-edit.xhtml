@@ -91,7 +91,14 @@
                     </p:column>
 
                     <p:column headerText="Available Amounts">
-                        <h:outputText value="#{product.availableAmountSet}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{product.availableAmountSet}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value=""  style="width:100%"/> <!-- TODO: Implement via View, then update model -->
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Shipping Cost">

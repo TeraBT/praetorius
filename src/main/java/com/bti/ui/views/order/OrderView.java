@@ -23,7 +23,7 @@ public class OrderView {
 
     private String product;
 
-    private double amount;
+    private Integer amount;
 
     private String selectedRegion;
 
@@ -75,11 +75,11 @@ public class OrderView {
         this.product = product;
     }
 
-    public double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

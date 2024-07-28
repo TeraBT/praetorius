@@ -7,11 +7,12 @@
                 template="/WEB-INF/templates/main-template.xhtml">
 
     <ui:define name="content">
+        <p:growl id="msgs" showDetail="true"/>
 
         <h1>Product Details</h1>
         <h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel value="Name:"/>
-            <h:outputText value="#{productView.product.id}"/>
+            <h:outputText value="#{productView.product.name}"/>
 
             <p:outputLabel value="Product Type:"/>
             <h:outputText value="#{productView.product.productType}"/>
@@ -27,17 +28,20 @@
                 <f:convertNumber currencySymbol="€" type="currency"/>
             </h:outputText>
 
-            <p:outputLabel value="Amount"/>
-            <p:selectOneMenu id="selectAmount" value="#{productView.selectedAmount}">
-                <f:selectItem itemLabel="Select Amount" itemValue=""/>
+            <p:outputLabel value="Amount:"/>
+            <p:selectOneMenu value="#{productView.amount}" style="width: 100px">
                 <f:selectItems value="#{productView.product.availableAmountSet}"/>
             </p:selectOneMenu>
 
+            <p:outputLabel value="Comment:"/>
+            <p:inputTextarea value="#{productView.comment}" rows="5" cols="30"/>
+
 
             <br/>
-            <p:commandButton value="Buy"
-                             action="#{orderController.placeOrder(productView.product,
-                             productView.selectedAmount, 'test')}"
+            <p:commandButton value="Order"
+                             action="#{productView.placeOrder(productView.product,
+                             productView.amount, productView.comment)}"
+                             update="msgs"
                              style="margin-top: 10px"/>
         </h:panelGrid>
 

@@ -29,7 +29,7 @@ public class Vendor implements Persistable<Long>, Serializable, Comparable<Vendo
     @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
     private Set<Product> productSet = new HashSet<>();
 
-    @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER)
     private Set<Order> orderSet = new HashSet<>();
 
     public void addToProductSet(Product product) {
