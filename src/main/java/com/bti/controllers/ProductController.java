@@ -1,13 +1,13 @@
 package com.bti.controllers;
 
-import com.bti.auxiliaries.OrderReferenceGenerator;
-import com.bti.model.Order;
 import com.bti.model.Product;
 import com.bti.services.OrderService;
 import com.bti.services.ProductService;
 import com.bti.ui.views.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Collection;
 
@@ -20,11 +20,16 @@ public class ProductController {
     @Autowired
     OrderService orderService;
 
-    @Autowired
-    private ProductView productView;
+    public String initProductView(Long productId) {
+        return "product/" + productId;
+    }
 
-    public void initProductView(Product product) {
-        productView.setProduct(product);
+    @GetMapping("/product/{productId}")
+    public String initProductView(@PathVariable long productId) {
+        System.out.println("Product ID: " + productId);
+        this.product = productService.getProduct(productId).orElse(null);
+        System.out.println(product);
+        return "product";
     }
 
     public Collection<Product> getAllProducts() {

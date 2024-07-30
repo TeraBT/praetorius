@@ -1,3 +1,7 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition xmlns="http://www.w3c.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -29,19 +33,24 @@
             </h:outputText>
 
             <p:outputLabel value="Amount:"/>
-            <p:selectOneMenu value="#{productView.amount}" style="width: 100px">
-                <f:selectItems value="#{productView.product.availableAmountSet}"/>
+            <p:selectOneMenu value="#{productView.ent}" update="out" style="width: 100px">
+<!--                <f:selectItems value="#{productView.entList}"/>-->
+                <f:selectItem itemLabel="1" itemValue="1"/>
+                <f:selectItem itemLabel="2" itemValue="2"/>
             </p:selectOneMenu>
+            <p:outputLabel id="out" value="Amount is: #{productView.ent}"/>
 
             <p:outputLabel value="Comment:"/>
             <p:inputTextarea value="#{productView.comment}" rows="5" cols="30"/>
 
 
+
             <br/>
+<!--                             action="#{productView.placeOrder(productView.product,-->
+<!--                             productView.amount, productView.comment)}"-->
             <p:commandButton value="Order"
-                             action="#{productView.placeOrder(productView.product,
-                             productView.amount, productView.comment)}"
                              update="msgs"
+                             action="#{productView.print(productView.ent)}"
                              style="margin-top: 10px"/>
         </h:panelGrid>
 
