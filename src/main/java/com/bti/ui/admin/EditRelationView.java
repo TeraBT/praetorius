@@ -1,4 +1,4 @@
-package com.bti.ui.views;
+package com.bti.ui.admin;
 
 import com.bti.controllers.*;
 import com.bti.model.Product;

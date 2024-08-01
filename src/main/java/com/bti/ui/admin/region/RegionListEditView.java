@@ -1,8 +1,8 @@
-package com.bti.ui.views.product;
+package com.bti.ui.admin.region;
 
-import com.bti.controllers.ProductController;
-import com.bti.model.Product;
-import com.bti.ui.views.AbstractListEditView;
+import com.bti.controllers.RegionController;
+import com.bti.model.Region;
+import com.bti.ui.admin.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
@@ -13,21 +13,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequestScoped
-public class ProductListEditView extends AbstractListEditView<Product> {
+public class RegionListEditView extends AbstractListEditView<Region> {
 
     @Autowired
-    ProductController productController;
+    RegionController regionController;
 
     @PostConstruct
-    public void init() {super.setCollection(productController.getAllProducts());}
+    public void init() {
+        super.setCollection(regionController.getAllRegions());
+    }
 
-    public void onRowEdit(RowEditEvent<Product> event) {
-        productController.saveProduct(event.getObject());
-        FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject().getId()));
+
+    public void onRowEdit(RowEditEvent<Region> event) {
+        regionController.saveRegion(event.getObject());
+        FacesMessage msg = new FacesMessage("Region Edited", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void onRowCancel(RowEditEvent<Product> event) {
+    public void onRowCancel(RowEditEvent<Region> event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

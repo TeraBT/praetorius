@@ -1,8 +1,8 @@
-package com.bti.ui.views.producttype;
+package com.bti.ui.admin.producttype;
 
 import com.bti.controllers.ProductTypeController;
 import com.bti.model.ProductType;
-import com.bti.ui.views.AbstractListEditView;
+import com.bti.ui.admin.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;

@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 @Component
 @Scope("session")
-public class SessionInfoBean implements Serializable {
+public class SessionInfoService implements Serializable {
 
     @Autowired
     private UserService userService;
@@ -68,8 +68,8 @@ public class SessionInfoBean implements Serializable {
             return false;
         }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        for (GrantedAuthority ga : auth.getAuthorities()) {
-            if (role.equals(ga.getAuthority())) {
+        for (GrantedAuthority grantedAuthority : auth.getAuthorities()) {
+            if (role.equals(grantedAuthority.getAuthority())) {
                 return true;
             }
         }

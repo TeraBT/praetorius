@@ -1,8 +1,8 @@
-package com.bti.ui.views.region;
+package com.bti.ui.admin.region;
 
 import com.bti.controllers.RegionController;
 import com.bti.model.Region;
-import com.bti.ui.views.AbstractAddView;
+import com.bti.ui.admin.AbstractAddView;
 import jakarta.enterprise.context.RequestScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/admin-tools-template.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+            <div class="order">
+                <div class="nav-vendor">
+                    <h2 style="display: inline-block; margin-right: 20px">Order List</h2>
+                    <p:button value="Edit" outcome="order-edit" style="display: inline-block; margin-bottom: 20px"/>
+                </div>
+
+                <p:dataTable var="order" value="#{orderManagementView.getCollection()}">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{order.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Order Reference">
+                        <h:outputText value="#{order.orderReference}"/>
+                    </p:column>
+
+                    <p:column headerText="Status">
+                        <h:outputText value="#{order.status}"/>
+                    </p:column>
+
+                    <p:column headerText="Create Timestamp">
+                        <h:outputText value="#{order.createTimestampAsFormatedString}"/>
+                    </p:column>
+
+                    <p:column headerText="Product">
+                        <h:outputText value="#{order.product}"/>
+                    </p:column>
+
+                    <p:column headerText="Amount">
+                        <h:outputText value="#{order.amount}"/>
+                    </p:column>
+
+                    <p:column headerText="Comment by client">
+                        <h:outputText value="#{order.comment}"/>
+                    </p:column>
+
+                    <p:column headerText="Own Note">
+                        <h:outputText value="not yet impl."/>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,19 +1,14 @@
-package com.bti.ui.views.product;
+package com.bti.ui.admin.product;
 
 import com.bti.controllers.OrderController;
 import com.bti.model.Product;
-import com.bti.services.ProductService;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @Scope("request")

@@ -1,10 +1,10 @@
-package com.bti.ui.views.vendor;
+package com.bti.ui.admin.vendor;
 
 import com.bti.controllers.RegionController;
 import com.bti.controllers.VendorController;
 import com.bti.model.Region;
 import com.bti.model.Vendor;
-import com.bti.ui.views.AbstractListEditView;
+import com.bti.ui.admin.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;

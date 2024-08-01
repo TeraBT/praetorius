@@ -1,10 +1,10 @@
-package com.bti.ui.views.vendor;
+package com.bti.ui.admin.vendor;
 
 import com.bti.controllers.RegionController;
 import com.bti.controllers.VendorController;
 import com.bti.model.Region;
 import com.bti.model.Vendor;
-import com.bti.ui.views.AbstractAddView;
+import com.bti.ui.admin.AbstractAddView;
 import jakarta.enterprise.context.RequestScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

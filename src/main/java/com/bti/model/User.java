@@ -29,6 +29,9 @@ public class User implements Persistable<String>, Serializable, Comparable<User>
     @Enumerated(EnumType.STRING)
     private Set<Role> roleSet;
 
+    @Column
+    private Long vendorId;
+
     boolean enabled;
 
     @Override
@@ -76,6 +79,14 @@ public class User implements Persistable<String>, Serializable, Comparable<User>
 
     public void setRoleSet(Set<Role> roles) {
         this.roleSet = roles;
+    }
+
+    public Long getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(Long vendorId) {
+        this.vendorId = vendorId;
     }
 
     public boolean isEnabled() {

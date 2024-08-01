@@ -1,4 +1,4 @@
-package com.bti.ui.views.order;
+package com.bti.ui.admin.order;
 
 import com.bti.controllers.OrderController;
 import com.bti.controllers.VendorController;

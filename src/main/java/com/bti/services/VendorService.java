@@ -1,5 +1,8 @@
 package com.bti.services;
 
+import com.bti.auxiliaries.SessionInfoService;
+import com.bti.model.Role;
+import com.bti.model.User;
 import com.bti.model.Vendor;
 import com.bti.repositories.VendorRepository;
 import jakarta.transaction.Transactional;
@@ -19,6 +22,7 @@ public class VendorService {
 
     @Autowired
     private ProductService productService;
+
     @Autowired
     private OrderService orderService;
 
@@ -28,6 +32,14 @@ public class VendorService {
 
     public Collection<String> getAllVendorNames() {
         return getAllVendors().stream().map(Vendor::getName).collect(Collectors.toSet());
+    }
+
+    public Optional<Long> getVendorIdForUserIfAllowed(User user) {
+        if (user.getRoleSet().contains(Role.VENDOR)) {
+            return Optional.ofNullable(user.getVendorId());
+        } else {
+            return Optional.empty();
+        }
     }
 
     public Vendor saveVendor(String name) {

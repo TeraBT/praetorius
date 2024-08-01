@@ -1,4 +1,4 @@
-//package com.bti.ui.views.region;
+//package com.bti.ui.admin.region;
 //
 //import com.bti.controllers.RegionController;
 //import com.bti.model.Region;

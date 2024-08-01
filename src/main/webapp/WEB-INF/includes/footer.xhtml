@@ -11,14 +11,14 @@
     <body>
         <ui:composition>
 
-<!--            <div style="float: right;">-->
-<!--                <ui:fragment rendered="#{sessionInfoBean.loggedIn}">-->
-<!--                    Logged in as #{sessionInfoBean.currentUserName} [#{sessionInfoBean.currentUserRoles}]-->
-<!--                </ui:fragment>-->
-<!--                <ui:fragment rendered="#{!sessionInfoBean.loggedIn}">-->
-<!--                    Not logged in-->
-<!--                </ui:fragment>-->
-<!--            </div>-->
+            <div style="float: right;">
+                <ui:fragment rendered="#{sessionInfoService.loggedIn}">
+                    Logged in as #{sessionInfoService.currentUserName} [#{sessionInfoService.currentUserRoles}]
+                </ui:fragment>
+                <ui:fragment rendered="#{!sessionInfoService.loggedIn}">
+                    Not logged in
+                </ui:fragment>
+            </div>
 
         </ui:composition>
     </body>
