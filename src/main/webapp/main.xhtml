@@ -20,8 +20,7 @@
                         gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
                 <p:dataViewGridItem>
-                    <p:commandLink actionListener="#{productController.initProductView(product.id)}"
-                                   action="product?faces-redirect=true"
+                    <p:link href="/product/#{product.id}"
                                    styleClass="product-grid-item-link"
                                    style="text-decoration: none">
                         <div class="product-grid-item">
@@ -42,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                    </p:commandLink>
+                    </p:link>
                 </p:dataViewGridItem>
 
             </p:dataView>

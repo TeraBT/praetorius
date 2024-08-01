@@ -74,7 +74,7 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
                 "\nOrder Reference: " + orderReference +
                 "\nVendor: " + vendor.getName() +
                 "\nProduct: " + product.getName() +
-                "\nAmount: " + amount;
+                "\nAmount: " + amount + "\n";
     }
 
     public void setVendor(Vendor vendor) {

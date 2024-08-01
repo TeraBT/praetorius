@@ -11,48 +11,46 @@
                 template="/WEB-INF/templates/main-template.xhtml">
 
     <ui:define name="content">
-        <p:growl id="msgs" showDetail="true"/>
+        <h:form>
+            <p:growl id="msg" showDetail="true"/>
 
-        <h1>Product Details</h1>
-        <h:panelGrid columns="2" cellpadding="5">
-            <p:outputLabel value="Name:"/>
-            <h:outputText value="#{productView.product.name}"/>
+            <h1>Product Details</h1>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Name:"/>
+                <h:outputText value="#{productView.product.name}"/>
 
-            <p:outputLabel value="Product Type:"/>
-            <h:outputText value="#{productView.product.productType}"/>
+                <p:outputLabel value="Product Type:"/>
+                <h:outputText value="#{productView.product.productType}"/>
 
-            <p:outputLabel value="Vendor:"/>
-            <h:outputText value="#{productView.product.vendor.name}"/>
+                <p:outputLabel value="Vendor:"/>
+                <h:outputText value="#{productView.product.vendor.name}"/>
 
-            <p:outputLabel value="Description:"/>
-            <h:outputText value="#{productView.product.description}"/>
+                <p:outputLabel value="Description:"/>
+                <h:outputText value="#{productView.product.description}"/>
 
-            <p:outputLabel value="Price:"/>
-            <h:outputText value="#{productView.product.pricePerUnit}">
-                <f:convertNumber currencySymbol="€" type="currency"/>
-            </h:outputText>
+                <p:outputLabel value="Price:"/>
+                <h:outputText value="#{productView.product.pricePerUnit}">
+                    <f:convertNumber currencySymbol="€" type="currency"/>
+                </h:outputText>
 
-            <p:outputLabel value="Amount:"/>
-            <p:selectOneMenu value="#{productView.ent}" update="out" style="width: 100px">
-<!--                <f:selectItems value="#{productView.entList}"/>-->
-                <f:selectItem itemLabel="1" itemValue="1"/>
-                <f:selectItem itemLabel="2" itemValue="2"/>
-            </p:selectOneMenu>
-            <p:outputLabel id="out" value="Amount is: #{productView.ent}"/>
+                <p:outputLabel value="Amount:"/>
+                <p:selectOneMenu value="#{productView.amount}" style="width: 100px">
+                    <!--                <f:selectItems value="#{productView.entList}"/>-->
+                    <f:selectItems value="#{productView.product.availableAmountSet}"/>
+                </p:selectOneMenu>
 
-            <p:outputLabel value="Comment:"/>
-            <p:inputTextarea value="#{productView.comment}" rows="5" cols="30"/>
-
+                <p:outputLabel value="Comment:"/>
+                <p:inputTextarea value="#{productView.comment}" rows="5" cols="30"/>
 
 
-            <br/>
-<!--                             action="#{productView.placeOrder(productView.product,-->
-<!--                             productView.amount, productView.comment)}"-->
-            <p:commandButton value="Order"
-                             update="msgs"
-                             action="#{productView.print(productView.ent)}"
-                             style="margin-top: 10px"/>
-        </h:panelGrid>
+                <br/>
 
+                <p:commandButton value="Order"
+                                 action="#{productView.placeOrder(productView.product,
+                                             productView.amount, productView.comment)}"
+                                 update="msg"
+                                 style="margin-top: 10px"/>
+            </h:panelGrid>
+        </h:form>
     </ui:define>
 </ui:composition>

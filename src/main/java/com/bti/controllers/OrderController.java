@@ -55,7 +55,7 @@ public class OrderController {
         order.setAmount(amount);
         order.setTotalPrice(product.getPricePerUnit() * amount);
         order.setComment(comment);
-        order.createOrderLog();
+        order.setOrderLog(order.createOrderLog());
 
         orderService.saveOrder(order);
     }
