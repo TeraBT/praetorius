@@ -98,6 +98,19 @@
                     </p:cellEditor>
                 </p:column>
 
+                <p:column headerText="Vendor Note">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{order.vendorNote}">
+                                <!--                                <f:convertNumber type="currency" currencySymbol="$"/>-->
+                            </h:outputText>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{order.vendorNote}" style="width:100%"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
                 <p:column style="width:6rem">
                     <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
                 </p:column>

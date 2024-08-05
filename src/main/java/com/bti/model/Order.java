@@ -53,7 +53,10 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     private double totalPrice;
 
     @Column
-    private String comment;
+    private String clientComment;
+
+    @Column
+    private String vendorNote;
 
     // TODO: Orders should keep info about vendor even if vendor is deleted (also for product)
     // TODO: Orders shouldn't have editable vendor and product info
@@ -201,12 +204,20 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
         this.status = status;
     }
 
-    public String getComment() {
-        return comment;
+    public String getClientComment() {
+        return clientComment;
     }
 
-    public void setComment(String textMessage) {
-        this.comment = textMessage;
+    public void setClientComment(String textMessage) {
+        this.clientComment = textMessage;
+    }
+
+    public String getVendorNote() {
+        return vendorNote;
+    }
+
+    public void setVendorNote(String vendorNote) {
+        this.vendorNote = vendorNote;
     }
 
     public String getOrderLog() {

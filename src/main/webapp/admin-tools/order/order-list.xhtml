@@ -46,8 +46,12 @@
                         <h:outputText value="#{order.amount}"/>
                     </p:column>
 
-                    <p:column headerText="Comment">
-                        <h:outputText value="#{order.comment}"/>
+                    <p:column headerText="Client Comment">
+                        <h:outputText value="#{order.clientComment}"/>
+                    </p:column>
+
+                    <p:column headerText="Vendor Note">
+                        <h:outputText value="#{order.vendorNote}"/>
                     </p:column>
 
                 </p:dataTable>

@@ -38,7 +38,7 @@ public class WebSecurityConfig {
             http
                     .csrf(csrf -> csrf.disable()) // TODO: Enable csrf and cors.
                     .cors(cors -> cors.disable())
-                    .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // needed for H2 console
+//                    .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                     .authorizeHttpRequests(authorize -> authorize
                             .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/main*")).permitAll()
@@ -46,6 +46,7 @@ public class WebSecurityConfig {
                             .requestMatchers(new AntPathRequestMatcher("/error/**")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/sec/**")).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/register")).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/vendor/**")).hasAnyAuthority(VENDOR, ADMIN)
                             .requestMatchers(new AntPathRequestMatcher("/admin-tools/**")).hasAnyAuthority(ADMIN)
                             .anyRequest().authenticated())
 
@@ -63,7 +64,8 @@ public class WebSecurityConfig {
                                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                             )
                             .sessionManagement(session -> session
-                                    .invalidSessionUrl("/error/invalid-session.xhtml")
+//                                    .invalidSessionUrl("/error/invalid-session.xhtml")
+                                    .invalidSessionUrl("/main")
                             );
 
             return http.build();

@@ -106,14 +106,15 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.ui-menuitem-link .ui-menuitem-text {
+.ui-menuitem .ui-menuitem-text {
     color: #ffffff !important;
     /*font-weight: bold;*/
 }
 
-.ui-menuitem-link:hover .ui-menuitem-text {
+.ui-menuitem:hover .ui-menuitem-text {
     color: #000000 !important;
     /*font-weight: bold;*/
+    /*background-color: green;*/
 }
 
 .header .menubar {
@@ -147,7 +148,6 @@ body {
 }
 
 .navbar-item:hover {
-    color: #000000;
     background-color: #f5f5f5;
 }
 
