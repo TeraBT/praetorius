@@ -14,16 +14,15 @@
             <p:growl id="msgs" showDetail="true"/>
 
             <div class="order">
-                <div class="nav-admin-tools">
+                <div class="nav-vendor">
                     <h2 style="display: inline-block; margin-right: 20px">Edit Orders</h2>
-                    <p:button value="List" outcome="order-list" style="display: inline-block; margin-bottom: 20px"/>
+                    <p:button value="List" outcome="orders" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
 
-                <p:dataTable var="order" value="#{orderListEditView.getCollection()}" editable="true"
-                             style="margin-bottom:20px">
+                <p:dataTable var="order" value="#{orderManagementView.getCollection()}" editable="true">
 
-                    <p:ajax event="rowEdit" listener="#{orderListEditView.onRowEdit}" update=":form:msgs"/>
-                    <p:ajax event="rowEditCancel" listener="#{orderListEditView.onRowCancel}" update=":form:msgs"/>
+                    <p:ajax event="rowEdit" listener="#{orderManagementView.onRowEdit}" update=":form:msgs"/>
+                    <p:ajax event="rowEditCancel" listener="#{orderManagementView.onRowCancel}" update=":form:msgs"/>
 
                     <p:column headerText="ID">
                         <h:outputText value="#{order.id}"/>
@@ -47,18 +46,6 @@
 
                     <p:column headerText="Create Timestamp">
                         <h:outputText value="#{order.createTimestampAsFormatedString}"/>
-                    </p:column>
-
-                    <p:column headerText="Vendor">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{order.vendor}"/></f:facet>
-                            <f:facet name="input">
-                                <p:selectOneMenu value="#{order.vendor}" converter="omnifaces.SelectItemsConverter"
-                                                 style="width:100%">
-                                    <f:selectItems value="#{vendorController.allVendors}"/>
-                                </p:selectOneMenu>
-                            </f:facet>
-                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Product">
@@ -88,7 +75,7 @@
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="Vendor Note">
+                    <p:column headerText="Own Note">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{order.vendorNote}">
@@ -104,6 +91,7 @@
                     <p:column style="width:6rem">
                         <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
                     </p:column>
+
                 </p:dataTable>
             </div>
         </h:form>

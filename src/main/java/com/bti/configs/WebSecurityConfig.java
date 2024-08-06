@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -76,7 +77,6 @@ public class WebSecurityConfig {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        //Configure roles and passwords via datasource
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from praetorius_user where username=?")
                 .authoritiesByUsernameQuery("select praetorius_user_username, role from user_role where praetorius_user_username=?");
@@ -84,7 +84,6 @@ public class WebSecurityConfig {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        // :TODO: Encrypt.
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

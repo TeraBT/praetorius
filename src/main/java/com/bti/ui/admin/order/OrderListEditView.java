@@ -2,6 +2,7 @@ package com.bti.ui.admin.order;
 
 import com.bti.model.Order;
 import com.bti.controllers.OrderController;
+import com.bti.model.OrderStatus;
 import com.bti.ui.admin.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
@@ -17,6 +18,8 @@ public class OrderListEditView extends AbstractListEditView<Order> {
 
     @Autowired
     OrderController orderController;
+
+    private final OrderStatus[] orderStatusArray = OrderStatus.values();
 
     @PostConstruct
     @Override
@@ -35,5 +38,9 @@ public class OrderListEditView extends AbstractListEditView<Order> {
     public void onRowCancel(RowEditEvent<Order> event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public OrderStatus[] getOrderStatusArray() {
+        return orderStatusArray;
     }
 }

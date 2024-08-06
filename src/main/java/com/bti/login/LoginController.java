@@ -7,8 +7,10 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Component;
 
@@ -17,25 +19,25 @@ import java.io.Serializable;
 import java.util.logging.Logger;
 
 @Component
-@ViewScoped
+@Scope("request")
 public class LoginController implements Serializable {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private static final Logger logger = Logger.getLogger(LoginController.class.getName());
 
     private String username;
     private String password;
 
-    @Autowired
-    private UserService userService;
-
     public String login() {
         logger.info("Attempting to log in with username: " + username);
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-            request.login(username, password);
+            request.login(username, passwordEncoder.encode(password));
             logger.info("Login successful for username: " + username);
-            return "main?faces-redirect=true";
+            return "/main?faces-redirect=true";
         } catch (Exception e) {
             logger.severe("Login failed for username: " + username + ". Error: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null,
@@ -52,7 +54,7 @@ public class LoginController implements Serializable {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        context.getExternalContext().redirect(request.getContextPath() + "/login.xhtml");
+        context.getExternalContext().redirect(request.getContextPath() + "/login");
     }
 
     public String getUsername() {

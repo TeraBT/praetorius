@@ -12,16 +12,16 @@
         <p:panel header="Register">
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel for="username" value="Username:" />
-                <p:inputText id="username" value="#{registerBean.user.username}" required="true" />
+                <p:inputText id="username" value="#{registerController.username}" required="true" />
 
                 <h:outputLabel for="password" value="Password:" />
-                <p:password id="password" value="#{registerBean.user.password}" required="true" />
+                <p:password id="password" value="#{registerController.password}" required="true" />
 
                 <h:outputLabel for="confirmPassword" value="Confirm Password:" />
-                <p:password id="confirmPassword" value="#{registerBean.confirmPassword}" required="true" />
+                <p:password id="confirmPassword" value="#{registerController.confirmPassword}" required="true" />
 
                 <h:outputLabel />
-                <p:commandButton value="Register" action="#{registerBean.register()}" icon="pi pi-check" update="@form" />
+                <p:commandButton value="Register" action="#{registerController.register()}" icon="pi pi-check" update="@form" />
             </h:panelGrid>
         </p:panel>
 

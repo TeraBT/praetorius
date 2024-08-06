@@ -15,7 +15,6 @@ public class User implements Persistable<String>, Serializable, Comparable<User>
 //    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
     @Column(length = 100)
     private String username;
 
@@ -32,7 +31,8 @@ public class User implements Persistable<String>, Serializable, Comparable<User>
     @Column
     private Long vendorId;
 
-    boolean enabled;
+    @Column
+    private boolean enabled;
 
     @Override
     public String getId() {
