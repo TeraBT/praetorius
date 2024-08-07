@@ -18,31 +18,31 @@
                 </div>
 
                 <p:dataTable var="order" value="#{orderListEditView.getCollection()}">
-                    <p:column headerText="ID">
+                    <p:column headerText="ID" sortBy="#{order.id}" filterBy="#{order.id}">
                         <h:outputText value="#{order.id}"/>
                     </p:column>
 
-                    <p:column headerText="Order Reference">
+                    <p:column headerText="Order Reference" sortBy="#{order.orderReference}" filterBy="#{order.orderReference}">
                         <h:outputText value="#{order.orderReference}"/>
                     </p:column>
 
-                    <p:column headerText="Status">
+                    <p:column headerText="Status" sortBy="#{order.status}" filterBy="#{order.status}">
                         <h:outputText value="#{order.status}"/>
                     </p:column>
 
-                    <p:column headerText="Create Timestamp">
+                    <p:column headerText="Create Timestamp" sortBy="#{order.createTimestamp}" filterBy="#{order.createTimestamp}">
                         <h:outputText value="#{order.createTimestampAsFormatedString}"/>
                     </p:column>
 
-                    <p:column headerText="Vendor">
+                    <p:column headerText="Vendor" sortBy="#{order.vendor}" filterBy="#{order.vendor}">
                         <h:outputText value="#{order.vendor}"/>
                     </p:column>
 
-                    <p:column headerText="Product">
+                    <p:column headerText="Product" sortBy="#{order.product}" filterBy="#{order.product}">
                         <h:outputText value="#{order.product}"/>
                     </p:column>
 
-                    <p:column headerText="Amount">
+                    <p:column headerText="Amount" sortBy="#{order.amount}" filterBy="#{order.amount}">
                         <h:outputText value="#{order.amount}"/>
                     </p:column>
 

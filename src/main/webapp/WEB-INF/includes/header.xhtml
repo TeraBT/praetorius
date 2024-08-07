@@ -20,11 +20,11 @@
                     <!-- <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}"> -->
                     <!-- <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}"> -->
                     <p:submenu label="Profile" class="submenu">
-                        <p:menuitem value="Incoming Orders" url="/vendor/orders.xhtml" rendered="#{sessionInfoService.hasRole('VENDOR')}" styleClass="sub-spec"/>
+                        <p:menuitem value="Received Orders" url="/vendor/orders.xhtml" rendered="#{sessionInfoService.hasRole('VENDOR')}" styleClass="sub-spec"/>
                         <p:menuitem value="My Orders" url="/admin-tools/order/order-list.xhtml" styleClass="sub-spec"/>
                         <p:menuitem value="Settings" url="/admin-tools/region/region-list.xhtml" styleClass="sub-spec"/>
                     </p:submenu>
-                    <p:menuitem value="Admin Tools" url="/admin-tools/order/order-list.xhtml" styleClass="navbar-item" />
+                    <p:menuitem value="Admin Tools" url="/admin-tools/order/order-list.xhtml" styleClass="navbar-item" rendered="#{sessionInfoService.hasRole('ADMIN')}"/>
                     <p:menuitem value="Login" url="/login" styleClass="navbar-item" rendered="#{!sessionInfoService.loggedIn}"/>
                     <p:menuitem value="Logout" url="/logout" styleClass="navbar-item" rendered="#{sessionInfoService.loggedIn}"/>
                     <p:menuitem value="Register" url="/sec/register.xhtml" styleClass="navbar-item"/>

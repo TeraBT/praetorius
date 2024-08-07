@@ -40,7 +40,7 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     private double shippingCost;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    private Set<Order> orderSet = new HashSet<Order>();
+    private Set<Order> orderSet = new HashSet<>();
 
     @Column
     private String imagePath;

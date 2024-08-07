@@ -7,7 +7,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
-                template="/WEB-INF/templates/admin-tools-template.xhtml">
+                template="/WEB-INF/templates/main-template.xhtml">
 
     <ui:define name="content">
         <h:form>
@@ -17,28 +17,28 @@
                     <p:button value="Edit" outcome="orders-edit" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
 
-                <p:dataTable var="order" value="#{orderManagementView.getCollection()}">
-                    <p:column headerText="ID">
+                <p:dataTable var="order" value="#{orderManagementView.getCollection()}" allowUnsorting="true">
+                    <p:column headerText="ID" sortBy="#{order.id}" filterBy="#{order.id}">
                         <h:outputText value="#{order.id}"/>
                     </p:column>
 
-                    <p:column headerText="Order Reference">
+                    <p:column headerText="Order Reference" sortBy="#{order.orderReference}" filterBy="#{order.orderReference}">
                         <h:outputText value="#{order.orderReference}"/>
                     </p:column>
 
-                    <p:column headerText="Status">
+                    <p:column headerText="Status" sortBy="#{order.status}" filterBy="#{order.status}">
                         <h:outputText value="#{order.status}"/>
                     </p:column>
 
-                    <p:column headerText="Create Timestamp">
+                    <p:column headerText="Create Timestamp" sortBy="#{order.createTimestamp}" filterBy="#{order.createTimestamp}">
                         <h:outputText value="#{order.createTimestampAsFormatedString}"/>
                     </p:column>
 
-                    <p:column headerText="Product">
+                    <p:column headerText="Product" sortBy="#{order.product}" filterBy="#{order.product}">
                         <h:outputText value="#{order.product}"/>
                     </p:column>
 
-                    <p:column headerText="Amount">
+                    <p:column headerText="Amount" sortBy="#{order.amount}" filterBy="#{order.amount}">
                         <h:outputText value="#{order.amount}"/>
                     </p:column>
 
