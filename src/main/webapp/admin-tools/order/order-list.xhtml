@@ -17,7 +17,7 @@
                     <p:button value="Edit" outcome="order-edit" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
 
-                <p:dataTable var="order" value="#{orderListEditView.getCollection()}">
+                <p:dataTable var="order" value="#{orderListEditView.getCollection()}" styleClass="data-table-main">
                     <p:column headerText="ID" sortBy="#{order.id}" filterBy="#{order.id}">
                         <h:outputText value="#{order.id}"/>
                     </p:column>

@@ -1,6 +1,9 @@
 package com.bti.configs;
 
 import com.bti.model.Role;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,15 +11,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.DefaultSavedRequest;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
-import java.util.List;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -55,8 +59,9 @@ public class WebSecurityConfig {
                             .formLogin(form -> form
                                     .loginPage(LOGIN)
                                     .permitAll()
-                                    .defaultSuccessUrl("/main", false)
                                     .loginProcessingUrl("/login")
+                                    .defaultSuccessUrl("/main", false)
+                                    .successHandler(new RedirectBackAuthenticationSuccessHandler())
                             )
                             .logout(logout -> logout
                                     .logoutSuccessUrl(LOGIN)
@@ -85,5 +90,19 @@ public class WebSecurityConfig {
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    private static class RedirectBackAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+
+
+        @Override
+        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+            DefaultSavedRequest defaultSavedRequest = (DefaultSavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+            if(defaultSavedRequest != null){
+                getRedirectStrategy().sendRedirect(request, response, defaultSavedRequest.getRedirectUrl());
+            }else{
+                super.onAuthenticationSuccess(request, response, authentication);
+            }
+        }
     }
 }

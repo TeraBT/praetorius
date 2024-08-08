@@ -18,6 +18,14 @@ body {
     color: #007bff;
 }
 
+.data-table-main thead {
+    /*font-size: 1em;*/
+}
+
+.data-table-main thead input     {
+    padding: 2.5%;
+}
+
 .product-grid-item {
     background: #ffffff;
     border: 1px solid #ddd;

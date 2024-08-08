@@ -21,6 +21,7 @@
                     <!-- <p:submenu label="Admin Submenu" rendered="#{sessionInfoBean.hasRole('ADMIN')}"> -->
                     <p:submenu label="Profile" class="submenu">
                         <p:menuitem value="Received Orders" url="/vendor/orders.xhtml" rendered="#{sessionInfoService.hasRole('VENDOR')}" styleClass="sub-spec"/>
+                        <p:menuitem value="Statistics" url="/vendor/statistics.xhtml" rendered="#{sessionInfoService.hasRole('VENDOR')}" styleClass="sub-spec"/>
                         <p:menuitem value="My Orders" url="/admin-tools/order/order-list.xhtml" styleClass="sub-spec"/>
                         <p:menuitem value="Settings" url="/admin-tools/region/region-list.xhtml" styleClass="sub-spec"/>
                     </p:submenu>
