@@ -55,24 +55,24 @@ public class WebSecurityConfig {
                             .requestMatchers(new AntPathRequestMatcher("/admin-tools/**")).hasAnyAuthority(ADMIN)
                             .anyRequest().authenticated())
 
-                            // :TODO: Login failure failureUrl(/login.xhtml?error)
-                            .formLogin(form -> form
+                    // :TODO: Login failure failureUrl(/login.xhtml?error)
+                    .formLogin(form -> form
                                     .loginPage(LOGIN)
                                     .permitAll()
                                     .loginProcessingUrl("/login")
-                                    .defaultSuccessUrl("/main", false)
+//                            .defaultSuccessUrl("/main", false)
                                     .successHandler(new RedirectBackAuthenticationSuccessHandler())
-                            )
-                            .logout(logout -> logout
-                                    .logoutSuccessUrl(LOGIN)
-                                    .deleteCookies("JSESSIONID")
-                                    .invalidateHttpSession(true)
-                                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                            )
-                            .sessionManagement(session -> session
+                    )
+                    .logout(logout -> logout
+                            .logoutSuccessUrl(LOGIN)
+                            .deleteCookies("JSESSIONID")
+                            .invalidateHttpSession(true)
+                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    )
+                    .sessionManagement(session -> session
 //                                    .invalidSessionUrl("/error/invalid-session.xhtml")
                                     .invalidSessionUrl("/main")
-                            );
+                    );
 
             return http.build();
         } catch (Exception ex) {
@@ -98,9 +98,13 @@ public class WebSecurityConfig {
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
             DefaultSavedRequest defaultSavedRequest = (DefaultSavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
-            if(defaultSavedRequest != null){
-                getRedirectStrategy().sendRedirect(request, response, defaultSavedRequest.getRedirectUrl());
-            }else{
+            if (defaultSavedRequest != null) {
+                if (defaultSavedRequest.getRequestURI().equals("/RES_NOT_FOUND")) {
+                    getRedirectStrategy().sendRedirect(request, response, "/main");
+                } else {
+                    getRedirectStrategy().sendRedirect(request, response, defaultSavedRequest.getRedirectUrl());
+                }
+            } else {
                 super.onAuthenticationSuccess(request, response, authentication);
             }
         }
