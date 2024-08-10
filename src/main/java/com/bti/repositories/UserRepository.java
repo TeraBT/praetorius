@@ -4,9 +4,9 @@ import com.bti.model.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends AbstractRepository<User, String> {
+public interface UserRepository extends AbstractRepository<User, Long> {
 
-    Optional<User> findById(String id);
+    Optional<User> findById(Long id);
 
     Optional<User> findByUsername(String username);
 }

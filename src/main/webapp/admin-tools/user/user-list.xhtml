@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/templates/admin-tools-template.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+            <div class="order">
+                <div class="nav-admin-tools">
+                    <h2 style="display: inline-block; margin-right: 20px">Order List</h2>
+                    <p:button value="Edit" outcome="order-edit" style="display: inline-block; margin-bottom: 20px"/>
+                </div>
+
+                <p:dataTable var="order" value="#{orderListEditView.getCollection()}" styleClass="data-table-main">
+                    <p:column headerText="ID" sortBy="#{order.id}" filterBy="#{order.id}">
+                        <h:outputText value="#{order.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Order Reference" sortBy="#{order.orderReference}" filterBy="#{order.orderReference}">
+                        <h:outputText value="#{order.orderReference}"/>
+                    </p:column>
+
+                    <p:column headerText="Status" sortBy="#{order.status}" filterBy="#{order.status}">
+                        <h:outputText value="#{order.status}"/>
+                    </p:column>
+
+                    <p:column headerText="Create Timestamp" sortBy="#{order.createTimestamp}" filterBy="#{order.createTimestamp}">
+                        <h:outputText value="#{order.createTimestampAsFormatedString}"/>
+                    </p:column>
+
+                    <p:column headerText="Vendor" sortBy="#{order.vendor}" filterBy="#{order.vendor}">
+                        <h:outputText value="#{order.vendor}"/>
+                    </p:column>
+
+                    <p:column headerText="Product" sortBy="#{order.product}" filterBy="#{order.product}">
+                        <h:outputText value="#{order.product}"/>
+                    </p:column>
+
+                    <p:column headerText="Amount" sortBy="#{order.amount}" filterBy="#{order.amount}">
+                        <h:outputText value="#{order.amount}"/>
+                    </p:column>
+
+                    <p:column headerText="Client Comment">
+                        <h:outputText value="#{order.clientComment}"/>
+                    </p:column>
+
+                    <p:column headerText="Vendor Note">
+                        <h:outputText value="#{order.vendorNote}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

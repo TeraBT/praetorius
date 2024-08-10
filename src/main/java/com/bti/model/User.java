@@ -4,18 +4,20 @@ import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Persistable;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "praetorius_user")
-public class User implements Persistable<String>, Serializable, Comparable<User> {
+public class User implements Persistable<Long>, Serializable, Comparable<User> {
 //    @Serial
 //    private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(length = 100)
+    @GeneratedValue
+    private Long id;
+
+    @Column(length = 100, unique = true)
     private String username;
 
     private String password;
@@ -26,7 +28,7 @@ public class User implements Persistable<String>, Serializable, Comparable<User>
     @CollectionTable(name = "user_role")
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private Set<Role> roleSet;
+    private Set<Role> roleSet = new HashSet<>();
 
     @Column
     private Long vendorId;
@@ -35,8 +37,8 @@ public class User implements Persistable<String>, Serializable, Comparable<User>
     private boolean enabled;
 
     @Override
-    public String getId() {
-        return username;
+    public Long getId() {
+        return id;
     }
 
     @Override

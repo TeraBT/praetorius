@@ -84,7 +84,7 @@ public class WebSecurityConfig {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from praetorius_user where username=?")
-                .authoritiesByUsernameQuery("select praetorius_user_username, role from user_role where praetorius_user_username=?");
+                .authoritiesByUsernameQuery("select praetorius_user_id, role from user_role where praetorius_user_id=(select id from praetorius_user where username=?)");
     }
 
     @Bean
