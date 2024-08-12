@@ -30,11 +30,28 @@ public class User implements Persistable<Long>, Serializable, Comparable<User> {
     @Enumerated(EnumType.STRING)
     private Set<Role> roleSet = new HashSet<>();
 
+    @OneToMany(mappedBy = "buyer", fetch = FetchType.LAZY)
+    private Set<Order> orderSet = new HashSet<>();
+
     @Column
     private Long vendorId;
 
     @Column
     private boolean enabled;
+
+    public void addToOrderSet(Order order) {
+        if (order != null) {
+            orderSet.add(order);
+            order.setBuyer(this);
+        }
+    }
+
+    public void removeFromOrderSet(Order order) {
+        if (order != null) {
+            orderSet.remove(order);
+            order.setBuyer(null);
+        }
+    }
 
     @Override
     public Long getId() {
@@ -49,6 +66,11 @@ public class User implements Persistable<Long>, Serializable, Comparable<User> {
     @Override
     public int compareTo(@NotNull User user) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "(%s) %s".formatted(id, username);
     }
 
     public String getUsername() {
@@ -81,6 +103,10 @@ public class User implements Persistable<Long>, Serializable, Comparable<User> {
 
     public void setRoleSet(Set<Role> roles) {
         this.roleSet = roles;
+    }
+
+    public Set<Order> getOrderSet() {
+        return orderSet;
     }
 
     public Long getVendorId() {

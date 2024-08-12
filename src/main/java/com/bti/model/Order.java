@@ -30,10 +30,9 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createTimestamp;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "vendor_id")
-//    private Vendor vendor;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User buyer;
 
     @ManyToOne
     @JoinColumn(name = "vendor_id")
@@ -79,6 +78,25 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
                 "\nProduct: " + product.getName() +
                 "\nAmount: " + amount + "\n";
     }
+
+    public void setBuyer(User user) {
+        if (user != null && this.buyer != null) {
+            if (this.buyer.equals(user)) {
+                return;
+            }
+        }
+
+        if (user != null) {
+            user.getOrderSet().add(this);
+        }
+
+        if (this.buyer != null) {
+            this.buyer.getOrderSet().remove(this);
+        }
+
+        this.buyer = user;
+    }
+
 
     public void setVendor(Vendor vendor) {
         if (vendor != null && this.vendor != null) {
@@ -162,6 +180,10 @@ public class Order implements Persistable<String>, Serializable, Comparable<Orde
 
     public void setCreateTimestamp(LocalDateTime createTimestamp) {
         this.createTimestamp = createTimestamp;
+    }
+
+    public User getBuyer() {
+        return buyer;
     }
 
     public Vendor getVendor() {

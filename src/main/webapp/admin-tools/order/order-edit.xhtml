@@ -49,6 +49,22 @@
                         <h:outputText value="#{order.createTimestampAsFormatedString}"/>
                     </p:column>
 
+                    <p:column headerText="Buyer">
+                        <h:outputText value="#{order.buyer}"/>
+                    </p:column>
+
+<!--                    <p:column headerText="Buyer" sortBy="#{order.buyer}" filterBy="#{order.buyer}">-->
+<!--                        <p:cellEditor>-->
+<!--                            <f:facet name="output"><h:outputText value="#{order.buyer}"/></f:facet>-->
+<!--                            <f:facet name="input">-->
+<!--                                <p:selectOneMenu value="#{order.buyer}" converter="omnifaces.SelectItemsConverter"-->
+<!--                                                 style="width:100%">-->
+<!--                                    <f:selectItems value="#{TODO}"/> // TODO: Loading all users not good idea-->
+<!--                                </p:selectOneMenu>-->
+<!--                            </f:facet>-->
+<!--                        </p:cellEditor>-->
+<!--                    </p:column>-->
+
                     <p:column headerText="Vendor">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{order.vendor}"/></f:facet>

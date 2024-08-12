@@ -1,6 +1,7 @@
 package com.bti.controllers;
 
 import com.bti.auxiliaries.OrderReferenceGenerator;
+import com.bti.auxiliaries.SessionInfoService;
 import com.bti.dto.ProductDto;
 import com.bti.dto.RegionDto;
 import com.bti.dto.RegionDtoSetDto;
@@ -15,7 +16,9 @@ import com.google.gson.GsonBuilder;
 import jakarta.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +32,7 @@ import java.util.Set;
 @Controller
 @RestController
 @CrossOrigin(origins = "*")
+@Scope("session")
 public class OrderController {
 
     @Autowired
@@ -40,8 +44,9 @@ public class OrderController {
     private RegionService regionService;
 
     @Autowired
-    private ProductTypeService productTypeService;
+    private SessionInfoService sessionInfoService;
 
+    @PreAuthorize("isAuthenticated()")
     @Transactional
     public void placeOrder(Product product, Integer amount, String comment) {
         Order order = new Order();
@@ -49,6 +54,7 @@ public class OrderController {
         order.setOrderReference(generateUnusedOrderReference());
         order.setStatus(OrderStatus.PLACED);
         order.setCreateTimestamp(LocalDateTime.now(ZoneId.of("UTC+0")));
+        order.setBuyer(sessionInfoService.getCurrentUser());
         order.setVendor(product.getVendor());
         order.setProduct(product);
         order.setPrice(product.getPricePerUnit());

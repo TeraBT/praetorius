@@ -1,7 +1,6 @@
 package com.bti.services;
 
 import com.bti.model.Order;
-import com.bti.model.Vendor;
 import com.bti.repositories.OrderRepository;
 import com.bti.repositories.RegionRepository;
 import jakarta.transaction.Transactional;
@@ -30,6 +29,10 @@ public class OrderService {
 
     public Collection<Order> getOrderCollectionByVendorId(Long vendorId) {
         return orderRepository.findByVendorId(vendorId);
+    }
+
+    public Collection<Order> getOrderCollectionByBuyerId(Long userId) {
+        return orderRepository.findByBuyerId(userId);
     }
 
     public Order saveOrder(Order order) {

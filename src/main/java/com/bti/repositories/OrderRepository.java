@@ -10,4 +10,5 @@ public interface OrderRepository extends AbstractRepository<Order, Long> {
 
     Collection<Order> findByVendorId(Long vendorId);
 
+    Collection<Order> findByBuyerId(Long buyerId);
 }

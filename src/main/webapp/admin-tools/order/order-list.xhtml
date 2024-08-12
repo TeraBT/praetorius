@@ -34,6 +34,10 @@
                         <h:outputText value="#{order.createTimestampAsFormatedString}"/>
                     </p:column>
 
+                    <p:column headerText="Buyer" sortBy="#{order.buyer}" filterBy="#{order.buyer}">
+                        <h:outputText value="#{order.buyer}"/>
+                    </p:column>
+
                     <p:column headerText="Vendor" sortBy="#{order.vendor}" filterBy="#{order.vendor}">
                         <h:outputText value="#{order.vendor}"/>
                     </p:column>

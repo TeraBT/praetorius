@@ -26,6 +26,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public Optional<User> getUser(long id) {
+        return userRepository.findById(id);
+    }
+
+    public Optional<User> getUser(User user) {
+        return userRepository.findById(user.getId());
+    }
+
     public Optional<User> getByUsername(String username) {
         return userRepository.findByUsername(username);
     }
@@ -86,6 +94,4 @@ public class UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByUsername(auth.getName()).orElse(null);
     }
-
-
 }
