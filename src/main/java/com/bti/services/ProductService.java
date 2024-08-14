@@ -1,5 +1,6 @@
 package com.bti.services;
 
+import com.bti.model.Order;
 import com.bti.model.Product;
 import com.bti.model.ProductType;
 import com.bti.repositories.ProductRepository;
@@ -32,6 +33,10 @@ public class ProductService {
 
     public Collection<String> getAllProductNames() {
         return getAllProducts().stream().map(Product::getName).collect(Collectors.toSet());
+    }
+
+    public Collection<Product> getProductCollectionByVendorId(Long vendorId) {
+        return productRepository.findByVendorId(vendorId);
     }
 
     public Product saveProduct(String name) {

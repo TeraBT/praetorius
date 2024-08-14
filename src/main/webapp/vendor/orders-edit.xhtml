@@ -7,7 +7,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
-                template="/WEB-INF/templates/admin-tools-template.xhtml">
+                template="/WEB-INF/templates/main-template.xhtml">
 
     <ui:define name="content">
         <h:form id="form">
@@ -19,10 +19,10 @@
                     <p:button value="List" outcome="orders" style="display: inline-block; margin-bottom: 20px"/>
                 </div>
 
-                <p:dataTable var="order" value="#{orderManagementView.getCollection()}" editable="true">
+                <p:dataTable var="order" value="#{vendorOrderManagementView.getCollection()}" editable="true">
 
-                    <p:ajax event="rowEdit" listener="#{orderManagementView.onRowEdit}" update=":form:msgs"/>
-                    <p:ajax event="rowEditCancel" listener="#{orderManagementView.onRowCancel}" update=":form:msgs"/>
+                    <p:ajax event="rowEdit" listener="#{vendorOrderManagementView.onRowEdit}" update=":form:msgs"/>
+                    <p:ajax event="rowEditCancel" listener="#{vendorOrderManagementView.onRowCancel}" update=":form:msgs"/>
 
                     <p:column headerText="ID">
                         <h:outputText value="#{order.id}"/>

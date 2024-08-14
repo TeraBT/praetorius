@@ -10,4 +10,6 @@ public interface ProductRepository extends AbstractRepository<Product, Long> {
     Optional<Product> findByName(String name);
 
     Collection<Product> findAllByProductType(ProductType productType);
+
+    Collection<Product> findByVendorId(Long vendorId);
 }
