@@ -14,9 +14,10 @@
 
         <h1 style="margin-left: 10px;">Services</h1>
         <h:form id="form">
-            <p:dataView var="product" value="#{productService.allProductsSortedByName}" rows="12" paginator="true"
+            <p:dataView var="product" value="#{productService.getProductCollectionSortedByName()}" rows="12" paginator="true"
                         layout="grid"
                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                        paginatorAlwaysVisible="false"
                         gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
                 <p:dataViewGridItem>

@@ -6,13 +6,11 @@ import com.bti.services.ProductService;
 import jakarta.faces.context.FacesContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.omnifaces.util.Faces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.net.http.HttpRequest;
 import java.util.Collection;
 
 @Controller
@@ -48,8 +46,20 @@ public class ProductController {
         return "product";
     }
 
+    @GetMapping("/product/{product-id}/edit")
+    public String initProductEditView(@PathVariable("product-id") long productId, HttpServletRequest request) {
+        Product product = productService.getProduct(productId).orElse(null);
+        try {
+            HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            httpSession.setAttribute("product", product);
+        } catch (Exception e) {
+            request.getSession().setAttribute("product", product);
+        }
+        return "vendor/product-edit";
+    }
+
     public Collection<Product> getAllProducts() {
-        return productService.getAllProducts();
+        return productService.getProductCollection();
     }
 
     public void saveProduct(String name) {

@@ -1,6 +1,5 @@
 package com.bti.services;
 
-import com.bti.model.Order;
 import com.bti.model.Product;
 import com.bti.model.ProductType;
 import com.bti.repositories.ProductRepository;
@@ -8,10 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,16 +19,21 @@ public class ProductService {
     @Autowired
     private OrderService orderService;
 
-    public Collection<Product> getAllProducts() {
+    public Collection<Product> getProductCollection() {
         return productRepository.findAll();
     }
 
-    public Collection<Product> getAllProductsSortedByName() {
+    public Collection<Product> getProductCollectionSortedByName() {
         return productRepository.findAll().stream().sorted(Comparator.comparing(Product::getName)).collect(Collectors.toList());
     }
 
+    public Collection<Product> getProductCollectionByVendorIdSortedByName(Long vendorId) {
+        return getProductCollectionByVendorId(vendorId).stream()
+                .sorted(Comparator.comparing(Product::getName)).collect(Collectors.toList());
+    }
+
     public Collection<String> getAllProductNames() {
-        return getAllProducts().stream().map(Product::getName).collect(Collectors.toSet());
+        return getProductCollection().stream().map(Product::getName).collect(Collectors.toSet());
     }
 
     public Collection<Product> getProductCollectionByVendorId(Long vendorId) {

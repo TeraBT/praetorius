@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 @Component
 @Scope("request")
-public class VendorGeneralManagementView extends AbstractListEditView<Product> {
+public class VendorGeneralManagementView {
 
     @Autowired
     private ProductController productController;
@@ -34,34 +36,28 @@ public class VendorGeneralManagementView extends AbstractListEditView<Product> {
 
     private Vendor vendor;
 
+    private Collection<Product> productCollection;
+
     @PostConstruct
-    @Override
     public void init() {
         if (sessionInfoService.hasRole(Role.VENDOR.name())) {
             Long vendorId = vendorService.getVendorIdForUserIfAllowed(sessionInfoService.getCurrentUser()).orElseThrow();
-            super.setCollection(productService.getProductCollectionByVendorId(vendorId));
+            productCollection = productService.getProductCollectionByVendorIdSortedByName(vendorId);
             vendor = vendorService.getVendor(vendorId).orElseThrow();
         } else {
-            super.setCollection(null);
+            productCollection = null;
         }
     }
 
-    // TODO: Adapt add vendor functionality from the vendor's perspective
+    // TODO: Adapt add product functionality from the vendor's perspective
 
-    @Override
-    public void onRowEdit(RowEditEvent<Product> event) {
-        productController.saveProduct(event.getObject());
-        FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject().getId()));
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
 
-    @Override
-    public void onRowCancel(RowEditEvent<Product> event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getId()));
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
 
     public Vendor getVendor() {
         return vendor;
+    }
+
+    public Collection<Product> getProductCollection() {
+        return productCollection;
     }
 }

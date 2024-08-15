@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition xmlns="http://www.w3c.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -8,71 +9,58 @@
                 xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/templates/main-template.xhtml">
+
     <ui:define name="content">
-        <h:form>
+
+        <h1 style="margin-left: 10px;">Services</h1>
+        <h:form id="form">
             <div class="vendor">
                 <div>
                     <h2 style="display: inline-block; margin-right: 20px">Vendor Details</h2>
                     <p:panelGrid columns="2" style="width: 20%">
-                    <p:outputLabel for="@next" value="Name:"/>
-                    <p:outputLabel value="#{vendorGeneralManagementView.vendor.name}"/>
-                    <p:outputLabel for="@next" value="Region:"/>
-                    <p:outputLabel value="#{vendorGeneralManagementView.vendor.region.name}"/>
-                    <p:button value="Edit" outcome="product-edit" style="display: inline-block; margin-right: 20px"/>
+                        <p:outputLabel for="@next" value="Name:"/>
+                        <p:outputLabel value="#{vendorGeneralManagementView.vendor.name}"/>
+                        <p:outputLabel for="@next" value="Region:"/>
+                        <p:outputLabel value="#{vendorGeneralManagementView.vendor.region.name}"/>
+                        <p:button value="Edit" outcome="product-edit" style="display: inline-block; margin-right: 20px"/>
                     </p:panelGrid>
                 </div>
             </div>
             <br/>
 
-            <div class="product">
-                <div class="nav-vendor">
-                    <h2 style="display: inline-block; margin-right: 20px">Product List</h2>
-                    <p:button value="Edit" outcome="product-edit" style="display: inline-block; margin-right: 20px"/>
-                    <p:button value="Add" outcome="product-add" style="display: inline-block; margin-bottom: 20px"/>
-                </div>
-                <p:dataTable var="product" value="#{vendorGeneralManagementView.getCollection()}">
-                    <p:column headerText="ID">
-                        <h:outputText value="#{product.id}"/>
-                    </p:column>
+            <p:dataView var="product" value="#{vendorGeneralManagementView.productCollection}" rows="12" paginator="true"
+                        layout="grid"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                        paginatorAlwaysVisible="false"
+                        gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
-                    <p:column headerText="Name">
-                        <h:outputText value="#{product.name}"/>
-                    </p:column>
+                <p:dataViewGridItem>
+                    <p:link href="/product/#{product.id}/edit"
+                                   styleClass="product-grid-item-link"
+                                   style="text-decoration: none">
+                        <div class="product-grid-item">
+                            <div class="product-grid-item-top">
+                                <div class="product-name">#{product.name}</div>
+                            </div>
+                            <div class="product-grid-item-content">
+                                <p:graphicImage name="products/#{product.imagePath}" library="images" width="10%"
+                                                style="border-style: solid; border-radius: 5px; border-color: black"/>
+                                <div class="product-vendor">#{product.vendor.name}</div>
+                                <div class="product-description">#{product.description}</div>
+                            </div>
+                            <div class="product-grid-item-bottom">
+                                <div class="product-price">
+                                    <h:outputText value="#{product.pricePerUnit}">
+                                        <f:convertNumber currencySymbol="€" type="currency"/>
+                                    </h:outputText>
+                                </div>
+                            </div>
+                        </div>
+                    </p:link>
+                </p:dataViewGridItem>
 
-                    <p:column headerText="Product Type">
-                        <h:outputText value="#{product.productType}"/>
-                    </p:column>
-
-                    <p:column headerText="Vendor">
-                        <h:outputText value="#{product.vendor}"/>
-                    </p:column>
-
-                    <p:column headerText="Description">
-                        <h:outputText value="#{product.description}"/>
-                    </p:column>
-
-                    <p:column headerText="Price Per Unit">
-                        <h:outputText value="#{product.pricePerUnit}"/>
-                    </p:column>
-
-                    <p:column headerText="Available Amounts">
-                        <h:outputText value="#{product.availableAmountSet}"/>
-                    </p:column>
-
-                    <p:column headerText="Shipping Cost">
-                        <h:outputText value="#{product.shippingCost}"/>
-                    </p:column>
-
-                    <p:column headerText="Number of Orders">
-                        <h:outputText value="#{product.orderSet.size()}"/>
-                    </p:column>
-
-                    <p:column headerText="Image Path">
-                        <h:outputText value="#{product.imagePath}"/>
-                    </p:column>
-
-                </p:dataTable>
-            </div>
+            </p:dataView>
         </h:form>
+
     </ui:define>
 </ui:composition>

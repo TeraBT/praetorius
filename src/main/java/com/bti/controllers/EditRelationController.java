@@ -117,7 +117,7 @@ public class EditRelationController {
     }
 
     public Collection<Product> getProducts() {
-        return productService.getAllProducts();
+        return productService.getProductCollection();
     }
 
     public Collection<ProductType> getProductTypes() {
