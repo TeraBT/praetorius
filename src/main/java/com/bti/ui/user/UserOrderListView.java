@@ -2,7 +2,6 @@ package com.bti.ui.user;
 
 import com.bti.auxiliaries.SessionInfoService;
 import com.bti.model.Order;
-import com.bti.model.Role;
 import com.bti.services.OrderService;
 import com.bti.ui.admin.AbstractListEditView;
 import jakarta.annotation.PostConstruct;
@@ -15,7 +14,7 @@ import java.util.Comparator;
 
 @Component
 @Scope("request")
-public class UserOrderView extends AbstractListEditView<Order> {
+public class UserOrderListView extends AbstractListEditView<Order> {
 
     @Autowired
     private OrderService orderService;

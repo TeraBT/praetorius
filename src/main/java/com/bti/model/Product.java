@@ -29,6 +29,9 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     private String description;
 
     @Column
+    private String detailedDescription;
+
+    @Column
     private double pricePerUnit;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -169,6 +172,14 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         this.description = description;
     }
 
+    public String getDetailedDescription() {
+        return detailedDescription;
+    }
+
+    public void setDetailedDescription(String longDescription) {
+        this.detailedDescription = longDescription;
+    }
+
     public double getPricePerUnit() {
         return pricePerUnit;
     }
@@ -177,7 +188,7 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
         this.pricePerUnit = pricePerUnit;
     }
 
-    public Set<Integer> getAvailableAmountSet() {
+    public SortedSet<Integer> getAvailableAmountSet() {
         return availableAmountSet;
     }
 

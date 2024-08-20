@@ -16,7 +16,7 @@
                     <h2 style="display: inline-block; margin-right: 20px">My Orders</h2>
                 </div>
 
-                <p:dataTable var="order" value="#{userOrderView.getCollection()}"
+                <p:dataTable var="order" value="#{userOrderListView.getCollection()}"
                              styleClass="data-table-main">
                     <p:column headerText="Order Reference">
                         <h:outputText value="#{order.orderReference}"/>

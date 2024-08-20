@@ -1,4 +1,4 @@
-package com.bti.ui.admin.product;
+package com.bti.ui.general;
 
 import com.bti.controllers.OrderController;
 import com.bti.model.Product;
@@ -12,22 +12,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("request")
-public class ProductView {
+public class OrderPlacementView {
 
     @Autowired
     private OrderController orderController;
-
-    @PostConstruct
-    public void init() {
-        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        this.product = (Product) httpSession.getAttribute("product");
-    }
 
     private Product product;
 
     private Integer amount = 0;
 
     private String comment;
+
+    @PostConstruct
+    public void init() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        this.product = (Product) httpSession.getAttribute("product");
+    }
 
     public void placeOrder(Product product, Integer amount, String comment) {
         orderController.placeOrder(product, amount, comment);

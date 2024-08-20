@@ -17,37 +17,37 @@
             <h1>Product Details</h1>
             <h:panelGrid columns="2" cellpadding="5">
                 <p:outputLabel value="Name:"/>
-                <h:outputText value="#{productView.product.name}"/>
+                <h:outputText value="#{orderPlacementView.product.name}"/>
 
                 <p:outputLabel value="Product Type:"/>
-                <h:outputText value="#{productView.product.productType}"/>
+                <h:outputText value="#{orderPlacementView.product.productType}"/>
 
                 <p:outputLabel value="Vendor:"/>
-                <h:outputText value="#{productView.product.vendor.name}"/>
+                <h:outputText value="#{orderPlacementView.product.vendor.name}"/>
 
                 <p:outputLabel value="Description:"/>
-                <h:outputText value="#{productView.product.description}"/>
+                <h:outputText value="#{orderPlacementView.product.description}"/>
 
                 <p:outputLabel value="Price:"/>
-                <h:outputText value="#{productView.product.pricePerUnit}">
+                <h:outputText value="#{orderPlacementView.product.pricePerUnit}">
                     <f:convertNumber currencySymbol="€" type="currency"/>
                 </h:outputText>
 
                 <p:outputLabel value="Amount:"/>
-                <p:selectOneMenu value="#{productView.amount}" style="width: 100px">
+                <p:selectOneMenu value="#{orderPlacementView.amount}" style="width: 100px">
                     <!--                <f:selectItems value="#{productView.entList}"/>-->
-                    <f:selectItems value="#{productView.product.availableAmountSet}"/>
+                    <f:selectItems value="#{orderPlacementView.product.availableAmountSet}"/>
                 </p:selectOneMenu>
 
                 <p:outputLabel value="Comment:"/>
-                <p:inputTextarea value="#{productView.comment}" rows="5" cols="30"/>
+                <p:inputTextarea value="#{orderPlacementView.comment}" rows="5" cols="30"/>
 
 
                 <br/>
 
                 <p:commandButton value="Order"
-                                 action="#{productView.placeOrder(productView.product,
-                                             productView.amount, productView.comment)}"
+                                 action="#{orderPlacementView.placeOrder(orderPlacementView.product,
+                                             orderPlacementView.amount, orderPlacementView.comment)}"
                                  update="msg"
                                  style="margin-top: 10px"/>
             </h:panelGrid>
