@@ -42,6 +42,9 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
     @Column
     private double shippingCost;
 
+    @Column
+    private boolean isVisible = true;
+
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private Set<Order> orderSet = new HashSet<>();
 
@@ -206,6 +209,14 @@ public class Product implements Persistable<Long>, Serializable, Comparable<Prod
 
     public Vendor getVendor() {
         return vendor;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 
     public void setOrderSet(Set<Order> orderSet) {

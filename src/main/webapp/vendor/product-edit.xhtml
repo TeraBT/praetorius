@@ -15,33 +15,39 @@
             <p:growl id="msg" showDetail="true"/>
 
             <h1>Product Details</h1>
-            <h:panelGrid columns="2" cellpadding="5">
+            <h:panelGrid columns="3" cellpadding="5">
                 <!--// TODO: Buttons for choosing to edit for all attributes-->
                 <p:outputLabel value="Name:"/>
-                <h:inputText value="#{orderPlacementView.product.name}"/>
+                <p:inputText value="#{productEditView.name}"/>
+                <p:commandButton icon="pi pi-pencil"/>
 
                 <p:outputLabel value="Product Type:"/>
-                <h:outputText value="#{orderPlacementView.product.productType}"/>
-
-                <p:outputLabel value="Vendor:"/>
-                <h:outputText value="#{orderPlacementView.product.vendor.name}"/>
+                <p:inputText value="#{productEditView.productType}"/>
+                <p:commandButton icon="pi pi-pencil"/>
 
                 <p:outputLabel value="Description:"/>
-                <h:outputText value="#{orderPlacementView.product.description}"/>
+                <p:inputText value="#{productEditView.description}"/>
+                <p:commandButton icon="pi pi-pencil"/>
+
+                <p:outputLabel value="Detailed Description:"/>
+                <p:inputText value="#{productEditView.detailedDescription}"/>
+                <p:commandButton icon="pi pi-pencil"/>
 
                 <p:outputLabel value="Price:"/>
-                <h:outputText value="#{orderPlacementView.product.pricePerUnit}">
+                <p:inputText value="#{productEditView.pricePerUnit}">
                     <f:convertNumber currencySymbol="€" type="currency"/>
-                </h:outputText>
+                </p:inputText>
+                <p:commandButton icon="pi pi-pencil"/>
 
-                <p:outputLabel value="Amount:"/>
-                <p:selectOneMenu value="#{orderPlacementView.amount}" style="width: 100px">
+                <p:outputLabel value="Available Amounts:"/>
+                <p:selectOneMenu value="#{productEditView.availableAmountSet}" style="width: 100px">
                     <!--                <f:selectItems value="#{productView.entList}"/>-->
-                    <f:selectItems value="#{orderPlacementView.product.availableAmountSet}"/>
+                    <f:selectItems value="#{productEditView.availableAmountSet}"/>
                 </p:selectOneMenu>
+                <p:commandButton icon="pi pi-pencil"/>
 
-                <p:outputLabel value="Comment:"/>
-                <p:inputTextarea value="#{orderPlacementView.comment}" rows="5" cols="30"/>
+                <p:outputLabel value="Product visible to client"/>
+                <p:toggleSwitch value="#{productEditView.visible}"/>
 
 
                 <br/>

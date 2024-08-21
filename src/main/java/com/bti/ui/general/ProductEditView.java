@@ -35,6 +35,10 @@ public class ProductEditView {
 
     private SortedSet<Integer> availableAmountSet;
 
+    private boolean isVisible;
+
+    private boolean isEdited;
+
     @PostConstruct
     public void init() {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -45,15 +49,59 @@ public class ProductEditView {
         this.detailedDescription = product.getDetailedDescription();
         this.pricePerUnit = product.getPricePerUnit();
         this.availableAmountSet = product.getAvailableAmountSet();
+        // TODO: ?Shipping cost?
+        this.isVisible = product.isVisible();
     }
 
-    public void editOrder(String name, ProductType productType, String description, String detailedDescription, double pricePerUnit, SortedSet<Integer> availableAmountSet) {
+    public void editOrder(String name, ProductType productType, String description, String detailedDescription, double pricePerUnit, SortedSet<Integer> availableAmountSet, boolean isVisible) {
 
         // TODO: Continue.
         productController.saveProduct(product);
         FacesMessage msg = new FacesMessage("Product Edited.",
                 "'%s' has been edited successfully.".formatted(product.getName()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void editName() {
+        product.setName(name);
+        productController.saveProduct(product);
+        this.isEdited = true;
+    }
+
+    public void editProductType() {
+        product.setProductType(productType);
+        productController.saveProduct(product);
+        this.isEdited = true;
+    }
+
+    public void editDescription() {
+        product.setDescription(description);
+        productController.saveProduct(product);
+        this.isEdited = true;
+    }
+
+    public void editDetailedDescription() {
+        product.setDetailedDescription(detailedDescription);
+        productController.saveProduct(product);
+        this.isEdited = true;
+    }
+
+    public void editPricePerUnit() {
+        product.setPricePerUnit(pricePerUnit);
+        productController.saveProduct(product);
+        this.isEdited = true;
+    }
+
+    public void editAvailableAmountSet() {
+        product.setAvailableAmountSet(availableAmountSet);
+        productController.saveProduct(product);
+        this.isEdited = true;
+    }
+
+    public void editIsVisible() {
+        product.setVisible(isVisible);
+        productController.saveProduct(product);
+        this.isEdited = true;
     }
 
     public String getName() {
@@ -102,5 +150,21 @@ public class ProductEditView {
 
     public void setAvailableAmountSet(SortedSet<Integer> availableAmountSet) {
         this.availableAmountSet = availableAmountSet;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
+
+    public boolean isEdited() {
+        return isEdited;
+    }
+
+    public void setEdited(boolean edited) {
+        isEdited = edited;
     }
 }
