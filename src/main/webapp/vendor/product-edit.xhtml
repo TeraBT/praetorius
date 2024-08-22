@@ -15,40 +15,39 @@
             <p:growl id="msg" showDetail="true"/>
 
             <h1>Product Details</h1>
-            <h:panelGrid columns="3" cellpadding="5">
+            <h:panelGrid id="grid" columns="3" cellpadding="5">
                 <!--// TODO: Buttons for choosing to edit for all attributes-->
                 <p:outputLabel value="Name:"/>
-                <p:inputText value="#{productEditView.name}"/>
-                <p:commandButton icon="pi pi-pencil"/>
+                <p:inputText id="name" value="#{productEditView.name}"/>
+                <p:commandButton action="#{productEditView.resetName()}" update="name" icon="pi pi-undo"/>
 
                 <p:outputLabel value="Product Type:"/>
-                <p:inputText value="#{productEditView.productType}"/>
-                <p:commandButton icon="pi pi-pencil"/>
+                <p:selectOneMenu id="productType" value="#{productEditView.productType}" converter="omnifaces.SelectItemsConverter">
+                    <f:selectItems value="#{productTypeController.allProductTypes}"/>
+                </p:selectOneMenu>
+                <p:commandButton action="#{productEditView.resetProductType()}" update="productType" icon="pi pi-undo"/>
+                <!-- TODO: Continue with setting IDs and updating the values of each row. -->
 
                 <p:outputLabel value="Description:"/>
                 <p:inputText value="#{productEditView.description}"/>
-                <p:commandButton icon="pi pi-pencil"/>
+                <p:commandButton action="#{productEditView.resetDescription()}" icon="pi pi-undo"/>
 
                 <p:outputLabel value="Detailed Description:"/>
-                <p:inputText value="#{productEditView.detailedDescription}"/>
-                <p:commandButton icon="pi pi-pencil"/>
+                <p:inputTextarea value="#{productEditView.detailedDescription}"/>
+                <p:commandButton action="#{productEditView.resetDetailedDescription()}" icon="pi pi-undo"/>
 
                 <p:outputLabel value="Price:"/>
                 <p:inputText value="#{productEditView.pricePerUnit}">
                     <f:convertNumber currencySymbol="€" type="currency"/>
                 </p:inputText>
-                <p:commandButton icon="pi pi-pencil"/>
+                <p:commandButton action="#{productEditView.resetPricePerUnit()}" icon="pi pi-undo"/>
 
                 <p:outputLabel value="Available Amounts:"/>
-                <p:selectOneMenu value="#{productEditView.availableAmountSet}" style="width: 100px">
-                    <!--                <f:selectItems value="#{productView.entList}"/>-->
-                    <f:selectItems value="#{productEditView.availableAmountSet}"/>
-                </p:selectOneMenu>
-                <p:commandButton icon="pi pi-pencil"/>
+                <p:outputLabel value="#{productEditView.availableAmountSet}"/>
+                <p:commandButton action="#{productEditView.resetAvailableAmountSet()}" icon="pi pi-undo"/>
 
                 <p:outputLabel value="Product visible to client"/>
                 <p:toggleSwitch value="#{productEditView.visible}"/>
-
 
                 <br/>
 
@@ -57,6 +56,11 @@
                                  action="#{vendorGeneralManagementView.save()}"
                                  update="msg"
                                  style="margin-top: 10px"/>
+
+                <p:commandButton value="Reset"
+                                 action="#{productEditView.initializeVariables()}"
+                                 update="msg"
+                                 style="margin-top: 10px; background-color: red"/>
             </h:panelGrid>
         </h:form>
     </ui:define>

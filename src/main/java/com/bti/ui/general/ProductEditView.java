@@ -43,12 +43,16 @@ public class ProductEditView {
     public void init() {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         this.product = (Product) httpSession.getAttribute("product");
-        this.name = product.getName();
-        this.productType = product.getProductType();
-        this.description = product.getDescription();
-        this.detailedDescription = product.getDetailedDescription();
-        this.pricePerUnit = product.getPricePerUnit();
-        this.availableAmountSet = product.getAvailableAmountSet();
+        initializeVariables();
+    }
+
+    public void initializeVariables() {
+        name = product.getName();
+        productType = product.getProductType();
+        description = product.getDescription();
+        detailedDescription = product.getDetailedDescription();
+        pricePerUnit = product.getPricePerUnit();
+        availableAmountSet = product.getAvailableAmountSet();
         // TODO: ?Shipping cost?
         this.isVisible = product.isVisible();
     }
@@ -56,6 +60,57 @@ public class ProductEditView {
     public void editOrder(String name, ProductType productType, String description, String detailedDescription, double pricePerUnit, SortedSet<Integer> availableAmountSet, boolean isVisible) {
 
         // TODO: Continue.
+        productController.saveProduct(product);
+        FacesMessage msg = new FacesMessage("Product Edited.",
+                "'%s' has been edited successfully.".formatted(product.getName()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+
+    public void resetName() {
+        name = product.getName();
+        isEdited = false;
+    }
+
+    public void resetProductType() {
+        productType = product.getProductType();
+        isEdited = false;
+    }
+
+    public void resetDescription() {
+        description = product.getDescription();
+        isEdited = false;
+    }
+
+    public void resetDetailedDescription() {
+        detailedDescription = product.getDetailedDescription();
+        isEdited = false;
+    }
+
+    public void resetPricePerUnit() {
+        pricePerUnit = product.getPricePerUnit();
+        isEdited = false;
+    }
+
+    public void resetAvailableAmountSet() {
+        availableAmountSet = product.getAvailableAmountSet();
+        isEdited = false;
+    }
+
+    public void resetIsVisible() {
+        isVisible = product.isVisible();
+        isEdited = false;
+    }
+
+    public void updateAndSaveProduct() {
+        product.setName(name);
+        product.setProductType(productType);
+        product.setDescription(description);
+        product.setDetailedDescription(detailedDescription);
+        product.setPricePerUnit(pricePerUnit);
+        product.setAvailableAmountSet(availableAmountSet);
+        product.setVisible(isVisible);
+
         productController.saveProduct(product);
         FacesMessage msg = new FacesMessage("Product Edited.",
                 "'%s' has been edited successfully.".formatted(product.getName()));
